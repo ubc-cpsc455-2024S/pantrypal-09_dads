@@ -16,7 +16,7 @@ Our application, designed for home cooks, food enthusiasts and people who just d
 
 {You should use this area to add a screenshot of your app or website }
 
-<img src ="images/test.png" width="100px">
+<img src ="images/mockup.png" width="200px">
 
 ## References
 

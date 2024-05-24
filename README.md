@@ -66,7 +66,6 @@ Our application, designed for home cooks, food enthusiasts and people who just d
 
 ## References
 
-{Add your stuff here}
 
 
 

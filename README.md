@@ -1,15 +1,16 @@
 # Group 09 - PantryPal
 
-## Describe your topic/interest in about 150-200 words
+## Project Description
 
-{Add your stuff here}
+Our application, designed for home cooks, food enthusiasts and people who just don’t know what to cook, aims to streamline the meal preparation process by generating recipes based on the ingredients users have on hand. By allowing users to take pictures of their fridge contents, the app will utilize image recognition technology to identify the ingredients and suggest a variety of recipes. The app will store data such as identified ingredients, user preferences, and recipe history to adapt to specific user needs better and create more tailored recipes. Our project could expand to include macros and nutritional information while it can get rid of some data storage and feedback requirements if necessary. This tool simplifies the cooking process making it easier and more enjoyable while reducing food waste.
+
 
 ## Team Members
 
-- Person 1: one sentence about you!
-- Person 2: one sentence about you!
-- Person 3: one sentence about you!
-- Person 4: one sentence about you!
+- Sai Athoti: one sentence about you!
+- Deep Parekh: one sentence about you!
+- David Mwita: one sentence about you!
+- Adi Poluri: one sentence about you!
 
 ## Images
 

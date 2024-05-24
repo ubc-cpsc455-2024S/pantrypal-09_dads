@@ -28,6 +28,38 @@ Our application, designed for home cooks, food enthusiasts and people who just d
   - Nutritional Information: Integrate detailed nutritional information for each recipe, enhancing the app's health-oriented utility.
   - Voice Controls: Incorporate voice control functionalities, enabling users to interact with the app hands-free, which is particularly useful during cooking.
 
+## Task Breakdown
+- User should be able to manually insert or upload (a picture of) the ingredients
+  - Create Ingredient Input Interface
+    - Develop a form where users can enter ingredient names and quantities manually.
+    - Implement validation to ensure inputs are in a correct and usable format.
+  - Implement File Upload/Take Photo Feature**
+    - Add a file upload option that supports image formats such as JPG, PNG, etc.
+    - Integrate camera access for mobile or web to allow users to take photos directly through the app.
+    - Ensure robust error handling and user feedback for file uploads and camera access.
+  - Backend Integration for Image Processing**
+    - Develop or integrate an existing image-to-text API to extract text from uploaded images.
+    - Handle the processing and conversion of image data to usable text (ingredient names and quantities).
+  - Update UI Based on Input Method
+    - Dynamically update the user interface based on whether the user is typing manually or uploading an image.
+    - Provide the user with the ability to edit or confirm the extracted ingredients before final submission.
+- Store user-generated recipes and ingredients
+  - Design Data Structure**
+    - Define the data structure for storing recipes and their associated ingredients in a database.
+    - Plan for scalability and efficiency, considering relationships between ingredients, recipes, and users.
+  - Develop Data Relay to Backend
+    - Implement functionality to send user input (both manual and from image processing) to the backend server.
+    - Ensure data is sent securely and efficiently, handling potential network issues gracefully.
+  - Temporary Data Storage During Session
+    - Develop a system to temporarily store data while the user adds more ingredients or completes other interactions during a session
+    - Use session management techniques to keep data consistent and avoid losses
+  - Persistent Storage in Database
+    - Implement the final storage functionality that saves the completed recipes and their ingredients to the database
+    - Ensure transactions are handled properly to maintain data integrity
+  - Confirm Successful Storage
+    - Provide users with confirmation once their data is successfully stored
+    - Offer an interface for users to view and manage their saved recipes.
+
 ## Sketch Prototypes
 
 <img src ="images/mockup.png" width="800px">

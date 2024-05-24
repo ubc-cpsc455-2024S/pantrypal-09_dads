@@ -1,6 +1,4 @@
-# Group YY - {Short snappy Title of your project}
-
-- Your title can change over time.
+# Group 09 - PantryPal
 
 ## Describe your topic/interest in about 150-200 words
 

@@ -4,13 +4,15 @@
 
 Our application, designed for home cooks, food enthusiasts and people who just don’t know what to cook, aims to streamline the meal preparation process by generating recipes based on the ingredients users have on hand. By allowing users to take pictures of their fridge contents, the app will utilize image recognition technology to identify the ingredients and suggest a variety of recipes. The app will store data such as identified ingredients, user preferences, and recipe history to adapt to specific user needs better and create more tailored recipes. Our project could expand to include macros and nutritional information while it can get rid of some data storage and feedback requirements if necessary. This tool simplifies the cooking process making it easier and more enjoyable while reducing food waste.
 
+
 ## Team Members
 
-- Sai Athoti: one sentence about you!
-- Deep Parekh: one sentence about you!
-- David Mwita: one sentence about you!
-- Adi Poluri: one sentence about you!
+- Sai Athoti
+- Deep Parekh
+- David Mwita
+- Adi Poluri
 
+  
 ## Project Task Requirements
 - ### Minimal Requirements
   - Ingredient Input: Users must be able to manually input or upload pictures of their ingredients.
@@ -28,6 +30,7 @@ Our application, designed for home cooks, food enthusiasts and people who just d
   - Nutritional Information: Integrate detailed nutritional information for each recipe, enhancing the app's health-oriented utility.
   - Voice Controls: Incorporate voice control functionalities, enabling users to interact with the app hands-free, which is particularly useful during cooking.
 
+
 ## Task Breakdown
 - User should be able to manually insert or upload (a picture of) the ingredients
   - Develop a form where users can enter ingredient names and quantities manually.
@@ -40,6 +43,7 @@ Our application, designed for home cooks, food enthusiasts and people who just d
   - Develop a system to temporarily store data while the user adds more ingredients or completes other interactions during a session
   - Implement the final storage functionality that saves the completed recipes and their ingredients to the database
   - Provide users with confirmation once their data is successfully stored
+
 
 ## Sketch Prototypes
 

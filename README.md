@@ -21,7 +21,6 @@ Our application, designed for home cooks, food enthusiasts and people who just d
   - User Interface: Develop a basic user interface for inserting ingredients and viewing recipes, ensuring ease of use.
 - ### Standard Requirements
   - Image-to-Text Conversion: Implement image-to-text conversion for recognizing food ingredients from uploaded pictures.
-  - User Accounts: Develop user accounts to save recipes, user preferences, and a history of generated recipes.
   - Preference-Based Recipes: Take user preferences into account when generating recipes, tailoring outputs to individual tastes.
   - Advanced Recipe Generation: Employ machine learning models or external APIs to generate recipes based on user-inputted ingredients.
   - Recipe Interaction: Allow users to rate and favorite recipes, which will aid in refining and improving recipe suggestions.
@@ -29,6 +28,8 @@ Our application, designed for home cooks, food enthusiasts and people who just d
   - Smart Ingredient and Recipe Memory: Save frequently used ingredients and recipes to streamline the generation process and prevent repetitive suggestions.
   - Nutritional Information: Integrate detailed nutritional information for each recipe, enhancing the app's health-oriented utility.
   - Voice Controls: Incorporate voice control functionalities, enabling users to interact with the app hands-free, which is particularly useful during cooking.
+  - User Accounts: Develop user accounts to save recipes, user preferences, and a history of generated recipes.
+
 
 
 ## Task Breakdown

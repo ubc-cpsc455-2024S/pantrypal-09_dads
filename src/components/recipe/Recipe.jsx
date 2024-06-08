@@ -2,6 +2,7 @@ import { Box, VStack, Breadcrumb, BreadcrumbItem, BreadcrumbLink} from "@chakra-
 import Ingredients from "./Ingredients";
 import Instructions from "./Instructions";
 import Header from "./Header";
+import Breadcrumbs from "../BreadCrumbs";
 
 // Replace with call to API to fetch Data
 const recipeList = [
@@ -57,19 +58,7 @@ const RecipeInstructions = () => {
 
   return (
     <Box>
-        <Breadcrumb>
-            <BreadcrumbItem>
-                <BreadcrumbLink href='#'>Home</BreadcrumbLink>
-            </BreadcrumbItem>
-
-            <BreadcrumbItem>
-                <BreadcrumbLink href='#'>Recipes</BreadcrumbLink>
-            </BreadcrumbItem>
-
-            <BreadcrumbItem isCurrentPage>
-                <BreadcrumbLink href='#'>{recipeList[0].title}</BreadcrumbLink>
-            </BreadcrumbItem>
-        </Breadcrumb>
+        <Breadcrumbs link={recipeList[0].title}/>
         <VStack w='100%'> 
           
             <Header

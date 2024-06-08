@@ -1,6 +1,8 @@
 import { Box} from "@chakra-ui/react";
 import { VStack, Wrap, WrapItem, Heading, HStack, Button, Divider} from "@chakra-ui/react";
 import RecipeCard from "./RecipeCard";
+import Breadcrumbs from "../BreadCrumbs";
+import { IoFastFoodOutline } from "react-icons/io5";
 
 const data = {
     "recipes": [
@@ -58,6 +60,7 @@ const RecipePage = () => {
   return (
     <Box display={"flex"} flexDirection={"column"} mx={"8%"}>
         <VStack alignItems="flex-start">
+            <Breadcrumbs link={""}/>
             <Heading
                as="h1"
                fontSize="2rem"
@@ -89,7 +92,7 @@ const RecipePage = () => {
             </Wrap>
             <Divider  marginTop={'20px'}/>
             <HStack direction='column' spacing={4}>
-                <Button variant='solid'>
+                <Button leftIcon={<IoFastFoodOutline />} variant='solid'>
                 Generate More
                 </Button>
                 <Button variant='outline'>

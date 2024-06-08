@@ -1,10 +1,11 @@
-import { Box, Center, Image, Text, Card, Heading, Stack, CardBody, StackDivider, HStack} from "@chakra-ui/react";
+import { Box, Center, Image, Text, Card, Heading, Stack, CardBody, StackDivider, HStack, Link} from "@chakra-ui/react";
 
 // eslint-disable-next-line react/prop-types
 const RecipeCard = ({image, title, time, calories,likes,id,onOpen}) => {
 
     return (
-        <Card>
+        <Card borderWidth="1px" borderRadius="lg">
+            <Link href="/recipes/temp" textDecoration={"none"} _hover={"textDecoration: 'none', color: 'tomato'"} >
             <CardBody>
                 <Stack divider={<StackDivider />} spacing='4'>
                     <Heading size='md'>{title}</Heading>
@@ -20,6 +21,7 @@ const RecipeCard = ({image, title, time, calories,likes,id,onOpen}) => {
                         </Box>
                 </Stack>
             </CardBody>
+            </Link>
         </Card>
     )
 }

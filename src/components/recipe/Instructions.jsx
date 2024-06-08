@@ -1,20 +1,20 @@
-import { Box, Text, Heading} from "@chakra-ui/react";
+import { Box, Text, Heading, VStack} from "@chakra-ui/react";
 
 const Instructions = ({ instructions }) => {
 
   return (
     <Box width={'100%'}>
-        <Heading size='md' overflowWrap={"break-word"}>
-            Instructions
-        </Heading>
 
-        <Box display="flex" flexDirection="column" marginLeft={"20px"}>
+        <VStack display="flex" flexDirection="column" alignItems={'flex-start'} marginLeft={"35px"}>
+            <Heading size='md' alignContent={'flex-start'} overflowWrap={"break-word"}>
+                Instructions
+            </Heading>
             {instructions.map((instruction, index) => {
                 return <Text key={index} overflowWrap={"break-word"} textAlign={'left'}>
-                    {index+1 + ". " + instruction}
+                    <b>{index + 1 + ". "}</b>{instruction}
                 </Text>
             })}
-        </Box>
+        </VStack>
     </Box>
   );
 };

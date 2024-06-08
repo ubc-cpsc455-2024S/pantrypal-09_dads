@@ -30,11 +30,11 @@ const NavBar = () => {
     <nav style={styles.navbar}>
       <div style={styles.logo}>pantrypal</div>
       <ul style={styles.navLinks}>
-        <li style={styles.navItem}><a style={styles.navLink} href="#home">Home</a></li>
+        <li style={styles.navItem}><a style={styles.navLink} href="/">Home</a></li>
         <li style={styles.navItem}><a style={styles.navLink} href="#about">About</a></li>
       </ul>
     </nav>
   );
-}
+};
 
 export default NavBar;

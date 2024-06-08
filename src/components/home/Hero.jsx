@@ -1,6 +1,6 @@
 import React from 'react';
 import { Stack } from '@chakra-ui/react'
-import { Button } from '@chakra-ui/react'
+import { Button, Link} from '@chakra-ui/react'
 import { FaRegKeyboard } from "react-icons/fa6";
 import { FaCameraRetro } from "react-icons/fa";
 
@@ -49,8 +49,8 @@ const Hero = () => {
 
     <div className='buttonsContainer'>
       <Stack direction='column' spacing={4}>
-        <Button leftIcon={<FaCameraRetro />} variant='solid'>
-          Take a picture
+        <Button leftIcon={<FaCameraRetro />} variant='solid' >
+          <Link href="/ingredients">Take a picture</Link>
         </Button>
         <Button leftIcon={<FaRegKeyboard />} variant='outline'>
           Insert ingredients

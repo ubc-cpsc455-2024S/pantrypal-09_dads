@@ -1,6 +1,6 @@
 import Hero from './Hero'
 
-function Home() {
+function HomePage() {
   return (
     <>
       <Hero />
@@ -8,4 +8,4 @@ function Home() {
   )
 }
 
-export default Home
+export default HomePage

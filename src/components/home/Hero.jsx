@@ -12,7 +12,7 @@ const Hero = () => {
       justifyContent: 'center',
       alignItems: 'center',
       textAlign: 'center',
-      height: '100vh',
+      height: '80vh',
       padding: '2rem',
     },
     heroTitle: {

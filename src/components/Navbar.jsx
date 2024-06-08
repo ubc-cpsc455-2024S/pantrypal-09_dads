@@ -1,5 +1,3 @@
-import React from 'react';
-
 const NavBar = () => {
   const styles = {
     navbar: {
@@ -10,7 +8,7 @@ const NavBar = () => {
       padding: '0.5rem 1rem',
     },
     logo: {
-      fontSize: '1.5rem',
+      fontSize: '1.75rem',
     },
     navLinks: {
       display: 'flex',

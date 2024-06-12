@@ -3,6 +3,7 @@ import { Stack } from '@chakra-ui/react'
 import { Button, Link} from '@chakra-ui/react'
 import { FaRegKeyboard } from "react-icons/fa6";
 import { FaCameraRetro } from "react-icons/fa";
+import ImageUpload from "./Camera"
 
 const Hero = () => {
   const styles = {
@@ -49,9 +50,10 @@ const Hero = () => {
 
     <div className='buttonsContainer'>
       <Stack direction='column' spacing={4}>
-        <Button leftIcon={<FaCameraRetro />} variant='solid' >
+        {/* <Button leftIcon={<FaCameraRetro />} variant='solid' >
           <Link href="/ingredients">Take a picture</Link>
-        </Button>
+        </Button> */}
+        <ImageUpload goTo = "/ingredients"/>
         <Button leftIcon={<FaRegKeyboard />} variant='outline'>
           Insert ingredients
         </Button>

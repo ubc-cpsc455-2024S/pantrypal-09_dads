@@ -56,8 +56,7 @@ const ImageUpload = () => {
     };
 
     const handleContinue = () => {
-        // Handle continue logic here
-        alert("Continue button clicked");
+        window.location.href = '/ingredients';
     };
 
     const capture = useCallback(() => {
@@ -99,7 +98,7 @@ const ImageUpload = () => {
                     <div style={styles.buttonContainer}>
                         <Button variant="solid" colorScheme="teal" onClick={handleContinue} style={styles.button}>
                             Continue
-                        {/* <Link href="/ingredients"> Continue </Link> */}
+                        
                         </Button>
                         <Button variant="solid" colorScheme="red" onClick={handleReTake} style={styles.button}>
                             Re-take
@@ -113,24 +112,29 @@ const ImageUpload = () => {
     );
 };
 
-const styles = {
+const styles = {      
     fullScreenContainer: {
-        position: 'fixed',
-        top: 0,
-        left: 0,
-        width: '100%',
-        height: '100%',
-        backgroundColor: 'rgba(0, 0, 0, 0.8)',
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'center',
-        alignItems: 'center',
-        zIndex: 1000,
-    },
+    position: 'fixed',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: '100%',
+    height: '100%',
+    backgroundColor: 'rgba(0, 0, 0, 0.8)',
+    border: '5px solid black', // Added black border
+    boxSizing: 'border-box', // Ensures the border is included in the element's dimensions
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+    zIndex: 1000,
+    }
+,
     fullScreenImage: {
-        width: '100%',
+        width: 'auto',
         height: 'auto',
-        maxHeight: '80%',
+        maxHeight: '80vh',
+        maxWidth: '80vw',
     },
     buttonContainer: {
         position: 'absolute',

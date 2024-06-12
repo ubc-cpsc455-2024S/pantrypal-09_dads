@@ -2,8 +2,9 @@ import React, { useState, useRef, useCallback } from 'react';
 import { Button } from '@chakra-ui/react';
 import { FaCameraRetro, FaWindowClose } from 'react-icons/fa';
 import Webcam from 'react-webcam';
+import { Link } from 'react-router-dom';
 
-const ImageUpload = () => {
+const ImageUpload = (props) => {
     const [preview, setPreview] = useState(null);
     const [isFullScreen, setIsFullScreen] = useState(false);
     const [useWebcam, setUseWebcam] = useState(false);
@@ -97,8 +98,7 @@ const ImageUpload = () => {
                     <img src={preview} alt="Preview" style={styles.fullScreenImage} />
                     <div style={styles.buttonContainer}>
                         <Button variant="solid" colorScheme="teal" onClick={handleContinue} style={styles.button}>
-                            Continue
-                        
+                            <Link to={props.goTo} > Continue </Link> 
                         </Button>
                         <Button variant="solid" colorScheme="red" onClick={handleReTake} style={styles.button}>
                             Re-take

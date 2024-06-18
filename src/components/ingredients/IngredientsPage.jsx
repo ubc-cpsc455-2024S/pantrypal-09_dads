@@ -1,6 +1,7 @@
 import { VStack, Wrap, WrapItem, Heading, HStack, Button, Divider, Link, Box} from "@chakra-ui/react";
 import { IoFastFoodOutline } from "react-icons/io5";
 import IngredientCard from "./ingredientCard";
+import IngredientsDisplay from "./IngredientsDisplay";
 
 //Replace with Redux Store
 const data = {
@@ -69,7 +70,7 @@ const IngredientsPage = () => {
                color="#333"
                marginBottom="1rem"
                 >
-                Here are the ingredients we Identifed...
+                Here are the ingredients we have identified:
             </Heading>
             <Heading
                as="h3"
@@ -78,19 +79,11 @@ const IngredientsPage = () => {
                color="#333"
                marginBottom="1rem"
                 >
-                Feel free to make any adjustments before we generate your recipes...
+                Make any necessary changes before generating recipes!
             </Heading>
-            <Wrap alignItems={"center"}>
-                {data!==null?
-                    (data.ingredients.map((ingredient, index) => {
-                        return (
-                            <WrapItem key={index}>
-                                <IngredientCard key={index} ingredient={ingredient} />
-                            </WrapItem>
-                        )
-                    })):null
-                }
-            </Wrap>
+            
+            <IngredientsDisplay initialIngredients={data.ingredients} />
+            
             <Divider  marginTop={'20px'}/>
             <HStack direction='column' spacing={4}>
                 <Button leftIcon={<IoFastFoodOutline />} variant='solid'>

@@ -14,6 +14,8 @@ const Hero = () => {
       textAlign: 'center',
       height: '80vh',
       padding: '2rem',
+      marginTop: '5rem',
+      marginBottom: '5rem'
     },
     heroTitle: {
       fontSize: '3rem',
@@ -53,7 +55,7 @@ const Hero = () => {
           <Link href="/ingredients">Take a picture</Link>
         </Button>
         <Button leftIcon={<FaRegKeyboard />} variant='outline'>
-          Insert ingredients
+          <Link href="/insert-ingredients"> Insert ingredients </Link>
         </Button>
       </Stack>
     </div>

@@ -55,7 +55,7 @@ const Hero = () => {
           <Link href="/ingredients">Take a picture</Link>
         </Button>
         <Button leftIcon={<FaRegKeyboard />} variant='outline'>
-          <Link href="/insert-ingredients"> Insert ingredients </Link>
+          <Link href="/ingredients"> Insert ingredients </Link>
         </Button>
       </Stack>
     </div>

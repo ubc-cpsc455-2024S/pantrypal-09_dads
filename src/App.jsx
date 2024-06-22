@@ -7,7 +7,7 @@ import RecipePage from './components/recipe/RecipePage'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import IngredientsPage from './components/ingredients/IngredientsPage'
 import DietPage from './components/diet/DietPage'
-import InsertIngredientsPage from './components/ingredients/InsertIngredientsPage'
+import InsertIngredientsPage from './components/ingredients/IngredientsPage'
 
 function App() {
 
@@ -20,7 +20,6 @@ function App() {
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/ingredients" element={<IngredientsPage />} />
-            <Route path="/insert-ingredients" element={<InsertIngredientsPage />} />
             <Route path="/diet" element={<DietPage />} />
             <Route path="/recipes" element={<RecipePage />} />
             <Route path="/recipes/temp" element={<RecipeInstructions />} />

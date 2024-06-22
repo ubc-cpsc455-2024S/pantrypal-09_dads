@@ -7,6 +7,7 @@ import RecipePage from './components/recipe/RecipePage'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import IngredientsPage from './components/ingredients/IngredientsPage'
 import DietPage from './components/diet/DietPage'
+import InsertIngredientsPage from './components/ingredients/IngredientsPage'
 
 function App() {
 

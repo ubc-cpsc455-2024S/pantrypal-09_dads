@@ -1,29 +1,18 @@
-import { Box, Input, Image, Text, Heading, Card, CardBody, CardHeader, VStack, HStack} from "@chakra-ui/react";
+import { Text, Card, CardBody, HStack, Button } from "@chakra-ui/react";
 
-// eslint-disable-next-line react/prop-types
-const IngredientCard = ({ ingredient }) => {
-
+const IngredientCard = ({ ingredient, id, onDelete, onEdit }) => {
     return (
-        <Card minH="150px" overflow="hidden" mb="4" borderWidth="1px" borderRadius="lg">
+        <Card overflow="hidden" mb="4" borderWidth="1px" borderRadius="lg" width={'300px'}>
             <CardBody>
-                <VStack align="start">
-                    <Text fontWeight="bold" fontSize="xl">{ingredient.name}</Text>
-                    <HStack>
-                        <Text>Quantity:</Text>
-                        <Input
-                            value={ingredient.quantity}
-                        />
-                    </HStack>
-                    <HStack>
-                        <Text>Notes:</Text>
-                        <Input
-                            value={ingredient.notes}
-                        />
-                    </HStack>
-                </VStack>
+                <HStack alignItems={'center'} spacing={'0.5rem'} justifyContent="space-between">
+                    <Text fontWeight="bold" fontSize="l">{ingredient.name}</Text>
+                    <Text>{ingredient.quantity} {ingredient.unit}</Text>
+                    <Button colorScheme="red" size="sm" onClick={() => onDelete(id)}>Delete</Button>
+                    <Button colorScheme="blue" size="sm" onClick={() => onEdit(id)}>Edit</Button>
+                </HStack>
             </CardBody>
         </Card>
-    )
+    );
 };
 
-export default IngredientCard
+export default IngredientCard;

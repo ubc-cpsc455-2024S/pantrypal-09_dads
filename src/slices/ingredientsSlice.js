@@ -1,10 +1,64 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { v4 as uuidv4 } from 'uuid';
 
 const initialState = {
   items: [
-    { id: 1, name: 'Carrot', quantity: 3, unit: 'pcs' },
-    { id: 2, name: 'Potato', quantity: 50, unit: 'g' },
-    { id: 3, name: 'Tomato', quantity: 4, unit: 'kg' },
+      {
+        id: uuidv4(),
+        name: "Flour",
+        quantity: 2,
+        unit: "cups",
+        notes: "All-purpose flour"
+      },
+      {
+        id: uuidv4(),
+        name: "Sugar",
+        quantity: 1,
+        unit: "cup",
+        notes: "Granulated white sugar"
+      },
+      {
+        id: uuidv4(),
+        name: "Butter",
+        quantity: 0.5,
+        unit: "cup",
+        notes: "Unsalted, melted"
+      },
+      {
+        id: uuidv4(),
+        name: "Eggs",
+        quantity: 2,
+        unit: "pieces",
+        notes: "Large"
+      },
+      {
+        id: uuidv4(),
+        name: "Baking Powder",
+        quantity: 1,
+        unit: "teaspoon",
+        notes: ""
+      },
+      {
+        id: uuidv4(),
+        name: "Salt",
+        quantity: 0.5,
+        unit: "teaspoon",
+        notes: ""
+      },
+      {
+        id: uuidv4(),
+        name: "Vanilla Extract",
+        quantity: 1,
+        unit: "teaspoon",
+        notes: "Pure vanilla extract"
+      },
+      {
+        id: uuidv4(),
+        name: "Milk",
+        quantity: 1,
+        unit: "cup",
+        notes: "Whole milk"
+      }
   ],
 };
 
@@ -13,25 +67,21 @@ const ingredientsSlice = createSlice({
   initialState,
   reducers: {
     addIngredient: (state, action) => {
-      state.items.push(action.payload);
+      const newIngredient = {
+        id: uuidv4(),
+        ...action.payload,
+      };
+      state.items.push(newIngredient);
     },
     removeIngredient: (state, action) => {
       state.items = state.items.filter(
         (ingredient) => ingredient.id !== action.payload
       );
     },
-    changeUnit: (state, action) => {
-      const { id, newUnit } = action.payload;
-      const ingredient = state.items.find((ingredient) => ingredient.id === id);
-      if (ingredient) {
-        ingredient.unit = newUnit;
-      }
-    },
-    changeQuantity: (state, action) => {
-      const { id, newQuantity } = action.payload;
-      const ingredient = state.items.find((ingredient) => ingredient.id === id);
-      if (ingredient) {
-        ingredient.quantity = newQuantity;
+    editIngredient: (state, action) => {
+      const index = state.items.findIndex(ingredient => ingredient.id === action.payload.id);
+      if (index !== -1) {
+        state.items[index] = { ...state.items[index], ...action.payload };
       }
     },
     clearIngredients: (state) => {
@@ -43,8 +93,7 @@ const ingredientsSlice = createSlice({
 export const {
   addIngredient,
   removeIngredient,
-  changeUnit,
-  changeQuantity,
+  editIngredient,
   clearIngredients,
 } = ingredientsSlice.actions;
 

@@ -1,6 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { v4 as uuidv4 } from 'uuid';
 
+// TODO: remove this and get data from mongoDB
+// TODO: replace ID with mongoDB IDs
 const initialState = {
   items: [
       {
@@ -8,57 +10,17 @@ const initialState = {
         name: "Flour",
         quantity: 2,
         unit: "cups",
-        notes: "All-purpose flour"
-      },
-      {
-        id: uuidv4(),
-        name: "Sugar",
-        quantity: 1,
-        unit: "cup",
-        notes: "Granulated white sugar"
-      },
-      {
-        id: uuidv4(),
-        name: "Butter",
-        quantity: 0.5,
-        unit: "cup",
-        notes: "Unsalted, melted"
+        category: "All-purpose flour",
+        image: "https://www.eatingwell.com/thmb/QYZnBgF72TIKI6-A--NyoPa6avY=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/greek-salmon-bowl-f681500cbe054bb1adb607ff55094075.jpeg"
       },
       {
         id: uuidv4(),
         name: "Eggs",
-        quantity: 2,
+        quantity: 4,
         unit: "pieces",
-        notes: "Large"
+        category: "Dairy",
+        image: "https://www.eatingwell.com/thmb/QYZnBgF72TIKI6-A--NyoPa6avY=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/greek-salmon-bowl-f681500cbe054bb1adb607ff55094075.jpeg"
       },
-      {
-        id: uuidv4(),
-        name: "Baking Powder",
-        quantity: 1,
-        unit: "teaspoon",
-        notes: ""
-      },
-      {
-        id: uuidv4(),
-        name: "Salt",
-        quantity: 0.5,
-        unit: "teaspoon",
-        notes: ""
-      },
-      {
-        id: uuidv4(),
-        name: "Vanilla Extract",
-        quantity: 1,
-        unit: "teaspoon",
-        notes: "Pure vanilla extract"
-      },
-      {
-        id: uuidv4(),
-        name: "Milk",
-        quantity: 1,
-        unit: "cup",
-        notes: "Whole milk"
-      }
   ],
 };
 

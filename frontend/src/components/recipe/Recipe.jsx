@@ -2,7 +2,7 @@ import { Box, VStack, Breadcrumb, BreadcrumbItem, BreadcrumbLink} from "@chakra-
 import Ingredients from "./Ingredients";
 import Instructions from "./Instructions";
 import Header from "./Header";
-import Breadcrumbs from "../BreadCrumbs";
+import Breadcrumbs from "../misc/BreadCrumbs";
 
 // Replace with call to API to fetch Data
 const recipeList = [

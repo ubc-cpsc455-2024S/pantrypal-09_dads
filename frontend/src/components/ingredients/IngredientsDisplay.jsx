@@ -22,7 +22,7 @@ import {
 import { IoFastFoodOutline } from "react-icons/io5";
 import IngredientCard from "./ingredientCard";
 import { useSelector, useDispatch } from 'react-redux';
-import { addIngredient, removeIngredient, editIngredient, clearIngredients } from '../../slices/ingredientsSlice.js';
+import { addIngredient, removeIngredient, editIngredient, clearIngredients } from '../../context/ingredientsSlice.js';
 
 const IngredientsDisplay = () => {
   const ingredients = useSelector((state) => state.ingredients.items);

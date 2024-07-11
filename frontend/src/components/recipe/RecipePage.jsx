@@ -1,7 +1,7 @@
 import React from 'react';
 import { Box, VStack, Wrap, WrapItem, Heading, HStack, Button, Divider } from "@chakra-ui/react";
 import RecipeCard from "./RecipeCard";
-import Breadcrumbs from "../BreadCrumbs";
+import Breadcrumbs from "../misc/BreadCrumbs";
 import { IoFastFoodOutline } from "react-icons/io5";
 import { useSelector, useDispatch } from "react-redux";
 

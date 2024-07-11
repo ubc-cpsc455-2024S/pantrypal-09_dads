@@ -24,13 +24,13 @@ const RecipePage = () => {
                 <Wrap alignItems={"center"}>
                     {recipes.length > 0 ?
                         recipes.map((recipe) => (
-                            <WrapItem key={recipe.id}>
+                            <WrapItem key={recipe._id}>
                                 <RecipeCard
                                     image={recipe.image}
-                                    title={recipe.title}
-                                    time={recipe.readyInMinutes}
-                                    calories={recipe.calories}
-                                    likes={recipe.likes}
+                                    title={recipe.name}
+                                    time={recipe.time}
+                                    calories={recipe.nutrition.calories}
+                                    likes={recipe.ratings[0].rating}
                                     id={recipe.id}
                                     open={null}
                                 />

@@ -3,6 +3,7 @@ import Ingredients from "./Ingredients";
 import Instructions from "./Instructions";
 import Header from "./Header";
 import Breadcrumbs from "../BreadCrumbs";
+import { useSelector, useDispatch } from "react-redux";
 
 // Replace with call to API to fetch Data
 const recipeList = [
@@ -54,34 +55,35 @@ const recipeList = [
 ]
 
 const RecipeInstructions = () => {
+    const recipes = useSelector((state) => state.recipes.items);
 
+    return (
+        <Box>
+            <Breadcrumbs link={recipes[0].name}/>
+            <VStack w='100%'> 
+            
+                <Header
+                    title={recipes[0].name}
+                    image={recipes[0].image}
+                    time={recipes[0].time}
+                    calories={recipes[0].nutrition.calories}
+                    likes={recipes[0].ratings[0].rating}
+                    servings = {recipes[0].serves}
+                />
+                {/* TODO: need to update ingredients card */}
+                <Ingredients
+                    missedIngredients={recipeList[0].missedIngredients}
+                    usedIngredients={recipeList[0].usedIngredients}
+                    equipment={recipeList[0].equipment}
+                    key={1}
+                />
 
-  return (
-    <Box>
-        <Breadcrumbs link={recipeList[0].title}/>
-        <VStack w='100%'> 
-          
-            <Header
-                title={recipeList[0].title}
-                image={recipeList[0].image}
-                time={recipeList[0].readyInMinutes}
-                calories={recipeList[0].calories}
-                likes={recipeList[0].likes}
-                servings = {recipeList[0].servings}
-            />
-            <Ingredients
-                missedIngredients={recipeList[0].missedIngredients}
-                usedIngredients={recipeList[0].usedIngredients}
-                equipment={recipeList[0].equipment}
-                key={1}
-            />
-
-            <Instructions
-                instructions={recipeList[0].instructions}
-                key={2}
-            />
-        </VStack>        
-    </Box>
+                <Instructions
+                    instructions={recipes[0].steps}
+                    key={2}
+                />
+            </VStack>        
+        </Box>
   );
 };
 

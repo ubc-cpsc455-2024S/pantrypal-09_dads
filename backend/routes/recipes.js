@@ -38,6 +38,11 @@ router.post('/recipes/generate', async (req, res) => {
 
 			let recipeID = recipeObject['insertedId'].toString()
 			
+			await db.collection('recipes').updateOne(
+				{ "_id": recipeObject['insertedId']},
+				{$push: {recipes: recipeID}}
+			);
+			
 			res.status(200).send({ recipeID : recipeID });
 	} catch (error) {
 			console.error('Error generating recipes:', error);
@@ -69,7 +74,7 @@ router.post('/recipes/like/:recipeID', async (req, res) => {
 			const db = getDb();
 
 			// Increment the like count for the specified recipe
-			const result = await db.collection('recipes').findOne({ "_id": recipeOID });
+			const result = await db.collection('recipes').updateOne({ "_id": recipeOID });
 
 			if (!result) {
 					return res.status(404).send('Recipe not found');

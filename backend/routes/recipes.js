@@ -5,6 +5,7 @@ const mongoose = require('mongoose');
 
 // POST route to generate recipes from ingredients
 // Needs username, ingredients should already be in userDB
+// Saved generated Recipe to DB and returns recipeID
 router.post('/recipes/generate', async (req, res) => {
 	const db = getDb();
 	const { username } = req.body;
@@ -58,7 +59,7 @@ router.post('/recipes/like/:recipeID', async (req, res) => {
 	
 	var ObjectId = require('mongodb').ObjectId;   
 
-	if (!ObjectId.isValid("669117e52569f4740ef33523")) {
+	if (!ObjectId.isValid(recipeID)) {
 			return res.status(400).send('Invalid RecipeID format');
 	}
 

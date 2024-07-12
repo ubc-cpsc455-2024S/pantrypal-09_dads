@@ -37,6 +37,7 @@ router.post('/auth/creator', async (req, res) => {
 
 // Expects Username and passwordHash
 // Checks if Username and passwordHash exist
+
 router.get('/auth/handler', async (req, res) => {
     const db = getDb();
     const { username, passwordHash } = req.query;

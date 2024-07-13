@@ -21,6 +21,21 @@ export const updateIngredients = createAsyncThunk('user/updateIngredients', asyn
   return response.data
 })
 
+export const generateRecipes = createAsyncThunk('user/generate', async (formData) => {
+  const response = await axios.post('http://localhost:3000/recipes/generate', formData)
+  return response.data
+})
+
+export const getRecipes = createAsyncThunk('user/getRecipes', async (username) => {
+  const response = await axios.get('http://localhost:3000/recipes', 
+    {
+      params: {
+        username: username
+      }
+    })
+  return response.data
+})
+
 // TODO: remove this and get data from mongoDB
 // TODO: replace ID with mongoDB IDs
 const userSlice = createSlice({
@@ -34,6 +49,7 @@ const userSlice = createSlice({
         diet: [],
         allergies: [],
       },
+      recipes: [],
       history: [],
       favorites: [],
       ingredients: [],
@@ -118,6 +134,19 @@ const userSlice = createSlice({
         .addCase(updateIngredients.fulfilled, (state, action) => {
           console.log(action.payload)
           state.ingredients = action.payload.ingredients.items;
+        })
+        .addCase(generateRecipes.pending, (state, action) => {
+          state.status = 'loading'
+        })
+        .addCase(generateRecipes.fulfilled, (state, action) => {
+          state.recipes = action.payload.recipes;
+          state.status = 'recipes'
+        })
+        .addCase(generateRecipes.rejected, (state, action) => {
+          state.status = 'default'
+        })
+        .addCase(getRecipes.fulfilled, (state, action) => {
+          state.recipes = action.payload.recipes;
         })
     }
     

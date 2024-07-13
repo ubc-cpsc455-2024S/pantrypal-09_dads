@@ -45,10 +45,9 @@ function convertImageToBase64(filePath) {
 // POST route to generate ingredients from image
 // Needs username, Image
 router.post('/ingredients/generate', imageUpload.array("my-image-file"), async (req, res) => {
-    const db = getDb();
-    console.log('POST request received to /image-upload.');
-    console.log('Axios POST body: ', req.body);
+    console.log('POST request received to /ingredients/generate');
 
+    const db = getDb();
     const { username } = req.body;
 
     try {
@@ -137,6 +136,8 @@ router.post('/ingredients/generate', imageUpload.array("my-image-file"), async (
 // Needs username, Ingredients in Map format <Ingredient, Quantity>
 // Updates DB with ingredient list for user
 router.post('/ingredients/update', async (req, res) => {
+    console.log('POST request received to /ingredients/update');
+
     const db = getDb();
     const { username, ingredients } = req.body;
     
@@ -163,6 +164,8 @@ router.post('/ingredients/update', async (req, res) => {
 // Needs username
 // Returns ingredients for that user from DB
 router.get('/ingredients', async (req, res) => {
+    console.log('GET request received to /ingredients');
+
     const db = getDb();
     const { username } = req.query;
 

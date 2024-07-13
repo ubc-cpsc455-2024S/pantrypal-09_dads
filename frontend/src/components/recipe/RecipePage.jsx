@@ -1,15 +1,14 @@
 import {useEffect} from 'react';
 import { Box, VStack, Wrap, WrapItem, Heading, HStack, Button, Divider } from "@chakra-ui/react";
-import RecipeCard from "./RecipeCard";
 import Breadcrumbs from "../misc/BreadCrumbs";
 import { IoFastFoodOutline } from "react-icons/io5";
 import { useSelector } from "react-redux";
 import { goToIngredients } from '../../context/userSlice';
-import { getRecipes } from '../../context/recipesSlice';
+import { getRecipes } from '../../context/userSlice';
 import RecipeInstructions from './Recipe';
 
 const RecipePage = ({dispatch}) => {
-    const recipes = useSelector((state) => state.recipes.items);
+    const recipes = useSelector((state) => state.user.recipes);
     const username = useSelector((state) => state.user.username);
 
     const handleModifyIngredients = async () => {

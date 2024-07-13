@@ -1,14 +1,27 @@
-import React from 'react';
+import {useEffect} from 'react';
 import { Box, VStack, Wrap, WrapItem, Heading, HStack, Button, Divider } from "@chakra-ui/react";
 import RecipeCard from "./RecipeCard";
 import Breadcrumbs from "../misc/BreadCrumbs";
 import { IoFastFoodOutline } from "react-icons/io5";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
+import { goToIngredients } from '../../context/userSlice';
+import { getRecipes } from '../../context/recipesSlice';
+import RecipeInstructions from './Recipe';
 
-const RecipePage = () => {
+const RecipePage = ({dispatch}) => {
     const recipes = useSelector((state) => state.recipes.items);
+    const username = useSelector((state) => state.user.username);
+
+    const handleModifyIngredients = async () => {
+        dispatch(goToIngredients())
+    };
+
+    useEffect(() => {
+        dispatch(getRecipes(username));
+    }, [dispatch, username]);
 
     return (
+        
         <Box display={"flex"} flexDirection={"column"} mx={"8%"}>
             <VStack alignItems="flex-start">
                 <Breadcrumbs link={""} />
@@ -24,17 +37,12 @@ const RecipePage = () => {
                 <Wrap alignItems={"center"}>
                     {recipes.length > 0 ?
                         recipes.map((recipe) => (
-                            <WrapItem key={recipe.id}>
-                                <RecipeCard
-                                    image={recipe.image}
-                                    title={recipe.title}
-                                    time={recipe.readyInMinutes}
-                                    calories={recipe.calories}
-                                    likes={recipe.likes}
-                                    id={recipe.id}
-                                    open={null}
-                                />
-                            </WrapItem>
+                            <>
+                                <WrapItem key={recipe.uuid}>
+                                    <RecipeInstructions recipe={recipe}>
+                                    </RecipeInstructions>
+                                </WrapItem>
+                            </>
                         )) : null
                     }
                 </Wrap>
@@ -43,7 +51,7 @@ const RecipePage = () => {
                     <Button leftIcon={<IoFastFoodOutline />} variant='solid'>
                         Generate More
                     </Button>
-                    <Button variant='outline'>
+                    <Button variant='outline' onClick={handleModifyIngredients}>
                         Modify ingredients
                     </Button>
                 </HStack>

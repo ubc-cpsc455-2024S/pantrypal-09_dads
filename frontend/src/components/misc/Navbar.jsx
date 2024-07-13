@@ -1,3 +1,4 @@
+import { Avatar, AvatarBadge } from "@chakra-ui/react";
 const NavBar = () => {
   const styles = {
     navbar: {
@@ -15,7 +16,7 @@ const NavBar = () => {
       listStyle: 'none',
     },
     navItem: {
-      marginLeft: '1.5rem',
+      marginLeft: '0.5rem',
     },
     navLink: {
       textDecoration: 'none',
@@ -30,8 +31,10 @@ const NavBar = () => {
     <nav style={styles.navbar}>
       <div style={styles.logo}>pantrypal</div>
       <ul style={styles.navLinks}>
-        <li style={styles.navItem}><a style={styles.navLink} href="/">Home</a></li>
-        <li style={styles.navItem}><a style={styles.navLink} href="#about">About</a></li>
+        <li style={styles.navItem}><a style={styles.navLink} href="/">Welcome Back, Adi</a></li>
+        <Avatar style={styles.navItem} size='sm'>
+          <AvatarBadge boxSize='1em' bg='green.500' />
+        </Avatar>
       </ul>
     </nav>
   );

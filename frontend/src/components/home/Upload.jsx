@@ -1,11 +1,12 @@
-import React, { useState, useRef, useCallback } from 'react';
-import { Button } from '@chakra-ui/react';
+import { useState, useRef, useCallback } from 'react';
+import { Button, Stack} from '@chakra-ui/react';
 import { FaCameraRetro, FaWindowClose } from 'react-icons/fa';
 import Webcam from 'react-webcam';
-import { Link } from 'react-router-dom';
+import { generateIngredients } from '../../context/userSlice';
 
 const ImageUpload = (props) => {
     const [preview, setPreview] = useState(null);
+    const [image, setImage] = useState(null);
     const [isFullScreen, setIsFullScreen] = useState(false);
     const [useWebcam, setUseWebcam] = useState(false);
     const [useMode, setUseMode] = useState("None");
@@ -14,6 +15,12 @@ const ImageUpload = (props) => {
 
     const handleFileChange = (event) => {
         const file = event.target.files[0];
+
+        const formData = new FormData(); 
+        formData.append('my-image-file', file, file.name);
+        formData.append('username', 'adi');
+        setImage(formData);
+
         if (file) {
             const reader = new FileReader();
             reader.onloadend = () => {
@@ -49,15 +56,15 @@ const ImageUpload = (props) => {
         }
     };
 
-    const handleClose= () => {
+    const handleClose = () => {
         setPreview(null);
         setUseWebcam(false)
         setUseMode("None")
         setIsFullScreen(false)
     };
 
-    const handleContinue = () => {
-        window.location.href = '/ingredients';
+    const handleContinue = async () => {
+        props.dispatch(generateIngredients(image))
     };
 
     const capture = useCallback(() => {
@@ -69,10 +76,12 @@ const ImageUpload = (props) => {
 
     return (
         <div>
-            <Button variant='solid' onClick={handleUpload}>
-                        Upload Photo </Button>
-            <Button leftIcon={<FaCameraRetro />} variant='solid' onClick={handlePhoto}>
+            <Stack direction='row' spacing={4}>
+                <Button variant='solid' onClick={handleUpload}>
+                    Upload Photo 
                 </Button>
+                <Button variant='solid' onClick={handlePhoto}><FaCameraRetro /></Button>
+            </Stack>
             <input
                 type="file"
                 ref={fileInputRef}
@@ -98,7 +107,7 @@ const ImageUpload = (props) => {
                     <img src={preview} alt="Preview" style={styles.fullScreenImage} />
                     <div style={styles.buttonContainer}>
                         <Button variant="solid" colorScheme="teal" onClick={handleContinue} style={styles.button}>
-                            <Link to={props.goTo} > Continue </Link> 
+                            Continue
                         </Button>
                         <Button variant="solid" colorScheme="red" onClick={handleReTake} style={styles.button}>
                             Re-take

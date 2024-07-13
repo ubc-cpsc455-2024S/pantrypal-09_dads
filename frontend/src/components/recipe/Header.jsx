@@ -11,16 +11,16 @@ const Header = ({title, image, time, calories, servings, likes}) => {
                     {title}
                 </Heading>
                 <HStack divider={<StackDivider />}>
-                    <Text fontSize="14px" lineHeight="20px" fontWeight="600">
+                    <Text fontSize="14px" lineHeight="20px" fontWeight="400">
                         {time + " mins"}
                     </Text>
-                    <Text fontSize="12px" lineHeight="20px" fontWeight="600">
+                    <Text fontSize="14px" lineHeight="20px" fontWeight="400">
                         {Math.round(calories) + " Cals per serving"}
                     </Text>
-                    <Text fontSize="12px" lineHeight="20px" fontWeight="600">
+                    <Text fontSize="14px" lineHeight="20px" fontWeight="400">
                         {"Feeds "+ servings}
                     </Text>
-                    <Text fontSize="14px" lineHeight="20px" fontWeight="600">
+                    <Text fontSize="14px" lineHeight="20px" fontWeight="400">
                         {"♥️ "+ likes}
                     </Text>
                 </HStack>

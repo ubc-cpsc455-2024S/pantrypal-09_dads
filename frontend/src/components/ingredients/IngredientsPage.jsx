@@ -5,35 +5,25 @@ import {
   Button, 
   Divider, 
   Link, 
-  Box, 
-  useDisclosure,
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalFooter,
-  ModalBody,
-  ModalCloseButton,
-  FormLabel,
-  Input,
-  Select
+  Box,
 } from "@chakra-ui/react";
 import { IoFastFoodOutline } from "react-icons/io5";
-import IngredientCard from "./ingredientCard";
-import { useState } from "react";
 import IngredientsDisplay from "./IngredientsDisplay";
-import { useSelector, useDispatch } from "react-redux";
+import { goToRecipes } from "../../context/userSlice";
+import { BsSkipForward } from "react-icons/bs";
+import { generateRecipes } from "../../context/recipesSlice";
+import { useSelector } from "react-redux";
 
-const InsertIngredientsPage = () => {
-  const ingredients = useSelector((state) => state.ingredients.items);
-  const dispatch = useDispatch();
-  const [newIngredient, setNewIngredient] = useState(
-    {
-      name: '',
-      quantity: 0,
-      unit: ''
-    }
-  );
+const InsertIngredientsPage = ({dispatch}) => {
+  const username = useSelector((state) => state.user.username);
+
+  const handleContinue = async () => {
+      dispatch(goToRecipes())
+  };
+  
+  const handleGenerate = async () => {
+    dispatch(generateRecipes({username:username}))
+};
 
   return (
     <Box display={"flex"} flexDirection={"column"} mx={"8%"}>
@@ -57,14 +47,17 @@ const InsertIngredientsPage = () => {
                 Make any necessary changes before generating recipes!
       </Heading>
 
-      <IngredientsDisplay initialIngredients={ingredients} />
+      <IngredientsDisplay />
 
 
       <VStack>
         <Divider  marginTop={'20px'}/>
         <HStack direction='column' spacing={4}>
-            <Button leftIcon={<IoFastFoodOutline />} variant='solid'>
-              <Link href="/recipes"> Generate Recipes! </Link>
+            <Button leftIcon={<IoFastFoodOutline/> } variant='solid' onClick={handleGenerate}>
+              Generate Recipes!
+            </Button>
+            <Button variant='solid' onClick={handleContinue}>
+              <BsSkipForward />
             </Button>
         </HStack>
       </VStack>

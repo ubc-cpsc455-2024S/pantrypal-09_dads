@@ -14,10 +14,11 @@ let temp = []
 // Needs username, ingredients should already be in userDB
 // Saved generated Recipe to DB and returns recipeID
 router.post('/recipes/generate', async (req, res) => {
+	console.log('POST request received to /recipes/generate');
+
 	const db = getDb();
 	const { username } = req.body;
-	
-	console.log("request received to generate recipes")
+
 
 	if (!username) {
 		return res.status(400).send('username is required');
@@ -138,8 +139,6 @@ router.post('/recipes/like/:recipeID', async (req, res) => {
 	const { recipeID } = req.params;
 	const { username } = req.body; // Assuming username is coming in the request body
 
-	console.log(recipeID)
-
 	if (!username || !recipeID) {
 			return res.status(400).send('username and RecipeID are required');
 	}
@@ -179,6 +178,8 @@ router.post('/recipes/like/:recipeID', async (req, res) => {
 // Needs username
 // Returns ingredients for that user from DB
 router.get('/recipes', async (req, res) => {
+	console.log('GET request received to /recipes');
+
     const db = getDb();
     const { username } = req.query;
 	

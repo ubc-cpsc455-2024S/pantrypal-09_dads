@@ -115,7 +115,7 @@ router.post('/recipes/generate', async (req, res) => {
 				size: "1024x1024",
 			});
 			curr['image'] = response.data[0].url;
-			curr['id'] = uuidv4()
+			curr['uuid'] = uuidv4()
 
 			let recipeObject = await db.collection('recipes').insertOne(curr);
 			retVal.push(curr);

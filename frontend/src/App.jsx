@@ -24,7 +24,7 @@ function App() {
         {status==='default' && <HomePage dispatch={dispatch}/>}
         {status==='ingredients' && <IngredientsPage dispatch={dispatch} />}
         {status==='dietary' && <DietPage />}
-        {status==='recipes' && <RecipePage />}
+        {status==='recipes' && <RecipePage dispatch={dispatch}/>}
         {status==='recipes/temp' && <RecipeInstructions />}
 
         {/* <BrowserRouter>

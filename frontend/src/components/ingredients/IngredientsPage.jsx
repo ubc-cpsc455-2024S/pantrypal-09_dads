@@ -10,6 +10,7 @@ import {
 import { IoFastFoodOutline } from "react-icons/io5";
 import IngredientsDisplay from "./IngredientsDisplay";
 import { goToRecipes } from "../../context/userSlice";
+import { BsSkipForward } from "react-icons/bs";
 
 const InsertIngredientsPage = ({dispatch}) => {
 
@@ -47,6 +48,9 @@ const InsertIngredientsPage = ({dispatch}) => {
         <HStack direction='column' spacing={4}>
             <Button leftIcon={<IoFastFoodOutline/> } variant='solid' onClick={handleContinue}>
               Generate Recipes!
+            </Button>
+            <Button variant='solid' onClick={handleContinue}>
+              <BsSkipForward />
             </Button>
         </HStack>
       </VStack>

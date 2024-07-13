@@ -1,5 +1,16 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, createAsyncThunk} from '@reduxjs/toolkit';
 import { v4 as uuidv4 } from 'uuid';
+import axios from 'axios';
+
+export const getRecipes = createAsyncThunk('recipes/getRecipes', async (username) => {
+  const response = await axios.get('http://localhost:3000/recipes', 
+    {
+      params: {
+        username: username
+      }
+    })
+  return response.data
+})
 
 // TODO: remove this and get data from mongoDB
 // TODO: replace ID with mongoDB IDs
@@ -50,6 +61,7 @@ const recipesSlice = createSlice({
     ],
   },
   reducers: {
+    
     addRecipe: (state, action) => {
       state.items.push(action.payload);
     },
@@ -59,6 +71,22 @@ const recipesSlice = createSlice({
       );
     },
   },
+  extraReducers(builder) {
+    builder
+      // .addCase(generateIngredients.pending, (state, action) => {
+      //   state.status = 'loading'
+      // })
+      // .addCase(generateIngredients.fulfilled, (state, action) => {
+      //   state.ingredients = action.payload.ingredients.items;
+      //   state.status = 'ingredients'
+      // })
+      // .addCase(generateIngredients.rejected, (state, action) => {
+      //   state.status = 'default'
+      // })
+      .addCase(getRecipes.fulfilled, (state, action) => {
+        state.items = action.payload.recipes;
+      })
+  }
 });
 
 export const { addRecipe, removeRecipe } = recipesSlice.actions;

@@ -11,12 +11,19 @@ import { IoFastFoodOutline } from "react-icons/io5";
 import IngredientsDisplay from "./IngredientsDisplay";
 import { goToRecipes } from "../../context/userSlice";
 import { BsSkipForward } from "react-icons/bs";
+import { generateRecipes } from "../../context/recipesSlice";
+import { useSelector } from "react-redux";
 
 const InsertIngredientsPage = ({dispatch}) => {
+  const username = useSelector((state) => state.user.username);
 
   const handleContinue = async () => {
       dispatch(goToRecipes())
   };
+  
+  const handleGenerate = async () => {
+    dispatch(generateRecipes({username:username}))
+};
 
   return (
     <Box display={"flex"} flexDirection={"column"} mx={"8%"}>
@@ -46,7 +53,7 @@ const InsertIngredientsPage = ({dispatch}) => {
       <VStack>
         <Divider  marginTop={'20px'}/>
         <HStack direction='column' spacing={4}>
-            <Button leftIcon={<IoFastFoodOutline/> } variant='solid' onClick={handleContinue}>
+            <Button leftIcon={<IoFastFoodOutline/> } variant='solid' onClick={handleGenerate}>
               Generate Recipes!
             </Button>
             <Button variant='solid' onClick={handleContinue}>

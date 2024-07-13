@@ -1,6 +1,6 @@
 import { Box, Checkbox, Divider, Heading, } from "@chakra-ui/react";
 
-const Ingredients = ({missedIngredients, usedIngredients, equipment}) => {
+const Ingredients = ({usedIngredients, equipment}) => {
 
   return (
     <Box paddingTop="20px" paddingBottom="15px">
@@ -12,14 +12,7 @@ const Ingredients = ({missedIngredients, usedIngredients, equipment}) => {
             {usedIngredients.map((ingredient, index) => {
                 return (
                     <Checkbox key={index} color="#0c5446" isChecked={true}>
-                        {ingredient}
-                    </Checkbox>
-                )
-            })}
-            {missedIngredients.map((ingredient, index) => {
-                return (
-                    <Checkbox key={index} color="#0c5446">
-                        {ingredient}
+                        {ingredient.quantity + " " + ingredient.unit + " of " + ingredient.name}
                     </Checkbox>
                 )
             })}

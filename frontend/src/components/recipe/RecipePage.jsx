@@ -6,6 +6,7 @@ import { IoFastFoodOutline } from "react-icons/io5";
 import { useSelector } from "react-redux";
 import { goToIngredients } from '../../context/userSlice';
 import { getRecipes } from '../../context/recipesSlice';
+import RecipeInstructions from './Recipe';
 
 const RecipePage = ({dispatch}) => {
     const recipes = useSelector((state) => state.recipes.items);
@@ -20,6 +21,7 @@ const RecipePage = ({dispatch}) => {
     }, [dispatch, username]);
 
     return (
+        
         <Box display={"flex"} flexDirection={"column"} mx={"8%"}>
             <VStack alignItems="flex-start">
                 <Breadcrumbs link={""} />
@@ -35,18 +37,12 @@ const RecipePage = ({dispatch}) => {
                 <Wrap alignItems={"center"}>
                     {recipes.length > 0 ?
                         recipes.map((recipe) => (
-                            <WrapItem key={recipe.uuid}>
-                                <RecipeCard
-                                    image={recipe.image}
-                                    title={recipe.name}
-                                    time={recipe.time}
-                                    description={recipe.description}
-                                    calories={recipe.nutrition.calories}
-                                    likes={5}
-                                    id={recipe.uuid}
-                                    open={null}
-                                />
-                            </WrapItem>
+                            <>
+                                <WrapItem key={recipe.uuid}>
+                                    <RecipeInstructions recipe={recipe}>
+                                    </RecipeInstructions>
+                                </WrapItem>
+                            </>
                         )) : null
                     }
                 </Wrap>

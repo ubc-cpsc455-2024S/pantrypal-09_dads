@@ -11,7 +11,7 @@ const IngredientCard = ({ ingredient, id, onDelete, onEdit }) => {
                         </HStack>
                         <Text>{ingredient.quantity} {ingredient.unit}</Text>
                         <Divider/>
-                        <Text textAlign={"left"}>{ingredient.notes}</Text>
+                        <Text textAlign={"left"}>{"Notes: " + ingredient.notes}</Text>
                     </>
                     <Spacer />
                     <Spacer />

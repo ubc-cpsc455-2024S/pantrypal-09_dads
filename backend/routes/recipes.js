@@ -16,6 +16,8 @@ let temp = []
 router.post('/recipes/generate', async (req, res) => {
 	const db = getDb();
 	const { username } = req.body;
+	
+	console.log("request received to generate recipes")
 
 	if (!username) {
 		return res.status(400).send('username is required');

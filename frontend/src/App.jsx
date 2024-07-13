@@ -22,7 +22,7 @@ function App() {
       <div className="body">
         {status==='loading' && <LoadingPage />}
         {status==='default' && <HomePage dispatch={dispatch}/>}
-        {status==='ingredients' && <IngredientsPage />}
+        {status==='ingredients' && <IngredientsPage dispatch={dispatch} />}
         {status==='dietary' && <DietPage />}
         {status==='recipes' && <RecipePage />}
         {status==='recipes/temp' && <RecipeInstructions />}

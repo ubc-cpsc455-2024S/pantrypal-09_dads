@@ -9,9 +9,13 @@ import {
 } from "@chakra-ui/react";
 import { IoFastFoodOutline } from "react-icons/io5";
 import IngredientsDisplay from "./IngredientsDisplay";
+import { goToRecipes } from "../../context/userSlice";
 
-const InsertIngredientsPage = () => {
+const InsertIngredientsPage = ({dispatch}) => {
 
+  const handleContinue = async () => {
+      dispatch(goToRecipes())
+  };
 
   return (
     <Box display={"flex"} flexDirection={"column"} mx={"8%"}>
@@ -41,7 +45,7 @@ const InsertIngredientsPage = () => {
       <VStack>
         <Divider  marginTop={'20px'}/>
         <HStack direction='column' spacing={4}>
-            <Button leftIcon={<IoFastFoodOutline />} variant='solid'>
+            <Button leftIcon={<IoFastFoodOutline/> } variant='solid' onClick={handleContinue}>
               Generate Recipes!
             </Button>
         </HStack>

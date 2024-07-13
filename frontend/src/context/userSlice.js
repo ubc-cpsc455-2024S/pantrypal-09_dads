@@ -123,6 +123,6 @@ const userSlice = createSlice({
     
   });
   
-  export const { setUser, logoutUser, goToIngredients, addIngredient, removeIngredient, editIngredient, clearIngredients} = userSlice.actions;
+  export const { setUser, logoutUser, goToIngredients,goToRecipes, addIngredient, removeIngredient, editIngredient, clearIngredients} = userSlice.actions;
   
   export default userSlice.reducer;

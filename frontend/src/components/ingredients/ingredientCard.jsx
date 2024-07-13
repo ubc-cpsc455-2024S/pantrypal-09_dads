@@ -2,7 +2,7 @@ import { Text, Card, CardBody, Flex, Spacer, HStack, Button, Divider, Heading } 
 
 const IngredientCard = ({ ingredient, id, onDelete, onEdit }) => {
     return (
-        <Card overflow="hidden" mb="4" width={'300px'} height={"200px"} variant={"filled"}>
+        <Card overflow="hidden" mb="4" width={'300px'} height={"200px"} variant={"elevated"}>
             <CardBody>
                 <Flex alignItems={'center'} direction={"column"} spacing={"space-between"} height={"100%"}>
                     <>

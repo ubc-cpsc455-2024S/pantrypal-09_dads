@@ -1,27 +1,37 @@
 const express = require('express');
 const router = express.Router();
 const { getDb } = require('../database.js');
+const bodyParser = require("body-parser");
+const fs = require("fs");
 
 
 // POST route to generate ingredients from image
 // Needs username, Image
 // Returns Ingredients fro Image Query
-router.post('/ingredients/generate', async (req, res) => {
+router.post('/ingredients/generate', bodyParser.raw({type: ["image/jpeg", "image/png"], limit: "5mb"}), async (req, res) => {
     const db = getDb();
-    const { username, image } = req.body;
+    //const { username, ingredients } = req.body;
 
-    if (!username || !image) {
-        return res.status(400).send('username and Image are required');
+    fs.writeFile("./temp/image.png", req.body, (error) => {
+    if (error) {
+        throw error;
     }
+        console.log("Image saved.");
+    });
+    // const { username, image } = req.body;
+
+    // if (!username || !image) {
+    //     return res.status(400).send('username and Image are required');
+    // }
 
     try {
-        // API call to GPT4o sends image and recieves ingredient information
-        // Post-processing can be performed on recieved image to extract ingredients and quantity
-        let ingredients = await exampleFunction(xyz) // GPT CALL HERE
+    //     // API call to GPT4o sends image and recieves ingredient information
+    //     // Post-processing can be performed on recieved image to extract ingredients and quantity
+    //     let ingredients = await exampleFunction(xyz) // GPT CALL HERE
 
         // Processed ingredients are sent back to user for confirmation
         // Once confirmed by user, update endpoint should be hit
-        res.status(200).send({ ingredients });
+        res.status(200).send({ lol: 'lol'});
     } catch (error) {
         console.error('Error generating ingredients:', error);
         res.status(500).send('Error generating ingredients');

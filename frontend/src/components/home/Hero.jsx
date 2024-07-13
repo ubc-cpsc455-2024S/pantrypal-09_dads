@@ -1,9 +1,7 @@
-import React from 'react';
 import { Stack } from '@chakra-ui/react'
 import { Button, Link} from '@chakra-ui/react'
 import { FaRegKeyboard } from "react-icons/fa6";
-import { FaCameraRetro } from "react-icons/fa";
-import ImageUpload from "./Camera"
+import ImageUpload from "./Upload"
 
 const Hero = () => {
   const styles = {

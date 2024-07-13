@@ -3,6 +3,8 @@ import { Button } from '@chakra-ui/react';
 import { FaCameraRetro, FaWindowClose } from 'react-icons/fa';
 import Webcam from 'react-webcam';
 import { Link } from 'react-router-dom';
+import axios from "axios"
+
 
 const ImageUpload = (props) => {
     const [preview, setPreview] = useState(null);
@@ -11,9 +13,19 @@ const ImageUpload = (props) => {
     const [useMode, setUseMode] = useState("None");
     const fileInputRef = useRef(null);
     const webcamRef = useRef(null);
+    const [image, setImage] = useState(null);
 
     const handleFileChange = (event) => {
         const file = event.target.files[0];
+
+        const formData = new FormData(); 
+        //FILE INFO NAME WILL BE "my-image-file"
+        formData.append('my-image-file', file, file.name);
+        formData.append('username', 'hubot');
+        setImage(formData);
+        for (var pair of formData.entries()) {
+            console.log(pair[0]+ ', ' + pair[1]); 
+        }
         if (file) {
             const reader = new FileReader();
             reader.onloadend = () => {
@@ -49,15 +61,20 @@ const ImageUpload = (props) => {
         }
     };
 
-    const handleClose= () => {
+    const handleClose = () => {
         setPreview(null);
         setUseWebcam(false)
         setUseMode("None")
         setIsFullScreen(false)
     };
 
-    const handleContinue = () => {
-        window.location.href = '/ingredients';
+    const handleContinue = async () => {
+        console.log("here")
+        console.log(image)
+        axios.post('http://localhost:3000/image-upload', image)
+            .then(res => {
+                console.log('Axios response: ', res)
+            })
     };
 
     const capture = useCallback(() => {
@@ -98,7 +115,7 @@ const ImageUpload = (props) => {
                     <img src={preview} alt="Preview" style={styles.fullScreenImage} />
                     <div style={styles.buttonContainer}>
                         <Button variant="solid" colorScheme="teal" onClick={handleContinue} style={styles.button}>
-                            <Link to={props.goTo} > Continue </Link> 
+                            Continue
                         </Button>
                         <Button variant="solid" colorScheme="red" onClick={handleReTake} style={styles.button}>
                             Re-take

@@ -40,6 +40,7 @@ const RecipePage = ({dispatch}) => {
                                     image={recipe.image}
                                     title={recipe.name}
                                     time={recipe.time}
+                                    description={recipe.description}
                                     calories={recipe.nutrition.calories}
                                     likes={5}
                                     id={recipe.uuid}

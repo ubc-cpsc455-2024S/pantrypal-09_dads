@@ -1,31 +1,26 @@
-import React, { useState, useRef, useCallback } from 'react';
-import { Button } from '@chakra-ui/react';
+import { useState, useRef, useCallback } from 'react';
+import { Button, Stack} from '@chakra-ui/react';
 import { FaCameraRetro, FaWindowClose } from 'react-icons/fa';
 import Webcam from 'react-webcam';
-import { Link } from 'react-router-dom';
-import axios from "axios"
-
+import { generateIngredients } from '../../context/userSlice';
 
 const ImageUpload = (props) => {
     const [preview, setPreview] = useState(null);
+    const [image, setImage] = useState(null);
     const [isFullScreen, setIsFullScreen] = useState(false);
     const [useWebcam, setUseWebcam] = useState(false);
     const [useMode, setUseMode] = useState("None");
     const fileInputRef = useRef(null);
     const webcamRef = useRef(null);
-    const [image, setImage] = useState(null);
 
     const handleFileChange = (event) => {
         const file = event.target.files[0];
 
         const formData = new FormData(); 
-        //FILE INFO NAME WILL BE "my-image-file"
         formData.append('my-image-file', file, file.name);
-        formData.append('username', 'hubot');
+        formData.append('username', 'adi');
         setImage(formData);
-        for (var pair of formData.entries()) {
-            console.log(pair[0]+ ', ' + pair[1]); 
-        }
+
         if (file) {
             const reader = new FileReader();
             reader.onloadend = () => {
@@ -69,12 +64,7 @@ const ImageUpload = (props) => {
     };
 
     const handleContinue = async () => {
-        console.log("here")
-        console.log(image)
-        axios.post('http://localhost:3000/image-upload', image)
-            .then(res => {
-                console.log('Axios response: ', res)
-            })
+        props.dispatch(generateIngredients(image))
     };
 
     const capture = useCallback(() => {
@@ -86,10 +76,12 @@ const ImageUpload = (props) => {
 
     return (
         <div>
-            <Button variant='solid' onClick={handleUpload}>
-                        Upload Photo </Button>
-            <Button leftIcon={<FaCameraRetro />} variant='solid' onClick={handlePhoto}>
+            <Stack direction='row' spacing={4}>
+                <Button variant='solid' onClick={handleUpload}>
+                    Upload Photo 
                 </Button>
+                <Button variant='solid' onClick={handlePhoto}><FaCameraRetro /></Button>
+            </Stack>
             <input
                 type="file"
                 ref={fileInputRef}

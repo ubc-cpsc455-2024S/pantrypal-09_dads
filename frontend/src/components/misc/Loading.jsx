@@ -1,4 +1,6 @@
-const Hero = () => {
+import { Spinner } from "@chakra-ui/react";
+
+const LoadingPage = () => {
   const styles = {
     heroContainer: {
       display: 'flex',
@@ -8,8 +10,8 @@ const Hero = () => {
       textAlign: 'center',
       height: '70vh',
       padding: '2rem',
-      marginTop: '10%',
-      marginBottom: '10%'
+      marginTop: '2rem',
+      marginBottom: '1rem'
     },
     heroTitle: {
       fontSize: '3rem',
@@ -25,6 +27,7 @@ const Hero = () => {
     heroImage: {
       width: '100%',
       maxWidth: '600px',
+      margin: '2rem 0',
     }
   };
 
@@ -34,15 +37,11 @@ const Hero = () => {
         Simplify Your Cooking, Minimize Food Waste
       </h1>
       <h2 style={styles.heroSubtitle}>
-        Discover recipes based on what's in your fridge. No more wasted food, just delicious meals.
+        Loading...
       </h2>
-      <img
-        style={styles.heroImage}
-        src="/open_fridge.jpeg"
-        alt="PantryPals"
-      />
+      <Spinner size='xl' />
     </div>
   );
 };
 
-export default Hero;
+export default LoadingPage;

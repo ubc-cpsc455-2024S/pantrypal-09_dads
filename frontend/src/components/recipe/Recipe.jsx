@@ -55,7 +55,6 @@ const recipeList = [
 
 const RecipeInstructions = () => {
 
-
   return (
     <Box>
         <Breadcrumbs link={recipeList[0].title}/>

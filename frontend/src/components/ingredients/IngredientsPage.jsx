@@ -5,35 +5,13 @@ import {
   Button, 
   Divider, 
   Link, 
-  Box, 
-  useDisclosure,
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalFooter,
-  ModalBody,
-  ModalCloseButton,
-  FormLabel,
-  Input,
-  Select
+  Box,
 } from "@chakra-ui/react";
 import { IoFastFoodOutline } from "react-icons/io5";
-import IngredientCard from "./ingredientCard";
-import { useState } from "react";
 import IngredientsDisplay from "./IngredientsDisplay";
-import { useSelector, useDispatch } from "react-redux";
 
 const InsertIngredientsPage = () => {
-  const ingredients = useSelector((state) => state.ingredients.items);
-  const dispatch = useDispatch();
-  const [newIngredient, setNewIngredient] = useState(
-    {
-      name: '',
-      quantity: 0,
-      unit: ''
-    }
-  );
+
 
   return (
     <Box display={"flex"} flexDirection={"column"} mx={"8%"}>
@@ -57,14 +35,14 @@ const InsertIngredientsPage = () => {
                 Make any necessary changes before generating recipes!
       </Heading>
 
-      <IngredientsDisplay initialIngredients={ingredients} />
+      <IngredientsDisplay />
 
 
       <VStack>
         <Divider  marginTop={'20px'}/>
         <HStack direction='column' spacing={4}>
             <Button leftIcon={<IoFastFoodOutline />} variant='solid'>
-              <Link href="/recipes"> Generate Recipes! </Link>
+              Generate Recipes!
             </Button>
         </HStack>
       </VStack>

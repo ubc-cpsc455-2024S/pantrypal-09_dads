@@ -4,9 +4,11 @@ const { getDb } = require('../database.js');
 
 // Used to insert a new user into the database
 // Expects a username, email, passwordHash
-router.post('/auth/creator', async (req, res) => {
+router.post('/auth/signup', async (req, res) => {
     const db = getDb();
+
     const { username, email, passwordHash } = req.body;
+
     if (!username || !email || !passwordHash) {
         return res.status(400).send('Missing required fields');
     }
@@ -21,12 +23,14 @@ router.post('/auth/creator', async (req, res) => {
             username,
             email,
             passwordHash,
-            ingredients: new Map(),
+            ingredients: [],
             recipes: [],
             favorites: []
         };
 
         await db.collection('users').insertOne(newUser);
+        
+        console.log('User created successfully')
         res.status(201).send('User created successfully');
 
     } catch (error) {
@@ -34,6 +38,8 @@ router.post('/auth/creator', async (req, res) => {
         res.status(500).send('Error creating user');
     }
 });
+
+
 
 // Expects Username and passwordHash
 // Checks if Username and passwordHash exist

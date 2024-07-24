@@ -1,15 +1,13 @@
 const request = require('supertest');
-const { startServer, stopServer } = require('../server');
-const { getDb } = require('../database');
-
-let server;
+const app = require('../app');
+const { connectToDb, closeDb, getDb } = require('../database');
 
 beforeAll(async () => {
-    server = await startServer();
+    await connectToDb();
 });
 
 afterAll(async () => {
-    await stopServer();
+    await closeDb();
 });
 
 afterEach(async () => {
@@ -19,7 +17,7 @@ afterEach(async () => {
 
 describe('Auth Routes', () => {
     test('should sign up a new user', async () => {
-        const response = await request(server)
+        const response = await request(app)
             .post('/auth/signup')
             .send({
                 username: 'testuser',
@@ -31,7 +29,7 @@ describe('Auth Routes', () => {
     });
 
     test('should not sign up an existing user', async () => {
-        await request(server)
+        await request(app)
             .post('/auth/signup')
             .send({
                 username: 'testuser',
@@ -39,7 +37,7 @@ describe('Auth Routes', () => {
                 passwordHash: 'hashedpassword'
             });
 
-        const response = await request(server)
+        const response = await request(app)
             .post('/auth/signup')
             .send({
                 username: 'testuser',
@@ -51,7 +49,7 @@ describe('Auth Routes', () => {
     });
 
     test('should not sign up a user with missing fields', async () => {
-        const response = await request(server)
+        const response = await request(app)
             .post('/auth/signup')
             .send({
                 username: 'testuser',
@@ -62,7 +60,7 @@ describe('Auth Routes', () => {
     });
 
     test('should login valid existing user', async () => {
-        await request(server)
+        await request(app)
             .post('/auth/signup')
             .send({
                 username: 'testuser',
@@ -70,7 +68,7 @@ describe('Auth Routes', () => {
                 passwordHash: 'hashedpassword'
             });
 
-        const response = await request(server)
+        const response = await request(app)
             .post('/auth/login')
             .send({
                 username: 'testuser',
@@ -81,7 +79,7 @@ describe('Auth Routes', () => {
     });
 
     test('should not login invalid user', async () => {
-        const response = await request(server)
+        const response = await request(app)
             .post('/auth/login')
             .send({
                 username: 'testuser',

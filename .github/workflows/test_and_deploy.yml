@@ -21,11 +21,9 @@ jobs:
 
     - name: Install Dependencies
       run: cd backend && npm install
-      working-directory: ./backend
 
     - name: Run Tests
       run: cd backend && npm test
-      working-directory: ./backend
       
   deploy-frontend:
     needs: test

@@ -1,15 +1,13 @@
 const request = require('supertest');
-const { startServer, stopServer } = require('../server');
-const { getDb } = require('../database');
-
-let server;
+const app = require('../app');
+const { connectToDb, closeDb, getDb } = require('../database');
 
 beforeAll(async () => {
-    server = await startServer();
+    await connectToDb();
 });
 
 afterAll(async () => {
-    await stopServer();
+    await closeDb();
 });
 
 afterEach(async () => {
@@ -19,7 +17,7 @@ afterEach(async () => {
 
 describe('Ingredients Routes', () => {
     test('should add ingredients to a user', async () => {
-        await request(server)
+        await request(app)
             .post('/auth/signup')
             .send({
                 username: 'testuser',
@@ -27,18 +25,17 @@ describe('Ingredients Routes', () => {
                 passwordHash: 'hashedpassword'
             });
 
-        const response = await request(server)
+        const response = await request(app)
             .post('/ingredients/update')
             .send({
                 username: 'testuser',
-                ingredients: {'tomato': 2, 'cheese': 1}
+                ingredients: { 'tomato': 2, 'cheese': 1 }
             });
-        // expect(response.status).toBe(200);
-        expect(JSON.parse(response.text)).toEqual({ingredients: {'tomato': 2, 'cheese': 1}});
+        expect(JSON.parse(response.text)).toEqual({ ingredients: { 'tomato': 2, 'cheese': 1 } });
     });
 
     test('should fetch ingredients for a user', async () => {
-        await request(server)
+        await request(app)
             .post('/auth/signup')
             .send({
                 username: 'testuser',
@@ -46,30 +43,28 @@ describe('Ingredients Routes', () => {
                 passwordHash: 'hashedpassword'
             });
 
-        await request(server)
+        await request(app)
             .post('/ingredients/update')
             .send({
                 username: 'testuser',
-                ingredients:  {"cheese": 1, "tomato": 2}
+                ingredients: { 'cheese': 1, 'tomato': 2 }
             });
 
-        const response = await request(server)
+        const response = await request(app)
             .get('/ingredients')
             .query({ username: 'testuser' });
-        // expect(response.status).toBe(200);
-        expect(response.body).toEqual({"cheese": 1, "tomato": 2});
+        expect(response.body).toEqual({ 'cheese': 1, 'tomato': 2 });
     });
 
     test('should not fetch ingredients for a non-existent user', async () => {
-        const response = await request(server)
+        const response = await request(app)
             .get('/ingredients')
             .query({ username: 'nonexistentuser' });
-        // expect(response.status).toBe(404);
         expect(response.text).toBe('No ingredients found for this user');
     });
 
     test('should not fetch ingredients without username', async () => {
-        const response = await request(server)
+        const response = await request(app)
             .get('/ingredients');
         expect(response.status).toBe(400);
         expect(response.text).toBe('username is required');

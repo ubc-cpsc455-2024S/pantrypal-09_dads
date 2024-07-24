@@ -1,19 +1,18 @@
 const request = require('supertest');
-const { startServer, stopServer } = require('../server');
-
-let server;
+const app = require('../app');
+const { connectToDb, closeDb } = require('../database');
 
 beforeAll(async () => {
-    server = await startServer();
+    await connectToDb();
 });
 
 afterAll(async () => {
-    await stopServer()
+    await closeDb();
 });
 
 describe('Server', () => {
     test('should return 404 for an unknown route', async () => {
-        const response = await request(server).get('/unknown-route');
+        const response = await request(app).get('/unknown-route');
         expect(response.status).toBe(404);
         expect(response.body.error.message).toBe('Not Found');
     });

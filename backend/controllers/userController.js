@@ -1,34 +1,41 @@
-const Users = require('../models/userModel')
-const mongoose = require('mongoose')
+const User = require('../models/userModel')
+const jwt = require('jsonwebtoken')
 
-// get all ingredients from user
-const getIngredients = async (req, res) => {
-  res.status(200).json({message: 'getIngredients'})
+const createToken = (_id) => {
+  return jwt.sign({_id}, process.env.SECRET, { expiresIn: '3d' })
 }
 
-// get all ingredients from user
-const generateIngredients = async (req, res) => {
-  res.status(200).json({message: 'getIngredients'})
+// login a user
+const loginUser = async (req, res) => {
+  const {email, password} = req.body
+
+  try {
+    const user = await User.login(email, password)
+
+    // create a token
+    const token = createToken(user._id)
+
+    res.status(200).json({email, token})
+  } catch (error) {
+    res.status(500).json({error: error.message})
+  }
 }
 
-// get all ingredients from user
-const updateIngredients = async (req, res) => {
-  res.status(200).json({message: 'getIngredients'})
+// signup a user
+const signupUser = async (req, res) => {
+  const {email, password} = req.body
+
+  try {
+    const user = await User.signup(email, password)
+
+    // create a token
+    const token = createToken(user._id)
+
+    res.status(200).json({email, token})
+  } catch (error) {
+    res.status(500).json({error: error.message})
+  }
 }
 
-// delete a workout
-const addIngredients = async (req, res) => {
-  res.status(200).json({message: 'getIngredients'})
-}
+module.exports = { signupUser, loginUser }
 
-const deleteIngredients = async (req, res) => {
-  res.status(200).json({message: 'getIngredients'})
-}
-
-module.exports = {
-  getIngredients,
-  generateIngredients,
-  updateIngredients,
-  addIngredients,
-  deleteIngredients
-}

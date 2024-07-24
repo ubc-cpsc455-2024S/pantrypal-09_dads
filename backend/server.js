@@ -1,35 +1,43 @@
-const app = require('./app');
-const { connectToDb, closeDb } = require('./database');
+// Dependencies
+// ============================================================================
+const express = require('express');
+const cors = require('cors');
+const mongoose = require("mongoose");
+const authRouter = require('./routes/auth');
+const bodyParser = require('body-parser');
+require('dotenv').config()
 
-const port = process.env.PORT || 3000;
+//const ingredientsRouter = require('./routes/ingredients');
+//const recipesRouter = require('./routes/recipes');
 
-const startServer = async () => {
-    try {
-        await connectToDb();
-        const server = app.listen(port, () => {
-            console.log(`Server is running on port ${port}`);
-        });
-        return server;
-    } catch (error) {
-        console.error('Failed to connect to the database:', error);
-        process.exit(1); // Exit the process with failure
-    }
-};
+// Initialise Express
+// ============================================================================
+const app = express();
 
-const stopServer = async (server) => {
-    if (server) {
-        await new Promise((resolve, reject) => {
-            server.close((err) => {
-                if (err) reject(err);
-                else resolve();
-            });
-        });
-        await closeDb();
-    }
-};
+// Middleware
+// ============================================================================
+app.use(cors());
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
-if (require.main === module) {
-    startServer();
-}
+// Routes
+// ============================================================================
+app.use('/api/auth', authRouter);
+//app.use('/api/user', ingredientsRouter);
+//app.use('/api/recipes', recipesRouter);
 
-module.exports = { startServer, stopServer };
+// Database Connection
+// ============================================================================
+mongoose.connect(process.env.MONGO_URI)
+  .then(() => {
+    // listen for requests
+    app.listen(process.env.PORT, () => {
+      console.log('Connected to Database! Listening on Port: ', process.env.PORT)
+    })
+})
+.catch((error) => {
+console.log(error)
+})
+
+
+module.exports = app;

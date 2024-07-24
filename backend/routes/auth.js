@@ -44,9 +44,9 @@ router.post('/auth/signup', async (req, res) => {
 // Expects Username and passwordHash
 // Checks if Username and passwordHash exist
 
-router.get('/auth/handler', async (req, res) => {
+router.post('/auth/login', async (req, res) => {
     const db = getDb();
-    const { username, passwordHash } = req.query;
+    const { username, passwordHash } = req.body;
     if (!username || !passwordHash) {
         return res.status(400).send('Missing required fields');
     }
@@ -57,7 +57,7 @@ router.get('/auth/handler', async (req, res) => {
             return res.status(404).send('User not found or incorrect password');
         }
 
-        res.status(200).json({ userRow });
+        res.status(200).json({ message: 'Login successful', userRow });
 
     } catch (error) {
         console.error('Error fetching user:', error);

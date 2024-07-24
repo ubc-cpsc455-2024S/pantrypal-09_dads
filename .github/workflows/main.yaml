@@ -40,3 +40,11 @@ jobs:
     steps:
     - name: Deploy frontend to Render
       run: curl -X POST ${{ secrets.FRONTEND_DEPLOY_HOOK }}
+
+  deploy-backend:
+    needs: test
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Deploy backend to Render
+      run: curl -X POST ${{ secrets.BACKEND_DEPLOY_HOOK }}

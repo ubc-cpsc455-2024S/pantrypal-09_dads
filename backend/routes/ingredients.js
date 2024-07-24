@@ -174,13 +174,13 @@ router.get('/ingredients', async (req, res) => {
     }
 
     try {
-        const userIngredients = await db.collection('users').findOne({ username: username });
+        const user = await db.collection('users').findOne({ username: username });
 
-        if (!userIngredients) {
+        if (!user) {
             return res.status(404).send('No ingredients found for this user');
         }
 
-        res.status(200).send(userIngredients);
+        res.status(200).send(user.ingredients);
     } catch (error) {
         console.error('Error fetching ingredients:', error);
         res.status(500).send('Error fetching ingredients');

@@ -1,11 +1,12 @@
 const express = require('express');
 const cors = require('cors');
-const { connectToDb } = require('./database'); // Import the MongoDB connection
+const { connectToDb, closeDb } = require('./database'); // Import the MongoDB connection
 const ingredientsRouter = require('./routes/ingredients');
 const authRouter = require('./routes/auth');
 const recipesRouter = require('./routes/recipes');
 const bodyParser = require('body-parser');
 const app = express();
+
 const port = process.env.PORT || 3000;
 
 // Middleware
@@ -15,8 +16,8 @@ app.use(bodyParser.json());
 
 // Routes
 app.use('/', authRouter);
-app.use('/', ingredientsRouter); 
-app.use('/', recipesRouter); 
+app.use('/', ingredientsRouter);
+app.use('/', recipesRouter);
 
 // Error handling
 app.use((req, res, next) => {
@@ -34,14 +35,32 @@ app.use((error, req, res, next) => {
     });
 });
 
-// Connect to MongoDB and start the server
-connectToDb().then(() => {
-    app.listen(port, () => {
-        console.log(`Server is running on port ${port}`);
-    });
-}).catch(error => {
-    console.error('Failed to connect to the database:', error);
-    process.exit(1); // Exit the process with failure
-});
+let server;
 
-module.exports = app;
+const startServer = async () => {
+    try {
+        await connectToDb();
+        server = app.listen(port, () => {
+            console.log(`Server is running on port ${port}`);
+        });
+    } catch (error) {
+        if (error.code === 'EADDRINUSE') {
+            console.log(`Port ${port} is in use, trying another one...`);
+            port += 1;
+            return startServer();
+        } else {
+            console.error('Failed to connect to the database:', error);
+            process.exit(1); // Exit the process with failure
+        }
+    }
+    return server;
+};
+
+const stopServer = async () => {
+    if (server) {
+        await server.close();
+        await closeDb();
+    }
+};
+
+module.exports = { startServer, stopServer };

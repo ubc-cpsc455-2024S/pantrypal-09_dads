@@ -26,4 +26,12 @@ function getDb() {
     return db;
 }
 
-module.exports = { connectToDb, getDb };
+async function closeDb() {
+    if (!client) {
+        throw new Error('Database not connected');
+    }
+    await client.close();
+    console.log('Disconnected from MongoDB');
+}
+
+module.exports = { connectToDb, getDb, closeDb };

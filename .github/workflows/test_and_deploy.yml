@@ -20,7 +20,7 @@ jobs:
         node-version: 20
 
     - name: Install Dependencies
-      run: cd backend && npm install
+      run: cd backend && npm install && npm update
 
     - name: Run Tests
       run: cd backend && npm test

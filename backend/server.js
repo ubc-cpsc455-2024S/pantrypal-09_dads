@@ -63,4 +63,6 @@ const stopServer = async () => {
     }
 };
 
+startServer();
+
 module.exports = { startServer, stopServer };

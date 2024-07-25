@@ -1,20 +1,19 @@
 const mongoose = require('mongoose')
+const Schema = mongoose.Schema
+
 const bcrypt = require('bcrypt')
 const validator = require('validator')
 
-const Schema = mongoose.Schema
+const IngredientSchema = require('./ingredientModel');
 
 const userSchema = new Schema({
-  email: {
-    type: String,
-    required: true,
-    unique: true
-  },
-  password: {  //Passwords are stored as hashes and not in plaintext
-    type: String,
-    required: true
-  }
+  email: {type: String, required: true, unique: true},
+  password: { type: String, required: true},
+  dietary_preferences: {type: String, required: false},
+  ingredients: { type: [IngredientSchema], required: true },
 })
+
+
 
 
 //SignUp validator
@@ -42,7 +41,7 @@ userSchema.statics.signup = async function(email, password) {
     const salt = await bcrypt.genSalt(10)
     const hash = await bcrypt.hash(password, salt)
   
-    const user = await this.create({ email, password: hash })
+    const user = await this.create({ email, password: hash, dietary_preferences:"", ingredients: []})
   
     return user
 
@@ -71,46 +70,3 @@ userSchema.statics.login = async function(email, password) {
   
 module.exports = mongoose.model('User', userSchema)
 
-
-/*
-
-// Used to insert a new user into the database
-// Expects a username, email, passwordHash
-router.post('/auth/signup', async (req, res) => {
-  const db = getDb();
-
-  const { username, email, passwordHash } = req.body;
-
-  if (!username || !email || !passwordHash) {
-      return res.status(400).send('Missing required fields');
-  }
-
-  try {
-      const existingUser = await db.collection('users').findOne({ username });
-      if (existingUser) {
-          return res.status(409).send('Username already exists');
-      }
-
-      const newUser = {
-          username,
-          email,
-          passwordHash,
-          ingredients: [],
-          recipes: [],
-          favorites: []
-      };
-
-      await db.collection('users').insertOne(newUser);
-      
-      console.log('User created successfully')
-      res.status(201).send('User created successfully');
-
-  } catch (error) {
-      console.error('Error creating user:', error);
-      res.status(500).send('Error creating user');
-  }
-});
-
-
-
-*/

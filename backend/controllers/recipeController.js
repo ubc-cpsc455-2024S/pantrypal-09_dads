@@ -64,6 +64,35 @@ const createRecipe = async (req, res) => {
   }
 }
 
+// create new recipes
+const createRecipes = async (req, res) => {
+    const {title, load, reps} = req.body
+  
+    let emptyFields = []
+  
+    if(!title) {
+      emptyFields.push('title')
+    }
+    if(!load) {
+      emptyFields.push('load')
+    }
+    if(!reps) {
+      emptyFields.push('reps')
+    }
+    if(emptyFields.length > 0) {
+      return res.status(400).json({ error: 'Please fill in all the fields', emptyFields })
+    }
+  
+    // add doc to db
+    try {
+      const user_id = req.user._id
+      const workout = await Workout.create({title, load, reps, user_id})
+      res.status(200).json(workout)
+    } catch (error) {
+      res.status(400).json({error: error.message})
+    }
+  }
+  
 
 // create new workout
 const generateRecipes = async (req, res) => {
@@ -201,6 +230,7 @@ module.exports = {
   getRecipes,
   getRecipe,
   createRecipe,
+  createRecipes,
   generateRecipes,
   deleteRecipe
 }

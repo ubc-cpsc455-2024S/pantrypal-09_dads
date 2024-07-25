@@ -1,4 +1,3 @@
-import Hero from './Hero'
 import { Stack, Button} from '@chakra-ui/react'
 import ImageUpload from './Upload'
 import { FaRegKeyboard } from 'react-icons/fa'
@@ -19,7 +18,6 @@ function HomePage({dispatch}) {
 
   return (
     <>
-      <Hero dispatch={dispatch}/>
       <div className='buttonsContainer'>
         <Stack direction='column' spacing={4}>
           {/* <Button leftIcon={<FaCameraRetro />} variant='solid' >

@@ -6,15 +6,14 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import Home from './pages/Home/Home'
 import Login from './pages/Login'
 import Signup from './pages/Signup'
-import Navbar from './components/Navbar'
 import RecipeInstructions from './components/recipe/Recipe'
 import RecipePage from './components/recipe/RecipePage'
 import IngredientsPage from './components/ingredients/IngredientsPage'
 import DietPage from './components/diet/DietPage'
 import LoadingPage from './components/misc/Loading'
 import HomePage from './components/home/HomePage'
-import NotFoundPage from './components/misc/404'
-
+import NotFoundPage from './pages/NotFound'
+import Navbar from './components/Navbar/Navbar'
 
 function App() {
   const { user } = useAuthContext()

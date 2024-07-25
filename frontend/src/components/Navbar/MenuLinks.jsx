@@ -43,25 +43,35 @@ const MenuLinks = ({isOpen}) => {
                 direction={["column", "row", "row", "row"]}
                 pt={[4, 4, 0, 0]}
                 >
-                <MenuListItem to="/">Home</MenuListItem>
-                <MenuListItem to="/pantry">Pantry</MenuListItem>
-                <MenuListItem to="/about">About</MenuListItem>
-                <Menu>
-                    <MenuButton
-                        aria-label='Options'
-                        variant='outline'
-                    >
-                        Settings
-                    </MenuButton>
-                    <MenuList>
-                        <MenuItem>
-                        Preferencees
-                        </MenuItem>
-                        <MenuItem onClick={handleClick}>
-                        Log Out
-                        </MenuItem>
-                    </MenuList>
-                </Menu>
+                {user ? (
+                <>
+                    <MenuListItem to="/">Home</MenuListItem>
+                    <MenuListItem to="/pantry">Pantry</MenuListItem>
+                    <MenuListItem to="/about">About</MenuListItem>
+                    <Menu>
+                        <MenuButton
+                            aria-label='Options'
+                            variant='outline'
+                        >
+                            Settings
+                        </MenuButton>
+                        <MenuList>
+                            <MenuItem>
+                            Preferencees
+                            </MenuItem>
+                            <MenuItem onClick={handleClick}>
+                            Log Out
+                            </MenuItem>
+                        </MenuList>
+                    </Menu>
+                </> 
+                ): (
+                <>
+                    <MenuListItem to="/login">Login</MenuListItem>
+                    <MenuListItem to="/signup">Sign Up!</MenuListItem>
+                </>
+                )}
+                
             </Stack>
         </Box>
     )

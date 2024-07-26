@@ -19,55 +19,57 @@ const getRecipes = async (req, res) => {
 
 // get a single workout
 const getRecipe = async (req, res) => {
-  const { id } = req.params
+	const user_uuid = req.user._id
 
-  if (!mongoose.Types.ObjectId.isValid(id)) {
-    return res.status(404).json({error: 'No such recipe'})
-  }
+	if (!mongoose.Types.ObjectId.isValid(id)) {
+		return res.status(404).json({error: 'No such recipe'})
+	}
 
-  const recipe = await Recipe.findById(id)
+	const recipe = await Recipe.findById(id)
 
-  if (!recipe) {
-    return res.status(404).json({error: 'No such recipe'})
-  }
-  
-  res.status(200).json(recipe)
+	if (!recipe) {
+		return res.status(404).json({error: 'No such recipe'})
+	}
+	
+	res.status(200).json(recipe)
 }
 
 
 // create new workout
 const createRecipe = async (req, res) => {
-  const {title, load, reps} = req.body
+	const {title, load, reps} = req.body
+	const user_uuid = req.user._id
 
-  let emptyFields = []
+	let emptyFields = []
 
-  if(!title) {
-    emptyFields.push('title')
-  }
-  if(!load) {
-    emptyFields.push('load')
-  }
-  if(!reps) {
-    emptyFields.push('reps')
-  }
-  if(emptyFields.length > 0) {
-    return res.status(400).json({ error: 'Please fill in all the fields', emptyFields })
-  }
+	if(!title) {
+		emptyFields.push('title')
+	}
+	if(!load) {
+		emptyFields.push('load')
+	}
+	if(!reps) {
+		emptyFields.push('reps')
+	}
+	if(emptyFields.length > 0) {
+		return res.status(400).json({ error: 'Please fill in all the fields', emptyFields })
+	}
 
-  // add doc to db
-  try {
-    const user_id = req.user._id
-    const workout = await Workout.create({title, load, reps, user_id})
-    res.status(200).json(workout)
-  } catch (error) {
-    res.status(400).json({error: error.message})
-  }
+	// add doc to db
+	try {
+		const user_id = req.user._id
+		const workout = await Workout.create({title, load, reps, user_id})
+		res.status(200).json(workout)
+	} catch (error) {
+		res.status(400).json({error: error.message})
+	}
 }
 
 // create new recipes
 const createRecipes = async (req, res) => {
     const {title, load, reps} = req.body
-  
+    const user_uuid = req.user._id
+
     let emptyFields = []
   
     if(!title) {
@@ -96,7 +98,7 @@ const createRecipes = async (req, res) => {
 
 // create new workout
 const generateRecipes = async (req, res) => {
-    const user_uuid = req.user._id
+	const user_uuid = req.user._id
   
     try {
 		// Fetch user's ingredients from the database
@@ -210,19 +212,19 @@ const generateRecipes = async (req, res) => {
 
 // delete a workout
 const deleteRecipe = async (req, res) => {
-  const { id } = req.params
+	const user_uuid = req.user._id
 
-  if (!mongoose.Types.ObjectId.isValid(id)) {
-    return res.status(404).json({error: 'No such recipe'})
-  }
+	if (!mongoose.Types.ObjectId.isValid(user_uuid)) {
+		return res.status(404).json({error: 'No such recipe'})
+	}
 
-  const recipe = await Recipe.findOneAndDelete({_id: id})
+	const recipe = await Recipe.findOneAndDelete({_id: user_uuid})
 
-  if (!recipe) {
-    return res.status(400).json({error: 'No such recipe'})
-  }
+	if (!recipe) {
+		return res.status(400).json({error: 'No such recipe'})
+	}
 
-  res.status(200).json(recipe)
+	res.status(200).json(recipe)
 }
 
 

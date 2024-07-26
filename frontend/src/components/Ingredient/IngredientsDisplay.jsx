@@ -17,43 +17,38 @@ import {
   Select,
   SimpleGrid
 } from "@chakra-ui/react";
-import IngredientCard from "./ingredientCard";
-import { useSelector, useDispatch } from 'react-redux';
+import IngredientCard from "./ingredientCard.jsx";
 import { updateIngredients } from '../../context/ingredientSlice.js';
 import { v4 as uuidv4 } from 'uuid';
 
-const IngredientsDisplay = () => {
-  const ingredients = useSelector((state) => state.user.ingredients);
-  const username = useSelector((state) => state.user.username);
-
-
-  const dispatch = useDispatch();
+const IngredientsDisplay = ({ingredients, dispatch, user}) => {
   const [newIngredient, setNewIngredient] = useState({
     name: '',
     quantity: 0,
     unit: '',
     notes: 'Added by User',
-    uuid: uuidv4(),
+    _id: null
   });
   const [isEditMode, setIsEditMode] = useState(false);
   const [editingId, setEditingId] = useState(null);
   const { isOpen, onOpen, onClose } = useDisclosure();
 
+  // Edit and Adding Ingredient Handling
+  // =======================================================================================
   const saveIngredient = () => {
     const newIngredients = [...ingredients];
 
     if (isEditMode) {
 
-      const index = ingredients.findIndex(ingredient => ingredient.uuid === editingId);
+      const index = ingredients.findIndex(ingredient => ingredient._id === editingId);
       if (index !== -1) {
         newIngredients[index] = newIngredient;
       }
-      dispatch(updateIngredients({username:username, ingredients:{items:newIngredients}}));
+      dispatch(updateIngredients({user:user, ingredients:newIngredients}));
 
     } else {
-      console.log(newIngredients)
-      newIngredients.push(newIngredient);
-      dispatch(updateIngredients({username:username, ingredients:{items:newIngredients}}));
+      newIngredients.push({name: newIngredient.name, quantity: newIngredient.quantity, unit: newIngredient.unit, notes: newIngredient.notes});
+      dispatch(updateIngredients({user:user, ingredients:newIngredients}));
     }
     setNewIngredient({ name: '', quantity: 0, unit: '' });
     setIsEditMode(false);
@@ -62,15 +57,15 @@ const IngredientsDisplay = () => {
   };
 
   const openAddModal = () => {
-    setNewIngredient({ name: '', quantity: 0, unit: '' , notes:'Added by User', uuid: uuidv4() });
+    setNewIngredient({ name: '', quantity: 0, unit: '' , notes:'Added by User', _id: null });
     setIsEditMode(false);
     setEditingId(null);
     onOpen();
   };
 
   const openEditModal = (ingredient) => {
-    setNewIngredient({ name: ingredient.name, quantity: ingredient.quantity, unit: ingredient.unit, notes: ingredient.notes, uuid: ingredient.uuid});
-    setEditingId(ingredient.uuid);
+    setNewIngredient({ name: ingredient.name, quantity: ingredient.quantity, unit: ingredient.unit, notes: ingredient.notes, _id: ingredient._id});
+    setEditingId(ingredient._id);
     setIsEditMode(true);
     onOpen();
   };
@@ -86,17 +81,21 @@ const IngredientsDisplay = () => {
   const handleNewIngredientUnit = (event) => {
     setNewIngredient({ ...newIngredient, unit: event.target.value });
   };
-  
+  // =======================================================================================
+
+  //Handling for deleting singular ingredients
   const deleteIngredient = (uuid) => {
     const newIngredients = ingredients.filter(
-      (ingredient) => ingredient.uuid !== uuid
+      (ingredient) => ingredient._id !== uuid
     );
-    dispatch(updateIngredients({username:username, ingredients:{items:newIngredients}}));
+
+    dispatch(updateIngredients({user:user, ingredients:newIngredients}));
   };
 
+  //Handling for clear ingredients
   const clearIngredients = () => {
     const newIngredients = [];
-    dispatch(updateIngredients({username:username, ingredients:{items: newIngredients}}));
+    dispatch(updateIngredients({user:user, ingredients:newIngredients}));
   };
 
   return (
@@ -151,11 +150,11 @@ const IngredientsDisplay = () => {
         <SimpleGrid spacing={4} templateColumns='repeat(4, minmax(200px, 1fr))'>
           {ingredients && ingredients.length !== 0 ? (
             ingredients.map((ingredient) => (
-              <HStack key={ingredient.uuid}>
+              <HStack key={ingredient._id}>
                 <IngredientCard
-                  key={ingredient.uuid}
+                  key={ingredient._id}
                   ingredient={ingredient}
-                  id={ingredient.uuid}
+                  id={ingredient._id}
                   onDelete={deleteIngredient}
                   onEdit={() => openEditModal(ingredient)}
                 />
@@ -170,7 +169,6 @@ const IngredientsDisplay = () => {
         <Button onClick={ () => dispatch(clearIngredients())}>
           Clear All Ingredients
         </Button>
-
       </VStack>
     </Box>
   );

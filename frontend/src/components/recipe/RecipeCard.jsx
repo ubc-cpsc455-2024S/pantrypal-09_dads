@@ -8,9 +8,9 @@ const RecipeCard = ({image, title, time, description, calories,likes,id,onOpen})
         direction={{ base: 'column', sm: 'row' }}
         overflow='hidden'
         variant='outline'
+        w="300px"
+        h="300px"
         >                              
-         <Image boxSize="220px" margin={'5px'} src={image} borderRadius={"5px"} objectFit='cover'maxW={{ base: '100%', sm: '200px' }}/> 
-
             <CardBody>
                 <Stack divider={<StackDivider />} spacing='4'>
                     <Box>

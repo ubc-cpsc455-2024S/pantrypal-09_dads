@@ -4,7 +4,7 @@ import recipeReducer from './recipeSlice';
 
 const store = configureStore({
   reducer: {
-    ingredients: ingredientReducer,
+    ingredient: ingredientReducer,
     recipe: recipeReducer
   },
 });

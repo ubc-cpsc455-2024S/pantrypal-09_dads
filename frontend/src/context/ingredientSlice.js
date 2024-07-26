@@ -1,4 +1,5 @@
 import { createSlice, createAsyncThunk} from '@reduxjs/toolkit';
+import { API_URL } from '../consts';
 import axios from 'axios';
 
 export const generateIngredients = createAsyncThunk('user/generateIngredients', async (image) => {
@@ -6,23 +7,31 @@ export const generateIngredients = createAsyncThunk('user/generateIngredients', 
   return response.data
 })
 
-export const getIngredients = createAsyncThunk('user/getUser', async (username) => {
-  const response = await axios.get('http://localhost:3000/ingredients', 
-    {
-      params: {
-        username: username
-      }
-    })
+export const getIngredients = createAsyncThunk('user/getUser', async (user) => {
+  const response = await axios.get(API_URL + '/ingredients/',{
+    headers: {'Authorization': `Bearer ${user.token}`},
+  })
+
   return response.data
 })
 
 export const updateIngredients = createAsyncThunk('user/updateIngredients', async (formData) => {
-  const response = await axios.post('http://localhost:3000/ingredients/update',  formData)
-  return response.data
-})
+  let data = JSON.stringify({
+    "ingredients":formData.ingredients
+  });
+  
+  let config = {
+    method: 'post',
+    maxBodyLength: Infinity,
+    url: `${API_URL}/ingredients/update`,
+    headers: { 
+      'Content-Type': 'application/json', 
+      'Authorization': `Bearer ${formData.user.token}`
+    },
+    data : data
+  };
 
-export const generateRecipes = createAsyncThunk('user/generate', async (formData) => {
-  const response = await axios.post('http://localhost:3000/recipes/generate', formData)
+  const response = await axios.request(config)
   return response.data
 })
 
@@ -33,50 +42,29 @@ const ingredientSlice = createSlice({
     name: 'ingredients',
     initialState: {
       preferences: "",
-      ingredients: []
-    },
-    reducers: {
-      //Ingredients
-      addIngredient: (state, action) => {
-        const newIngredient = {
-          id: uuidv4(),
-          ...action.payload,
-        };
-        state.ingredients.push(newIngredient);
-      },
-      editIngredient: (state, action) => {
-        const index = state.ingredients.findIndex(ingredient => ingredient.id === action.payload.id);
-        if (index !== -1) {
-          state.ingredients[index] = { ...state.ingredients[index], ...action.payload };
-        }
-      },
-      clearIngredients: (state) => {
-        state.ingredients = [];
-      },
+      ingredients: [],
+      status: 'default'
     },
     extraReducers(builder) {
       builder
         .addCase(getIngredients.fulfilled, (state, action) => {
-        state.ingredients = action.payload.ingredients.items;
+          state.ingredients = action.payload.ingredients;
         })
         .addCase(generateIngredients.pending, (state, action) => {
           state.status = 'loading'
         })
         .addCase(generateIngredients.fulfilled, (state, action) => {
-          state.ingredients = action.payload.ingredients.items;
+          state.ingredients = action.payload.ingredients;
           state.status = 'ingredients'
         })
         .addCase(generateIngredients.rejected, (state, action) => {
           state.status = 'default'
         })
         .addCase(updateIngredients.fulfilled, (state, action) => {
-          console.log(action.payload)
-          state.ingredients = action.payload.ingredients.items;
+          state.ingredients = action.payload.ingredients;
         })
     }
     
   });
-  
-  export const {addIngredient, removeIngredient, editIngredient, clearIngredients} = ingredientSlice.actions;
-  
+    
   export default ingredientSlice.reducer;

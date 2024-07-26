@@ -1,7 +1,6 @@
 import { createSlice, createAsyncThunk} from '@reduxjs/toolkit';
 import { API_URL } from '../consts';
 import axios from 'axios';
-import { useAuthContext } from '../hooks/useAuthContext';
 
 export const generateRecipes = createAsyncThunk('user/generate', async (formData) => {
   const response = await axios.post(API_URL + '/recipes/generate')
@@ -29,7 +28,6 @@ const recipeSlice = createSlice({
           state.recipes = action.payload.recipes;
         })
         .addCase(getRecipes.fulfilled, (state, action) => {
-          console.log(action.payload)
           state.recipes = action.payload;
         })
     }

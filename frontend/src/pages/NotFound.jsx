@@ -23,23 +23,6 @@ const NotFoundPage = () => {
                 >
                 Sorry about that!
             </Heading>
-            {/* <Wrap alignItems={"center"}>
-                {data!==null?
-                    (data.ingredients.map((ingredient, index) => {
-                        return (
-                            <WrapItem key={index}>
-                                <IngredientCard key={index} ingredient={ingredient} />
-                            </WrapItem>
-                        )
-                    })):null
-                }
-            </Wrap>
-            <Divider  marginTop={'20px'}/>
-            <HStack direction='column' spacing={4}>
-                <Button leftIcon={<IoFastFoodOutline />} variant='solid'>
-                Generate Recipes!
-                </Button>
-            </HStack> */}
         </VStack>
     </Box>
   )

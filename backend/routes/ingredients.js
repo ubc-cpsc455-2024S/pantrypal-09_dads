@@ -10,13 +10,13 @@ updateIngredients,
 const requireAuth = require('../middleware/requireAuth')
 const router = express.Router()
 
-// require auth for all workout routes
+// require auth for all ingredients routes
 router.use(requireAuth)
 
-// GET all workouts
+// GET all ingredients
 router.get('/', getIngredients)
 
-// POST a new recipe 
+// POST a new ingredients list 
 router.post('/update', updateIngredients)
 
 // POST generate new recipes

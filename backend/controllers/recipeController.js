@@ -8,24 +8,24 @@ require('dotenv').config()
 
 const openai = new OpenAI({apiKey: process.env.OPEN_AI_API_KEY});
 
-// get all workouts
+// get all recipes
 const getRecipes = async (req, res) => {
-  const user_uuid = req.user._id
-
-  const recipes = await Recipe.find({user_uuid}).sort({createdAt: -1})
-
-  res.status(200).json(recipes)
-}
-
-// get a single workout
-const getRecipe = async (req, res) => {
 	const user_uuid = req.user._id
 
-	if (!mongoose.Types.ObjectId.isValid(id)) {
+	const recipes = await Recipe.find({user_uuid}).sort({createdAt: -1})
+
+	res.status(200).json(recipes)
+}
+
+// get a single recipe
+const getRecipe = async (req, res) => {
+	const recipe_id = req.user._id
+
+	if (!mongoose.Types.ObjectId.isValid(recipe_id)) {
 		return res.status(404).json({error: 'No such recipe'})
 	}
 
-	const recipe = await Recipe.findById(id)
+	const recipe = await Recipe.findById(recipe_id)
 
 	if (!recipe) {
 		return res.status(404).json({error: 'No such recipe'})
@@ -35,7 +35,7 @@ const getRecipe = async (req, res) => {
 }
 
 
-// create new workout
+// create new recipe
 const createRecipe = async (req, res) => {
 	const {title, load, reps} = req.body
 	const user_uuid = req.user._id
@@ -96,7 +96,7 @@ const createRecipes = async (req, res) => {
   }
   
 
-// create new workout
+// generate new recipes
 const generateRecipes = async (req, res) => {
 	const user_uuid = req.user._id
   
@@ -210,7 +210,8 @@ const generateRecipes = async (req, res) => {
 	}
   }
 
-// delete a workout
+
+// delete a recipe
 const deleteRecipe = async (req, res) => {
 	const user_uuid = req.user._id
 

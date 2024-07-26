@@ -8,7 +8,7 @@ import RecipeCard from "./RecipeCard";
 // Replace with call to API to fetch Data
 
 
-const RecipeInstructions = ({recipe}) => {
+const RecipeComponent = ({recipe}) => {
     const { isOpen, onOpen, onClose } = useDisclosure()
 
     return (
@@ -53,4 +53,4 @@ const RecipeInstructions = ({recipe}) => {
   );
 };
 
-export default RecipeInstructions;
+export default RecipeComponent;

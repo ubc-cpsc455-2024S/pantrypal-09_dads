@@ -4,7 +4,7 @@ import { IoFastFoodOutline } from "react-icons/io5";
 import { useSelector, useDispatch } from "react-redux";
 import { getRecipes } from '../context/recipeSlice';
 import { useAuthContext } from '../hooks/useAuthContext';
-import RecipeInstructions from '../components/Recipe/Recipe';
+import RecipeComponent from '../components/Recipe/RecipeComponent';
 
 const Home = () => {
   const recipes = useSelector((state) => state.recipe.recipes);
@@ -33,7 +33,7 @@ const Home = () => {
                     recipes.map((recipe) => (
                         <>
                             <WrapItem key={recipe.uuid}>
-                                <RecipeInstructions recipe={recipe}/>
+                                <RecipeComponent recipe={recipe}/>
                             </WrapItem>
                         </>
                     )) : null

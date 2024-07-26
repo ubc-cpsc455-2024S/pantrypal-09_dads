@@ -14,9 +14,7 @@ const userSchema = new Schema({
 })
 
 
-
-
-//SignUp validator
+//Sign Up validator
 userSchema.statics.signup = async function(email, password) {
 
     // validation
@@ -48,7 +46,7 @@ userSchema.statics.signup = async function(email, password) {
 }
   
 
-//LogIn validator
+//Log In validator
 userSchema.statics.login = async function(email, password) {
   
     if (!email || !password) {

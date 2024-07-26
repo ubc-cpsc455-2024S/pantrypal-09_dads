@@ -12,25 +12,25 @@ const requireAuth = require('../middleware/requireAuth')
 
 const router = express.Router()
 
-// require auth for all workout routes
+// require auth for all recipe routes
 router.use(requireAuth)
 
-// GET all workouts
+// GET all recipes
 router.get('/', getRecipes)
 
-//GET a single workout
+//GET a single recipe
 router.get('/:id', getRecipe)
 
 // POST a new recipe 
 router.post('/add', createRecipe)
 
-// POST a new recipe 
+// POST new recipes 
 router.post('/addMultiple', createRecipes)
 
 // POST generate new recipes
 router.post('/generate', generateRecipes)
 
-// DELETE a workout
+// DELETE a recipe
 router.delete('/:id', deleteRecipe)
 
 module.exports = router

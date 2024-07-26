@@ -2,22 +2,20 @@ import {useEffect} from 'react';
 import { Box, VStack, Wrap, WrapItem, Heading, HStack, Button, Divider } from "@chakra-ui/react";
 import Breadcrumbs from "../misc/BreadCrumbs";
 import { IoFastFoodOutline } from "react-icons/io5";
-import { useSelector } from "react-redux";
-import { goToIngredients } from '../../context/userSlice';
-import { getRecipes } from '../../context/userSlice';
+import { useSelector, useDispatch } from "react-redux";
 import RecipeInstructions from './Recipe';
+import { getRecipes } from '../../context/recipeSlice';
+import { useAuthContext } from '../../hooks/useAuthContext';
 
-const RecipePage = ({dispatch}) => {
-    const recipes = useSelector((state) => state.user.recipes);
-    const username = useSelector((state) => state.user.username);
-
-    const handleModifyIngredients = async () => {
-        dispatch(goToIngredients())
-    };
+const RecipePage = () => {
+    const recipes = useSelector((state) => state.recipe.recipes);
+    const dispatch = useDispatch()
+    const {user} = useAuthContext();
 
     useEffect(() => {
-        dispatch(getRecipes(username));
-    }, [dispatch, username]);
+        console.log("here")
+        dispatch(getRecipes(user));
+    }, [dispatch, user]);
 
     return (
         
@@ -49,9 +47,6 @@ const RecipePage = ({dispatch}) => {
                 <HStack direction='column' spacing={4}>
                     <Button leftIcon={<IoFastFoodOutline />} variant='solid'>
                         Generate More
-                    </Button>
-                    <Button variant='outline' onClick={handleModifyIngredients}>
-                        Modify ingredients
                     </Button>
                 </HStack>
             </VStack>

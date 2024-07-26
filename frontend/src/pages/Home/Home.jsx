@@ -1,6 +1,7 @@
 import { useEffect }from 'react'
 import { useAuthContext } from "../../hooks/useAuthContext"
 import Hero from './Hero'
+import RecipePage from '../../components/recipe/RecipePage'
 
 // components
 //import WorkoutDetails from '../components/WorkoutDetails'
@@ -29,7 +30,7 @@ const Home = () => {
 
   return (
     <div className="home">
-        <Hero/>
+        <RecipePage />
     </div>
   )
 }

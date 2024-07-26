@@ -19,7 +19,7 @@ import {
 } from "@chakra-ui/react";
 import IngredientCard from "./ingredientCard";
 import { useSelector, useDispatch } from 'react-redux';
-import { updateIngredients } from '../../context/userSlice.js';
+import { updateIngredients } from '../../context/ingredientSlice.js';
 import { v4 as uuidv4 } from 'uuid';
 
 const IngredientsDisplay = () => {

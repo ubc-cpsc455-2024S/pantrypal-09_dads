@@ -3,8 +3,6 @@ const Schema = mongoose.Schema
 
 const IngredientSchema = require('./ingredientModel');
 
-
-
 const NutritionSchema = new Schema({
   calories: { type: Number, required: true },
   fat: { type: Number, required: true },

@@ -10,16 +10,13 @@ import {
 import { useSelector } from "react-redux";
 import { IoFastFoodOutline } from "react-icons/io5";
 import { BsSkipForward } from "react-icons/bs";
-import { goToRecipes } from "../../context/userSlice";
-import { generateRecipes } from "../../context/userSlice";
+import { generateRecipes } from "../../context/recipeSlice";
 import IngredientsDisplay from "./IngredientsDisplay";
 
 const InsertIngredientsPage = ({dispatch}) => {
   const username = useSelector((state) => state.user.username);
 
-  const handleContinue = async () => {
-      dispatch(goToRecipes())
-  };
+
   
   const handleGenerate = async () => {
     dispatch(generateRecipes({username:username}))

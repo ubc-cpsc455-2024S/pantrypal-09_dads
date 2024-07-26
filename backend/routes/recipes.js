@@ -22,16 +22,13 @@ router.get('/', getRecipes)
 router.get('/:id', getRecipe)
 
 // POST a new recipe 
-router.post('/', createRecipe)
+router.post('/add', createRecipe)
 
 // POST a new recipe 
-router.post('/', createRecipes)
-
-// POST a new workout
-router.post('/', createRecipe)
+router.post('/addMultiple', createRecipes)
 
 // POST generate new recipes
-router.post('/', generateRecipes)
+router.post('/generate', generateRecipes)
 
 // DELETE a workout
 router.delete('/:id', deleteRecipe)

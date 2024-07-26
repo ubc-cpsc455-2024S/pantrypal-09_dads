@@ -100,7 +100,7 @@ const generateRecipes = async (req, res) => {
   
     try {
 		// Fetch user's ingredients from the database
-		const user = await User.findOne({ _id: username });
+		const user = await User.findOne({ _id: user_uuid });
 		
 		let userIngredients = user['ingredients'];
 				
@@ -117,6 +117,8 @@ const generateRecipes = async (req, res) => {
 
 		// Should have GPT4o call to generate recipe from user ingredients
 		// Might need a helper to convert from [<ingredients, quantity>] to string
+        console.log("Generating Recipes for User " + user_uuid)
+
 		const response = await openai.chat.completions.create({
 			model: "gpt-4o",
 			response_format: {
@@ -178,30 +180,28 @@ const generateRecipes = async (req, res) => {
 		});
 
 		const recipes = JSON.parse(response.choices[0].message.content);
-		console.log("Finished Generating Recipes")
+		console.log("Finished Generating Recipes for User " + user_uuid)
 
         //TODO: If we find a cheaper alternative to image gen, uncomment this and add it in
-		// let retVal = []
-		// for(let i = 0; i < recipes.recipes.length; i++) {
-		// 	curr = recipes.recipes[i]
+		let retVal = []
+		for(let i = 0; i < recipes.recipes.length; i++) {
+			curr = recipes.recipes[i]
 
-		// 	console.log("Generating tag and image for Recipe "+  i);
-		// 	const response = await openai.images.generate({
-		// 		model: "dall-e-3",
-		// 		prompt: curr.name,
-		// 		n: 1,
-		// 		size: "1024x1024",
-		// 	});
-		// 	curr['image'] = response.data[0].url;
-		// 	curr['uuid'] = uuidv4()
+			// console.log("Generating tag and image for Recipe "+  i);
+			// const response = await openai.images.generate({
+			// 	model: "dall-e-3",
+			// 	prompt: curr.name,
+			// 	n: 1,
+			// 	size: "1024x1024",
+			// });
+			curr['user_uuid'] = user_uuid
 
-		// 	let recipeObject = await db.collection('recipes').insertOne(curr);
-		// 	retVal.push(curr);
-		// }
+			await Recipe.create(curr)
+			retVal.push(curr);
+		}
 
-		// temp = retVal;
 
-		res.status(200).send({ recipes : recipes });
+		res.status(200).send({recipes: retVal});
 	} catch (error) {
 		console.error('Error generating recipes:', error);
 		res.status(500).send('Error generating recipes');

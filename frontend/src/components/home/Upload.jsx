@@ -2,7 +2,7 @@ import { useState, useRef, useCallback } from 'react';
 import { Button, Stack} from '@chakra-ui/react';
 import { FaCameraRetro, FaWindowClose } from 'react-icons/fa';
 import Webcam from 'react-webcam';
-import { generateIngredients } from '../../context/userSlice';
+import { generateIngredients } from '../../context/ingredientSlice';
 
 const ImageUpload = (props) => {
     const [preview, setPreview] = useState(null);

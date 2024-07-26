@@ -1,20 +1,10 @@
 import { Stack, Button} from '@chakra-ui/react'
 import ImageUpload from './Upload'
 import { FaRegKeyboard } from 'react-icons/fa'
-import { getUser, goToIngredients} from '../../context/userSlice'
-import { useEffect} from 'react'
 import { useSelector } from 'react-redux'
 
 function HomePage({dispatch}) {
   const username = useSelector((state) => state.user.username);
-
-  useEffect(() => {
-      dispatch(getUser(username));
-  }, [dispatch, username]);
-
-  const insertIngredientOnclick = () => {
-    dispatch(goToIngredients())
-  }
 
   return (
     <>

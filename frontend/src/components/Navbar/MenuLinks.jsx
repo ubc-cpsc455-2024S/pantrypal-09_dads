@@ -57,7 +57,9 @@ const MenuLinks = ({isOpen}) => {
                         </MenuButton>
                         <MenuList>
                             <MenuItem>
-                            Preferencees
+                                <Link href={"/preference"}>
+                                    Preferencees
+                                </Link>
                             </MenuItem>
                             <MenuItem onClick={handleClick}>
                             Log Out

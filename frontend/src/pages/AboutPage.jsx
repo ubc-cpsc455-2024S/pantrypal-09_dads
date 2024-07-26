@@ -12,7 +12,7 @@ const PreferencePage = () => {
                color="#333"
                marginBottom="1rem"
                 >
-                Dietary Restrictions
+                About The Team behind PantryPal!
             </Heading>
             <Heading
                as="h3"

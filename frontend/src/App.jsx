@@ -3,12 +3,14 @@ import { useAuthContext } from './hooks/useAuthContext'
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 
 // pages & components
-import Home from './pages/Home'
-import Login from './pages/Login'
-import Signup from './pages/Signup'
-import NotFoundPage from './pages/NotFound'
+import Home from './pages/HomePage'
+import Login from './pages/LoginPage'
+import Signup from './pages/SignupPage'
+import NotFoundPage from './pages/NotFoundPage'
 import Navbar from './components/Navbar/Navbar'
 import IngredientsPage from './pages/IngredientsPage'
+import PreferencePage from './pages/PreferencePage'
+import AboutPage from './pages/AboutPage'
 
 function App() {
   const { user } = useAuthContext()
@@ -26,6 +28,14 @@ function App() {
             <Route 
               path="/pantry" 
               element={user ? <IngredientsPage /> : <></>}
+            />
+            <Route 
+              path="/about" 
+              element={user ? <AboutPage /> : <></>}
+            />
+            <Route 
+              path="/preference" 
+              element={user ? <PreferencePage /> : <></>}
             />
             <Route 
               path="/login" 

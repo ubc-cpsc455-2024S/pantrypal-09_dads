@@ -13,7 +13,7 @@ import IngredientsPage from './components/ingredients/IngredientsPage'
 import DietPage from './components/diet/DietPage'
 import LoadingPage from './components/misc/Loading'
 import HomePage from './components/home/HomePage'
-import NotFoundPage from './components/misc/404'
+import NotFoundPage from './pages/NotFound'
 
 
 function App() {

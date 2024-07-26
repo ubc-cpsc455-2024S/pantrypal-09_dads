@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 import { useLogout } from '../hooks/useLogout'
 import { useAuthContext } from '../hooks/useAuthContext'
-import { Avatar, AvatarBadge, Tooltip } from "@chakra-ui/react";
+import { Flex, Tooltip, Avatar, AvatarBadge, Box } from "@chakra-ui/react";
 
 
 const Navbar = () => {
@@ -51,26 +51,26 @@ const Navbar = () => {
       </div>
       <ul style={styles.navLinks}>
         {user && (
-          <>
+          <Flex direction='row' justifyContent="center" alignItems="center">
             <li style={styles.navItem}>
-              Welcome Back, {user.email}
+              Welcome <strong>{user.email.split('@')[0]}</strong>!
             </li>
             <Tooltip label='Logout'>
               <Avatar style={styles.navItem} size='sm' src="https://cdn-icons-png.flaticon.com/512/5235/5235253.png" onClick={handleClick}>
                 <AvatarBadge boxSize='1em' bg='green.500' />
               </Avatar>  
             </Tooltip>
-          </>
+          </Flex>
         )}
         {!user && (
-          <>
+          <Flex direction='row' gap={3}>
             <li style={styles.navItem}>
               <Link to="/login">Login</Link>
             </li>
             <li style={styles.navItem}>
               <Link to="/signup">Signup</Link>
             </li>
-          </>   
+          </Flex>   
         )}
       </ul>
     </nav>

@@ -46,7 +46,6 @@ Transform your cooking experience with PantryPal, the ultimate app for home cook
 - ### Stretch Requirements
   - Smart Ingredient and Recipe Memory: Save frequently used ingredients and recipes to streamline the generation process and prevent repetitive suggestions.
   - Nutritional Information: Integrate detailed nutritional information for each recipe, enhancing the app's health-oriented utility.
-  - Voice Controls: Incorporate voice control functionalities, enabling users to interact with the app hands-free, which is particularly useful during cooking.
   - User Accounts: Develop user accounts to save recipes, user preferences, and a history of generated recipes.
 
 ## Task Breakdown

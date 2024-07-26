@@ -277,4 +277,6 @@ $RECYCLE.BIN/
 
 # End of https://www.toptal.com/developers/gitignore/api/visualstudiocode,python,macos,windows,microsoftoffice
 backend/temp
+backend/node_modules
+frontend/node_modules
 .env

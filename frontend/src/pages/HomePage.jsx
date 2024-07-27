@@ -1,7 +1,7 @@
 import { useEffect }from 'react'
 import { Box, VStack, Wrap, WrapItem, Heading, HStack, Button, Divider } from "@chakra-ui/react";
 import { useSelector, useDispatch } from "react-redux";
-import { getRecipes } from '../context/recipeSlice';
+import { getRecipes, deleteRecipe} from '../context/recipeSlice';
 import { useAuthContext } from '../hooks/useAuthContext';
 import RecipeComponent from '../components/Recipe/RecipeComponent';
 import RecipeGeneration from '../components/Recipe/RecipeGeneration';
@@ -15,6 +15,9 @@ const Home = () => {
       dispatch(getRecipes(user));
   }, [dispatch, user]);
 
+  const handleDelete = (id) => {
+    dispatch(deleteRecipe({user:user, id:id}));
+  }
 
   return (
     <Box display={"flex"} flexDirection={"column"} mx={"8%"} alignItems="flex-start">
@@ -34,7 +37,7 @@ const Home = () => {
                     recipes.map((recipe) => (
                         <div key={recipe._id}>
                             <WrapItem key={recipe._id}>
-                                <RecipeComponent recipe={recipe}/>
+                                <RecipeComponent recipe={recipe} handleDelete={handleDelete}/>
                             </WrapItem>
                         </div>
                     )) : null

@@ -22,6 +22,7 @@ const IngredientsPage = () => {
       dispatch(getIngredients(user));
   }, [dispatch, user]);
 
+
   return (
     <Box display={"flex"} flexDirection={"column"} mx={"8%"}>
 

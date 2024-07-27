@@ -62,12 +62,12 @@ const generateRecipes = async (req, res) => {
 	const user_uuid = req.user._id
 	const {prompt} = req.body
 
-    try {
+	try {
 		// Fetch user's ingredients from the database
 		const user = await User.findOne({ _id: user_uuid });
-		
+
 		let userIngredients = user['ingredients'];
-		let userPreferences = user['preferences'];
+		let userPreferences = user['dietary_preferences'];
 
 				
 		if (!userIngredients) {
@@ -179,18 +179,21 @@ const generateRecipes = async (req, res) => {
 // delete a recipe
 const deleteRecipe = async (req, res) => {
 	const user_uuid = req.user._id
+	const {id} = req.params
 
 	if (!mongoose.Types.ObjectId.isValid(user_uuid)) {
-		return res.status(404).json({error: 'No such recipe'})
+		return res.status(404).json({error: 'No such user'})
 	}
 
-	const recipe = await Recipe.findOneAndDelete({_id: user_uuid})
+	const recipe = await Recipe.findOneAndDelete({_id: id})
 
 	if (!recipe) {
 		return res.status(400).json({error: 'No such recipe'})
 	}
 
-	res.status(200).json(recipe)
+	const recipes = await Recipe.find({user_uuid}).sort({createdAt: -1})
+
+	res.status(200).json(recipes)
 }
 
 

@@ -8,6 +8,7 @@ import Login from './pages/LoginPage'
 import Signup from './pages/SignupPage'
 import NotFoundPage from './pages/NotFoundPage'
 import Navbar from './components/Navbar/Navbar'
+import Footer from './components/Footer'
 import IngredientsPage from './pages/IngredientsPage'
 import PreferencePage from './pages/PreferencePage'
 import AboutPage from './pages/AboutPage'
@@ -51,6 +52,7 @@ function App() {
             />
           </Routes>
         </div>
+        <Footer/>
       </BrowserRouter>
     </div>
   )

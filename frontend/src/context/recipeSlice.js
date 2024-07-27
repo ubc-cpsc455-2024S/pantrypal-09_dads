@@ -29,6 +29,15 @@ export const getRecipes = createAsyncThunk('recipes/getRecipes', async (user) =>
   return response.data
 })
 
+export const deleteRecipe = createAsyncThunk('recipes/delete', async (formData) => {
+  const response = await axios.delete(API_URL + '/recipes/'+formData.id,{
+    headers: {'Authorization': `Bearer ${formData.user.token}`},
+  })
+  
+  return response.data
+})
+
+
 export const addRecipe = createAsyncThunk('recipes/add', async (formData) => {
   let data = JSON.stringify({
     "recipe":formData.recipe
@@ -76,6 +85,9 @@ const recipeSlice = createSlice({
         })
         .addCase(addRecipe.fulfilled, (state, action) => {
           state.suggestedRecipes = state.suggestedRecipes.filter(recipe => recipe.name !== action.name)
+          state.recipes = action.payload;
+        })
+        .addCase(deleteRecipe.fulfilled, (state, action) => {
           state.recipes = action.payload;
         })
     }

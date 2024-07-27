@@ -7,6 +7,7 @@ const Footer = () => {
       justifyContent: 'space-between',
       alignItems: 'center',
       padding: '1rem 2rem',
+      paddingTop: '4rem',
     },
     footerLeft: {
       display: 'flex',

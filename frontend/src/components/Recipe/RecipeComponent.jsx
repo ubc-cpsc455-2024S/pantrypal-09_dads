@@ -5,12 +5,12 @@ import Header from "./Header";
 import { useDisclosure } from "@chakra-ui/react";
 import RecipeCard from "./RecipeCard";
 
-// Replace with call to API to fetch Data
-
-
-const RecipeComponent = ({recipe}) => {
+const RecipeComponent = ({recipe, handleDelete}) => {
     const { isOpen, onOpen, onClose } = useDisclosure()
 
+    const handleDeleteRecipe = () => {
+        handleDelete(recipe._id);
+    }
     return (
     <Box>
       <Box onClick={onOpen}>
@@ -36,7 +36,7 @@ const RecipeComponent = ({recipe}) => {
                         key={2}
                     />
                     <Flex w="100%" ml={"2em"} mt={"1em"}>
-                        <Link  onClick={onClose}>I'm done making this recipe!</Link>
+                        <Link  onClick={handleDeleteRecipe}>I'm done making this recipe!</Link>
                     </Flex>
                 </VStack>     
             </ModalContent>

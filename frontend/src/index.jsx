@@ -6,12 +6,22 @@ import { ChakraProvider } from '@chakra-ui/react'
 import { Provider } from 'react-redux';
 import { AuthContextProvider } from './context/AuthContext.jsx'
 import store from './context/store.js'
+import { extendTheme } from '@chakra-ui/react'
+import '@fontsource/arvo'
+
+const theme = extendTheme({
+  fonts: {
+    heading: `'Arvo', serif`,
+    body: `'Arvo', serif`,
+  },
+})
+
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <AuthContextProvider>
       <Provider store={store}>
-        <ChakraProvider>
+        <ChakraProvider theme={theme}>
           <App />
         </ChakraProvider>
       </Provider>

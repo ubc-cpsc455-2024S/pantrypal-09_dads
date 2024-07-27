@@ -24,7 +24,6 @@ const Navbar = (props) => {
         {...props}
         >
             <Logo
-            w="100px"
             color={["black", "black", "primary.500", "primary.500"]}
             />
             <MenuToggle toggle={toggle} isOpen={isOpen} />

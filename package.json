@@ -4,9 +4,9 @@
   "description": "Web app solving cooking troubles",
   "main": "index.js",
   "scripts": {
-    "install-server": "cd backend && npm install",
+    "install-server": "cd backend && npm ci",
     "start-server": "cd backend && node server.js",
-    "install-client": "cd frontend && npm install",
+    "install-client": "cd frontend && npm ci",
     "build-client": "cd frontend && npm run build",
     "start-client": "cd frontend && npm run start"
   },

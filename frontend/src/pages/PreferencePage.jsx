@@ -1,9 +1,26 @@
-import { VStack, Wrap, WrapItem, Heading, Box, HStack, Button, Divider} from "@chakra-ui/react";
+import { VStack, Wrap, WrapItem, Heading, Box, Button, Textarea, Text, FormControl} from "@chakra-ui/react";
+import { useState, useEffect } from "react";
+import { useDispatch, useSelector} from "react-redux";
+import { useAuthContext } from "../hooks/useAuthContext";
+import { getPreference,setPreference } from "../context/preferenceSlice";
 
 const PreferencePage = () => {
+    const dispatch = useDispatch()
+    const {user} = useAuthContext();
+    const preference = useSelector((state) => state.preference.preferences);
+    const [preferences, setPreferences] = useState('')
 
+    useEffect(() => {
+        dispatch(getPreference(user));
+    }, [dispatch, user]);
+
+    const handleSubmit = async (e) => {
+      e.preventDefault()
+      dispatch(setPreference({user:user, preferences:preferences}))
+    }
+  
   return (
-    <Box display={"flex"} flexDirection={"column"} mx={"8%"}>
+    <Box display={"flex"} flexDirection={"column"} mx={"8%"} alignItems="flex-start">
         <VStack alignItems="flex-start">
             <Heading
                as="h1"
@@ -19,27 +36,16 @@ const PreferencePage = () => {
                fontSize="1rem"
                fontWeight="500"
                color="#333"
-               marginBottom="1rem"
                 >
                 Please add any Restrictions that you would like for us to take into account!
             </Heading>
-            {/* <Wrap alignItems={"center"}>
-                {data!==null?
-                    (data.ingredients.map((ingredient, index) => {
-                        return (
-                            <WrapItem key={index}>
-                                <IngredientCard key={index} ingredient={ingredient} />
-                            </WrapItem>
-                        )
-                    })):null
-                }
-            </Wrap>
-            <Divider  marginTop={'20px'}/>
-            <HStack direction='column' spacing={4}>
-                <Button leftIcon={<IoFastFoodOutline />} variant='solid'>
-                Generate Recipes!
-                </Button>
-            </HStack> */}
+            <form onSubmit={handleSubmit}>
+                <Text margin="2rem">
+                    Here are your current preferences: <br/><b>{preference}</b>
+                </Text>
+                <Textarea type='preferences' id="preferences" value={preferences} minW={'500px'} onChange={(e) => setPreferences(e.target.value)} />
+                <Button mt={5} type="submit">Set Preferences</Button>
+            </form>
         </VStack>
     </Box>
   )

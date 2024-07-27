@@ -10,6 +10,7 @@ require('dotenv').config()
 const authRouter = require('./routes/auth');
 const recipesRouter = require('./routes/recipes');
 const ingredientsRouter = require('./routes/ingredients')
+const preferencesRouter = require('./routes/preferences')
 
 // Initialise Express
 // ============================================================================
@@ -32,6 +33,7 @@ app.use((req, res, next) => {
 app.use('/api/auth', authRouter);
 app.use('/api/ingredients', ingredientsRouter);
 app.use('/api/recipes', recipesRouter);
+app.use('/api/preferences', preferencesRouter);
 
 // Database Connection
 // ============================================================================

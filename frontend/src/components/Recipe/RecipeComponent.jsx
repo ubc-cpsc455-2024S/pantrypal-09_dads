@@ -15,13 +15,7 @@ const RecipeComponent = ({recipe}) => {
     <Box>
       <Box onClick={onOpen}>
         <RecipeCard
-            image={recipe.image}
-            title={recipe.name}
-            time={recipe.time}
-            description={recipe.description}
-            calories={recipe.nutrition.calories}
-            likes={5}
-            id={recipe.uuid}
+            recipe={recipe}
         />
       </Box>
         <Modal isOpen={isOpen} onClose={onClose} >

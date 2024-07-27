@@ -1,7 +1,7 @@
-import { Box, Center, Image, Text, Card, Heading, Stack, CardBody, StackDivider, HStack, Link} from "@chakra-ui/react";
+import { Box, Center, Image, Text, Card, Heading, Stack, CardBody, StackDivider, HStack, Link, Badge, Tag} from "@chakra-ui/react";
 
 // eslint-disable-next-line react/prop-types
-const RecipeCard = ({image, title, time, description, calories,likes,id,onOpen}) => {
+const RecipeCard = ({recipe}) => {
 
     return (
         <Card
@@ -11,17 +11,17 @@ const RecipeCard = ({image, title, time, description, calories,likes,id,onOpen})
         w="300px"
         h="300px"
         >                              
-            <CardBody>
+            <CardBody h="100%">
                 <Stack divider={<StackDivider />} spacing='4'>
                     <Box>
-                        <Heading size='md' mb="15px">{title}</Heading>
+                        <Heading as='h1' size='lg' mb="15px">{recipe.name}</Heading>
                         <StackDivider />
-                        <Text fontSize='xl' marginBottom={'2em'}>{description}</Text>
+                        <Text fontSize='lg' marginBottom={'2em'}>{recipe.description}</Text>
                         <Center height='10px'>
-                            <HStack divider={<StackDivider />}>
-                                <Text overflowWrap={"break-word"} alignItems={"flex-end"}>{time + " mins"}</Text>
-                                <Text overflowWrap={"break-word"} textAlign={"end"}>{Math.round(calories) + " Cals"}</Text>
-                                <Text overflowWrap={"break-word"} textAlign={"end"}>{"♥️ "+ likes}</Text>
+                            <HStack>
+                                <Tag  size={'md'} key={'md'} borderRadius='full' variant='outline' color={"black"}>{recipe.time + " mins"}</Tag>
+                                <Tag  size={'md'} key={'md'} borderRadius='full' variant='outline' color={"black"}>{Math.round(recipe.nutrition.calories) + " Cals"}</Tag>
+                                <Tag  size={'md'} key={'md'} borderRadius='full' variant='outline' color={"black"}>{Math.round(recipe.time) + " Mins"}</Tag>
                             </HStack>
                         </Center>
                     </Box>

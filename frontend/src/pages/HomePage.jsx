@@ -17,7 +17,7 @@ const Home = () => {
 
 
   return (
-    <Box display={"flex"} flexDirection={"column"} mx={"8%"}>
+    <Box display={"flex"} flexDirection={"column"} mx={"8%"} alignItems="flex-start">
         <Heading
             as="h1"
             fontSize="2rem"
@@ -27,6 +27,7 @@ const Home = () => {
         >
           Saved Recipes
         </Heading>
+        <Divider marginBottom={'20px'} />
         <VStack alignItems="flex-start">
             <Wrap alignItems={"center"}>
                 {recipes.length > 0 ?

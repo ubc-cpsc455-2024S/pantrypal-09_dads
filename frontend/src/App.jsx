@@ -1,46 +1,60 @@
 import './App.css'
-import { useSelector, useDispatch} from 'react-redux'
-import HomePage from './components/home/HomePage'
-import Footer from './components/misc/Footer'
-import Navbar from './components/misc/Navbar'
-import RecipeInstructions from './components/recipe/Recipe'
-import RecipePage from './components/recipe/RecipePage'
-import IngredientsPage from './components/ingredients/IngredientsPage'
-import DietPage from './components/diet/DietPage'
-import LoadingPage from './components/misc/Loading'
+import { useAuthContext } from './hooks/useAuthContext'
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
+
+// pages & components
+import Home from './pages/HomePage'
+import Login from './pages/LoginPage'
+import Signup from './pages/SignupPage'
+import NotFoundPage from './pages/NotFoundPage'
+import Navbar from './components/Navbar/Navbar'
+import Footer from './components/Footer'
+import IngredientsPage from './pages/IngredientsPage'
+import PreferencePage from './pages/PreferencePage'
+import AboutPage from './pages/AboutPage'
 
 function App() {
-  const dispatch = useDispatch()
-
-  const status = useSelector((state) => state.user.status);
-  console.log(status)
+  const { user } = useAuthContext()
 
   return (
-    <>
-      <Navbar />
-
-      <div className="body">
-        {status==='loading' && <LoadingPage />}
-        {status==='default' && <HomePage dispatch={dispatch}/>}
-        {status==='ingredients' && <IngredientsPage dispatch={dispatch} />}
-        {status==='dietary' && <DietPage />}
-        {status==='recipes' && <RecipePage dispatch={dispatch}/>}
-        {status==='recipes/temp' && <RecipeInstructions />}
-
-        {/* <BrowserRouter>
+    <div className="App">
+      <BrowserRouter>
+        <Navbar />
+        <div className="pages">
           <Routes>
-            <Route path="/" element={status==='home'?<HomePage dispatch={dispatch} /> : <NotFoundPage/>} />
-            <Route path="/ingredients" element={status==='ing'?<IngredientsPage /> : <NotFoundPage/>} />
-            <Route path="/diet" element={status==='diet'?<DietPage /> : <NotFoundPage/>} />
-            <Route path="/recipes" element={status==='recipes'?<RecipePage /> : <NotFoundPage/>} />
-            <Route path="/recipes/temp" element={<RecipeInstructions />} />
+            <Route 
+              path="/" 
+              element={user ? <Home /> : <Navigate to="/login" />} 
+            />
+            <Route 
+              path="/pantry" 
+              element={user ? <IngredientsPage /> : <></>}
+            />
+            <Route 
+              path="/about" 
+              element={user ? <AboutPage /> : <></>}
+            />
+            <Route 
+              path="/preference" 
+              element={user ? <PreferencePage /> : <></>}
+            />
+            <Route 
+              path="/login" 
+              element={!user ? <Login /> : <Navigate to="/" />} 
+            />
+            <Route 
+              path="/signup" 
+              element={!user ? <Signup /> : <Navigate to="/" />} 
+            />
+            <Route 
+              path="*" 
+              element={<NotFoundPage/>} 
+            />
           </Routes>
-        </BrowserRouter> */}
-      </div>
-
-      <Footer />
-      
-    </>
+        </div>
+        <Footer/>
+      </BrowserRouter>
+    </div>
   )
 }
 

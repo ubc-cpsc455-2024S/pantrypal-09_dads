@@ -1,12 +1,28 @@
-require('dotenv').config()
-const express = require('express');
-const router = express.Router();
-const { getDb } = require('../database.js');
+const express = require('express')
 const fs = require("fs");
 const multer = require('multer');
-const OpenAI = require('openai');
 const { v4: uuidv4 } = require('uuid');
-//HELPERS
+const {
+getIngredients,
+updateIngredients,
+} = require('../controllers/ingredientController')
+
+const requireAuth = require('../middleware/requireAuth')
+const router = express.Router()
+
+// require auth for all ingredients routes
+router.use(requireAuth)
+
+// GET all ingredients
+router.get('/', getIngredients)
+
+// POST a new ingredients list 
+router.post('/update', updateIngredients)
+
+// POST generate new recipes
+//router.post('/generate', generateIngredients)
+
+
 
 // Returns Ingredients fro Image Query
 //Image Uploader
@@ -24,8 +40,7 @@ const storage = multer.diskStorage({
 
 const imageUpload = multer({storage: storage})
 
-//OpenAI connection
-const openai = new OpenAI({apiKey: process.env.OPEN_AI_API_KEY});
+
 
 //Converts image to base64 string
 function convertImageToBase64(filePath) {
@@ -132,62 +147,6 @@ router.post('/ingredients/generate', imageUpload.array("my-image-file"), async (
     }
 });
 
-// POST route to add new ingredients to DB or Update pre-existing
-// Needs username, Ingredients in Map format <Ingredient, Quantity>
-// Updates DB with ingredient list for user
-router.post('/ingredients/update', async (req, res) => {
-    console.log('POST request received to /ingredients/update');
-
-    const db = getDb();
-    const { username, ingredients } = req.body;
-    
-    if (!username || !ingredients) {
-        return res.status(400).send('username and Ingredients are required');
-    }
-
-    try {
-        // Update the ingredients for the user
-        await db.collection('users').updateOne(
-            { username: username },
-            { $set: {ingredients: ingredients}}
-        );
-            
-        res.status(200).send({ ingredients: ingredients});
-    } catch (error) {
-        console.error('Error updating ingredients:', error);
-        res.status(500).send('Error updating ingredients');
-    }
-});
 
 
-// GET route to return users current ingredients
-// Needs username
-// Returns ingredients for that user from DB
-router.get('/ingredients', async (req, res) => {
-    console.log('GET request received to /ingredients');
-
-    const db = getDb();
-    const { username } = req.query;
-
-    if (!username) {
-        return res.status(400).send('username is required');
-    }
-
-    try {
-        const user = await db.collection('users').findOne({ username: username });
-
-        if (!user) {
-            return res.status(404).send('No ingredients found for this user');
-        }
-
-        res.status(200).send(user.ingredients);
-    } catch (error) {
-        console.error('Error fetching ingredients:', error);
-        res.status(500).send('Error fetching ingredients');
-    }
-});
-
-
-
-
-module.exports = router;
+module.exports = router

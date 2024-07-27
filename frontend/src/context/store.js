@@ -1,9 +1,13 @@
 import { configureStore } from '@reduxjs/toolkit';
-import userReducer from './userSlice';
+import ingredientReducer from './ingredientSlice';
+import recipeReducer from './recipeSlice';
+import preferenceReducer from './preferenceSlice';
 
 const store = configureStore({
   reducer: {
-    user: userReducer,
+    ingredient: ingredientReducer,
+    recipe: recipeReducer,
+    preference: preferenceReducer
   },
 });
 

@@ -1,6 +1,6 @@
-import { HStack, VStack, StackDivider, Heading, Image, Center, Text} from "@chakra-ui/react";
+import { HStack, VStack, StackDivider, Heading, Image, Center, Wrap, WrapItem, Tag} from "@chakra-ui/react";
 
-const Header = ({title, image, time, calories, servings, likes}) => {
+const Header = ({recipe}) => {
 
   return (
     <>
@@ -8,29 +8,22 @@ const Header = ({title, image, time, calories, servings, likes}) => {
             <VStack>
                 
                 <Heading alignContent={'flex-start'} marginTop={'5px'} marginBottom={'5px'} size="xl" fontWeight="400" letterSpacing={'tighter'}>
-                    {title}
+                    {recipe.name}
                 </Heading>
-                <HStack divider={<StackDivider />}>
-                    <Text fontSize="14px" lineHeight="20px" fontWeight="400">
-                        {time + " mins"}
-                    </Text>
-                    <Text fontSize="14px" lineHeight="20px" fontWeight="400">
-                        {Math.round(calories) + " Cals per serving"}
-                    </Text>
-                    <Text fontSize="14px" lineHeight="20px" fontWeight="400">
-                        {"Feeds "+ servings}
-                    </Text>
-                    <Text fontSize="14px" lineHeight="20px" fontWeight="400">
-                        {"♥️ "+ likes}
-                    </Text>
-                </HStack>
-                <Image src={image}
-                    style={{
-                        width: "60%",
-                        borderRadius: "10px"
-                    }}
-                />
-                
+                <Wrap>
+                    <WrapItem>
+                    <Tag  size={'md'} key={'md'} borderRadius='full' variant='outline' color={"black"}>{recipe.time + " mins"}</Tag>
+                    </WrapItem>
+                    <WrapItem>
+                    <Tag  size={'md'} key={'md'} borderRadius='full' variant='outline' color={"black"}>{Math.round(recipe.nutrition.calories) + " Cals"}</Tag>
+                    </WrapItem>
+                    <WrapItem>
+                    <Tag  size={'md'} key={'md'} borderRadius='full' variant='outline' color={"black"}>{Math.round(recipe.serves) + " Servings"}</Tag>
+                    </WrapItem>
+                    <WrapItem>
+                    {recipe.vegetarian ? <Tag  size={'md'} key={'md'} borderRadius='full' variant='solid' color={"black"} bg="green.200">Vegetarian</Tag> : <Tag  size={'md'} key={'md'} borderRadius='full' variant='solid' color={"black"} bg="yellow.300">Non-Vegetarian</Tag>}
+                    </WrapItem>
+                </Wrap>                
             </VStack>
         </Center>
     </>

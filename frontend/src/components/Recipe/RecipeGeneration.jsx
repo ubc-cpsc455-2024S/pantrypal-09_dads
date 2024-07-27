@@ -9,6 +9,7 @@ import Loading from "../Loading";
 import SuggestedRecipeComponent from "./SuggestedRecipeComponent";
 import { addRecipe } from "../../context/recipeSlice";
 import { deleteSuggestedRecipe } from "../../context/recipeSlice";
+import { useToast } from '@chakra-ui/react'
 
 const RecipeGeneration = ({dispatch}) => {
     const { isOpen, onOpen, onClose } = useDisclosure()
@@ -16,6 +17,7 @@ const RecipeGeneration = ({dispatch}) => {
     const loading = useSelector((state) => state.recipe.loading);
     const {user} = useAuthContext();
     const [generator, setGenerator] = useState('')
+    const toast = useToast()
 
     const handleSubmit = async (e) => {
       e.preventDefault()
@@ -28,6 +30,13 @@ const RecipeGeneration = ({dispatch}) => {
         newRecipes.splice(parseInt(index), 1)
         dispatch(deleteSuggestedRecipe(newRecipes))
         dispatch(addRecipe({user:user,recipe:suggestedRecipes[index]}))
+        toast({
+            title: 'Recipe Added',
+            description: "We've added the Recipe to your account for you.",
+            status: 'success',
+            duration: 2000,
+            isClosable: true,
+        })
     }
 
     const onDelete = (index) => {

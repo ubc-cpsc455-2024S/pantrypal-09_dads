@@ -15,9 +15,9 @@ const SuggestedRecipeCard = ({recipe, index, onChoose, onDelete, onOpen}) => {
             <CardBody h="100%">
                 <Stack spacing='4'>
                     <Box onClick={onOpen} mb={'0.5em'} >
-                        <Heading as='h1' size='lg'>{recipe.name}</Heading>
+                        <Heading as='h1' size='lg' mb={'0.5em'}>{recipe.name}</Heading>
                         <StackDivider />
-                        <Text fontSize='lg'>{recipe.description}</Text>
+                        <Text fontSize='lg' mb={'0.5em'}>{recipe.description}</Text>
                         <Wrap>
                             <WrapItem>
                                 <Tag  size={'md'} key={'md'} borderRadius='full' variant='outline' color={"black"}>{recipe.time + " mins"}</Tag>

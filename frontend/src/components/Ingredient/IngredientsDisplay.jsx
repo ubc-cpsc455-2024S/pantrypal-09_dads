@@ -26,6 +26,7 @@ import {
   Td,
   TableCaption,
   TableContainer,
+  useToast
 } from "@chakra-ui/react";
 import IngredientCard from "./ingredientCard.jsx";
 import IngredientRow from './ingredientRow.jsx';
@@ -43,6 +44,7 @@ const IngredientsDisplay = ({ingredients, dispatch, user}) => {
   const [isEditMode, setIsEditMode] = useState(false);
   const [editingId, setEditingId] = useState(null);
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const toast = useToast()
 
   // Edit and Adding Ingredient Handling
   // =======================================================================================
@@ -60,6 +62,12 @@ const IngredientsDisplay = ({ingredients, dispatch, user}) => {
     } else {
       newIngredients.push({name: newIngredient.name, quantity: newIngredient.quantity, unit: newIngredient.unit, notes: newIngredient.notes});
       dispatch(updateIngredients({user:user, ingredients:newIngredients}));
+      toast({
+        title: 'Ingredient Added Successfully',
+        status: 'success',
+        duration: 1500,
+        isClosable: true,
+      })
     }
     setNewIngredient({ name: '', quantity: 0, unit: '' });
     setIsEditMode(false);
@@ -101,6 +109,12 @@ const IngredientsDisplay = ({ingredients, dispatch, user}) => {
     );
 
     dispatch(updateIngredients({user:user, ingredients:newIngredients}));
+    toast({
+      title: 'Deleted Ingredient',
+      status: 'warning',
+      duration: 1500,
+      isClosable: true,
+    })
   };
 
   //Handling for clear ingredients

@@ -105,6 +105,8 @@ const generateRecipes = async (req, res) => {
 		const user = await User.findOne({ _id: user_uuid });
 		
 		let userIngredients = user['ingredients'];
+		let userPreferences = user['preferences'];
+
 				
 		if (!userIngredients) {
 			return res.status(404).send('No ingredients found for this user');
@@ -131,7 +133,7 @@ const generateRecipes = async (req, res) => {
 					role: "user",
 					content: [
 						{ type: "text", text: 
-							`Here is a list of ingredients that I have available at home. Can you create 3-6 recipes using these ingredients. Each recipe should be detailed with name, description, steps, tools, and more. you MUST follow this JSON scheme EXACTLY:   
+							`Here is a list of ingredients that I have available at home. ${ingredientString}. Can you create 2-5 recipes using these ingredients${userPreferences==""?"":" while keeping in mind the following dietary preferences " + userPreferences}. Each recipe should be detailed with name, description, steps, tools, and more. Each step must be accurate and detailed such that anyone can make follow this recipe and make this dish. You MUST follow this JSON scheme EXACTLY:   
 								{
 									recipes: [
 										{
@@ -172,10 +174,10 @@ const generateRecipes = async (req, res) => {
 								}
 							`
 						},
-						{
-							type: "text",
-							text: ingredientString,
-						},
+						// {
+						// 	type: "text",
+						// 	text: ingredientString,
+						// },
 					],
 				},
 			],

@@ -200,7 +200,8 @@ const generateRecipes = async (req, res) => {
 			// });
 			curr['user_uuid'] = user_uuid
 
-			await Recipe.create(curr)
+			//WE only suggest recipes, we don't save them. Once user selects a recipe, we add them through the group add POST endpoint
+			//await Recipe.create(curr)
 			retVal.push(curr);
 		}
 

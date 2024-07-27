@@ -1,10 +1,10 @@
 import { useEffect }from 'react'
 import { Box, VStack, Wrap, WrapItem, Heading, HStack, Button, Divider } from "@chakra-ui/react";
-import { IoFastFoodOutline } from "react-icons/io5";
 import { useSelector, useDispatch } from "react-redux";
 import { getRecipes } from '../context/recipeSlice';
 import { useAuthContext } from '../hooks/useAuthContext';
 import RecipeComponent from '../components/Recipe/RecipeComponent';
+import RecipeGeneration from '../components/Recipe/RecipeGeneration';
 
 const Home = () => {
   const recipes = useSelector((state) => state.recipe.recipes);
@@ -42,9 +42,7 @@ const Home = () => {
             </Wrap>
             <Divider marginTop={'20px'} />
             <HStack direction='column' spacing={4}>
-                <Button leftIcon={<IoFastFoodOutline />} variant='solid'>
-                    Generate More
-                </Button>
+                <RecipeGeneration dispatch={dispatch}/>
             </HStack>
         </VStack>
     </Box>

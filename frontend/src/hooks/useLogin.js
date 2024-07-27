@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useAuthContext } from './useAuthContext'
-
+import { env } from '../consts'
 export const useLogin = () => {
   const [error, setError] = useState(null)
   const [isLoading, setIsLoading] = useState(null)
@@ -23,7 +23,7 @@ export const useLogin = () => {
     if (response.ok) {
       console.log(json)
       // save the user to local storage
-      localStorage.setItem('user', JSON.stringify(json))
+      localStorage.setItem('user_'+env, JSON.stringify(json))
 
       // update the auth context
       dispatch({type: 'LOGIN', payload: json})

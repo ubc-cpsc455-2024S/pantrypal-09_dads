@@ -15,9 +15,20 @@ import {
   FormLabel,
   Input,
   Select,
-  SimpleGrid
+  SimpleGrid,
+  Divider,
+  Table,
+  Thead,
+  Tbody,
+  Tfoot,
+  Tr,
+  Th,
+  Td,
+  TableCaption,
+  TableContainer,
 } from "@chakra-ui/react";
 import IngredientCard from "./ingredientCard.jsx";
+import IngredientRow from './ingredientRow.jsx';
 import { updateIngredients } from '../../context/ingredientSlice.js';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -147,7 +158,7 @@ const IngredientsDisplay = ({ingredients, dispatch, user}) => {
       </Modal>
 
       <VStack>
-        <SimpleGrid spacing={4} templateColumns='repeat(4, minmax(200px, 1fr))'>
+        {/* <SimpleGrid spacing={4} templateColumns='repeat(4, minmax(200px, 1fr))'>
           {ingredients && ingredients.length !== 0 ? (
             ingredients.map((ingredient) => (
               <HStack key={ingredient._id}>
@@ -161,8 +172,33 @@ const IngredientsDisplay = ({ingredients, dispatch, user}) => {
               </HStack>
             ))
           ) : null}
-        </SimpleGrid>
-
+        </SimpleGrid> */}
+        <TableContainer>
+          <Table size='lg' variant='simple'>
+            <Thead>
+              <Tr>
+                <Th>Name</Th>
+                <Th>Quantity</Th>
+                <Th>Unit</Th>
+                <Th>Notes</Th>
+              </Tr>
+            </Thead>
+            <Tbody>
+              {ingredients && ingredients.length !== 0 ? (
+                  ingredients.map((ingredient) => (
+                    <IngredientRow
+                      key={ingredient._id}
+                      ingredient={ingredient}
+                      id={ingredient._id}
+                      onDelete={deleteIngredient}
+                      onEdit={() => openEditModal(ingredient)}
+                    />
+                  ))
+                ) : null}
+            </Tbody>
+          </Table>
+        </TableContainer>
+        <Divider />
         <Button onClick={openAddModal}>
           Add Ingredient
         </Button>

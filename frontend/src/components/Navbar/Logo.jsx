@@ -1,12 +1,12 @@
 import React from "react"
-import { Box, Text } from "@chakra-ui/react"
+import { Box, Heading } from "@chakra-ui/react"
 
 export default function Logo(props) {
   return (
     <Box {...props}>
-      <Text fontSize="xl" fontWeight="bold">
+      <Heading size="lg" fontWeight="bold">
         pantrypal
-      </Text>
+      </Heading>
     </Box>
   )
 }

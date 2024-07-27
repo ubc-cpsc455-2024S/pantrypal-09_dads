@@ -36,8 +36,6 @@ export const updateIngredients = createAsyncThunk('ingredients/updateIngredients
 })
 
 
-// TODO: remove this and get data from mongoDB
-// TODO: replace ID with mongoDB IDs
 const ingredientSlice = createSlice({
     name: 'ingredients',
     initialState: {

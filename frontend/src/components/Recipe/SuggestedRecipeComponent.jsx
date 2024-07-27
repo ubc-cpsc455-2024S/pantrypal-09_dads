@@ -36,6 +36,7 @@ const SuggestedRecipeComponent = ({recipe, index, onChoose, onDelete}) => {
                         instructions={recipe.steps}
                         key={2}
                     />
+                    <Button onClick={onClose}>I'm done making this recipe!</Button>
                 </VStack>     
             </ModalContent>
         </Modal>   

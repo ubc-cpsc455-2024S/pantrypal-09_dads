@@ -1,4 +1,4 @@
-import { Box, VStack, Button, Modal, ModalBody, ModalOverlay, ModalContent} from "@chakra-ui/react";
+import { Box, VStack, Button, Modal, Link, ModalOverlay, ModalContent, Flex} from "@chakra-ui/react";
 import Ingredients from "./Ingredients";
 import Instructions from "./Instructions";
 import Header from "./Header";
@@ -35,6 +35,9 @@ const RecipeComponent = ({recipe}) => {
                         instructions={recipe.steps}
                         key={2}
                     />
+                    <Flex w="100%" ml={"2em"} mt={"1em"}>
+                        <Link  onClick={onClose}>I'm done making this recipe!</Link>
+                    </Flex>
                 </VStack>     
             </ModalContent>
         </Modal>   

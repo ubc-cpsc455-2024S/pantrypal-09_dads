@@ -18,7 +18,10 @@ const app = express();
 
 // Middleware
 // ============================================================================
-app.use(cors());
+const corsOptions = {
+  origin: process.env.CORS_ORIGIN // frontend URI (ReactJS)
+}
+app.use(cors(corsOptions));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 

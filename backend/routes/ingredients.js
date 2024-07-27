@@ -24,6 +24,10 @@ router.post('/update', updateIngredients)
 
 
 
+//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+// Temp
+//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 // Returns Ingredients fro Image Query
 //Image Uploader
 const imageUploadPath = './temp';
@@ -39,7 +43,6 @@ const storage = multer.diskStorage({
 })
 
 const imageUpload = multer({storage: storage})
-
 
 
 //Converts image to base64 string

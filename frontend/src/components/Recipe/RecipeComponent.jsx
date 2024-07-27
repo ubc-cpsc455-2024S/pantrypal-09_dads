@@ -1,9 +1,9 @@
 import { Box, VStack, Button, Modal, Link, ModalOverlay, ModalContent, Flex} from "@chakra-ui/react";
+import { useDisclosure } from "@chakra-ui/react";
+import Header from "./Header";
+import RecipeCard from "./RecipeCard";
 import Ingredients from "./Ingredients";
 import Instructions from "./Instructions";
-import Header from "./Header";
-import { useDisclosure } from "@chakra-ui/react";
-import RecipeCard from "./RecipeCard";
 
 const RecipeComponent = ({recipe, handleDelete}) => {
     const { isOpen, onOpen, onClose } = useDisclosure()

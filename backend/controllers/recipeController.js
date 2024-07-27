@@ -60,7 +60,8 @@ const addRecipe = async (req, res) => {
 // generate new recipes
 const generateRecipes = async (req, res) => {
 	const user_uuid = req.user._id
-  
+	const {prompt} = req.body
+
     try {
 		// Fetch user's ingredients from the database
 		const user = await User.findOne({ _id: user_uuid });
@@ -94,7 +95,7 @@ const generateRecipes = async (req, res) => {
 					role: "user",
 					content: [
 						{ type: "text", text: 
-							`Here is a list of ingredients that I have available at home. ${ingredientString}. Can you create 2-5 recipes using these ingredients${userPreferences==""?"":" while keeping in mind the following dietary preferences " + userPreferences}. Each recipe should be detailed with name, description, steps, tools, and more. Each step must be accurate and detailed such that anyone can make follow this recipe and make this dish. You MUST follow this JSON scheme EXACTLY:   
+							`Here is a list of ingredients that I have available at home. ${ingredientString}. Can you create 2-5 recipes using these ingredients${userPreferences==""?"":" while keeping in mind the following dietary preferences " + userPreferences}.${prompt==""?"":"I am looking for recipes that fulfill this request: " + prompt+". "}Each recipe should be detailed with name, description, steps, tools, and more. Each step must be accurate and detailed such that anyone can make follow this recipe and make this dish. You MUST follow this JSON scheme EXACTLY:   
 								{
 									recipes: [
 										{

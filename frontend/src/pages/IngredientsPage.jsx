@@ -41,7 +41,7 @@ const IngredientsPage = () => {
                color="#333"
                marginBottom="1rem"
                 >
-                Make any necessary changes before generating recipes!
+                Make any necessary changes before generating recipes.
       </Heading>
       <IngredientsDisplay ingredients={ingredients} dispatch={dispatch} user={user} />
     </Box>

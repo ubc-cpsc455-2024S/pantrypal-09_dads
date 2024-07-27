@@ -1,4 +1,4 @@
-import { Box, Center, Image, Text, Card, Heading, Stack, CardBody, StackDivider, HStack, Link, Badge, Tag} from "@chakra-ui/react";
+import { Box, Center, Image, Text, Card, Heading, Stack, CardBody, StackDivider, HStack, Link, Badge, Tag, Wrap, WrapItem} from "@chakra-ui/react";
 
 // eslint-disable-next-line react/prop-types
 const RecipeCard = ({recipe}) => {
@@ -18,11 +18,20 @@ const RecipeCard = ({recipe}) => {
                         <StackDivider />
                         <Text fontSize='lg' marginBottom={'2em'}>{recipe.description}</Text>
                         <Center height='10px'>
-                            <HStack>
+                            <Wrap>
+                                <WrapItem>
                                 <Tag  size={'md'} key={'md'} borderRadius='full' variant='outline' color={"black"}>{recipe.time + " mins"}</Tag>
+                                </WrapItem>
+                                <WrapItem>
                                 <Tag  size={'md'} key={'md'} borderRadius='full' variant='outline' color={"black"}>{Math.round(recipe.nutrition.calories) + " Cals"}</Tag>
+                                </WrapItem>
+                                <WrapItem>
                                 <Tag  size={'md'} key={'md'} borderRadius='full' variant='outline' color={"black"}>{Math.round(recipe.time) + " Mins"}</Tag>
-                            </HStack>
+                                </WrapItem>
+                                <WrapItem>
+                                {recipe.vegetarian ? <Tag  size={'md'} key={'md'} borderRadius='full' variant='solid' color={"black"} bg="green.200">Vegetarian</Tag> : <Tag  size={'md'} key={'md'} borderRadius='full' variant='solid' color={"black"} bg="yellow.300">Non-Vegetarian</Tag>}
+                                </WrapItem>
+                            </Wrap>
                         </Center>
                     </Box>
                 </Stack>

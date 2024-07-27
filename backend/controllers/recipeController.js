@@ -137,7 +137,7 @@ const generateRecipes = async (req, res) => {
 										{
 											name: "Spaghetti Carbonara",
 											description: "A classic Italian dish made with spaghetti, eggs, bacon, and cheese.",
-											equipment: ["ice cream scoop", "kitchen thermometer", "muffin tray", "microwave", "oven", "bowl"],
+											equipment: ["Ice Cream Scoop", "Kitchen Thermometer", "Muffin Tray", "Microwave", "Oven", "Bowl"],
 											vegetarian: false,
 											nutrition: {"calories": 500, "fat": 20, "carbs": 60, "protein": 30, "sugar": 10, "sodium": 500},
 											ingredients: [{ name: "Spaghetti", quantity: 1, unit: "cup" }, { name: "Eggs", quantity: 2, unit: "pieces" }, { name: "Bacon", quantity: 4, unit: "strips" }, { name: "Parmesan Cheese", quantity: 0.5, unit: "cup" }, { name: "Black Pepper", quantity: 1, unit: "teaspoon"} ],
@@ -154,7 +154,7 @@ const generateRecipes = async (req, res) => {
 										{
 											name: "Spaghetti Carbonara",
 											description: "A classic Italian dish made with spaghetti, eggs, bacon, and cheese.",
-											equipment: ["ice cream scoop", "kitchen thermometer", "muffin tray", "microwave", "oven", "bowl"],
+											equipment: ["Ice Cream Scoop", "Kitchen Thermometer", "Muffin Tray", "Microwave", "Oven", "Bowl"],
 											vegetarian: false,
 											nutrition: {"calories": 500, "fat": 20, "carbs": 60, "protein": 30, "sugar": 10, "sodium": 500},
 											ingredients: [{ name: "Spaghetti", quantity: 1, unit: "cup" }, { name: "Eggs", quantity: 2, unit: "pieces" }, { name: "Bacon", quantity: 4, unit: "strips" }, { name: "Parmesan Cheese", quantity: 0.5, unit: "cup" }, { name: "Black Pepper", quantity: 1, unit: "teaspoon"} ],

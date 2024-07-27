@@ -26,6 +26,9 @@ const loginUser = async (req, res) => {
 const signupUser = async (req, res) => {
   const {email, password} = req.body
 
+  // disable signup for workshop demo
+  res.status(500).json({error: "Signup Disabled for Workshop Demo to prevent spam lol"})
+
   try {
     const user = await User.signup(email, password)
 

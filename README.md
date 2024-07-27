@@ -17,20 +17,20 @@ Transform your cooking experience with PantryPal, the ultimate app for home cook
   
 ## Project Task Requirements
 - ### Minimal Requirements
-  - Ingredient Input: Users must be able to manually input or upload pictures of their ingredients.
-  - Recipe and Ingredient Storage: The system should store user-generated recipes along with their ingredients.
-  - Recipe Retrieval: Provide basic functionality to return recipes based on the entered ingredients, even if initially mocked or simplified.
-  - User Interface: Develop a basic user interface for inserting ingredients and viewing recipes, ensuring ease of use.
+  - [x] Ingredient Input: Users must be able to manually input or upload pictures of their ingredients.
+  - [x] Recipe and Ingredient Storage: The system should store user-generated recipes along with their ingredients.
+  - [x] Recipe Retrieval: Provide basic functionality to return recipes based on the entered ingredients, even if initially mocked or simplified.
+  - [x] User Interface: Develop a basic user interface for inserting ingredients and viewing recipes, ensuring ease of use.
 - ### Standard Requirements
-  - Image-to-Text Conversion: Implement image-to-text conversion for recognizing food ingredients from uploaded pictures.
-  - Preference-Based Recipes: Take user preferences into account when generating recipes, tailoring outputs to individual tastes.
-  - Advanced Recipe Generation: Employ machine learning models or external APIs to generate recipes based on user-inputted ingredients.
-  - Recipe Interaction: Allow users to rate and favorite recipes, which will aid in refining and improving recipe suggestions.
+  - [x] Image-to-Text Conversion: Implement image-to-text conversion for recognizing food ingredients from uploaded pictures.
+  - [x] Preference-Based Recipes: Take user preferences into account when generating recipes, tailoring outputs to individual tastes.
+  - [x] Advanced Recipe Generation: Employ machine learning models or external APIs to generate recipes based on user-inputted ingredients.
+  - [x] Recipe Interaction: Allow users to rate and favorite recipes, which will aid in refining and improving recipe suggestions.
 - ### Stretch Requirements
-  - Smart Ingredient and Recipe Memory: Save frequently used ingredients and recipes to streamline the generation process and prevent repetitive suggestions.
-  - Nutritional Information: Integrate detailed nutritional information for each recipe, enhancing the app's health-oriented utility.
-  - Voice Controls: Incorporate voice control functionalities, enabling users to interact with the app hands-free, which is particularly useful during cooking.
-  - User Accounts: Develop user accounts to save recipes, user preferences, and a history of generated recipes.
+  - [ ] Smart Ingredient and Recipe Memory: Save frequently used ingredients and recipes to streamline the generation process and prevent repetitive suggestions.
+  - [ ] Nutritional Information: Integrate detailed nutritional information for each recipe, enhancing the app's health-oriented utility.
+  - [ ] Voice Controls: Incorporate voice control functionalities, enabling users to interact with the app hands-free, which is particularly useful during cooking.
+  - [x] User Accounts: Develop user accounts to save recipes, user preferences, and a history of generated recipes.
 
 ## Progress 4 Update
 - ### Minimal Requirements

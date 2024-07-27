@@ -1,4 +1,5 @@
 import { createContext, useReducer, useEffect } from 'react'
+import { env } from '../consts'
 
 export const AuthContext = createContext()
 

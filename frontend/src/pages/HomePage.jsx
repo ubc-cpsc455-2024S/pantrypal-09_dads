@@ -32,11 +32,11 @@ const Home = () => {
             <Wrap alignItems={"center"}>
                 {recipes.length > 0 ?
                     recipes.map((recipe) => (
-                        <>
-                            <WrapItem key={recipe.uuid}>
+                        <div key={recipe._id}>
+                            <WrapItem key={recipe._id}>
                                 <RecipeComponent recipe={recipe}/>
                             </WrapItem>
-                        </>
+                        </div>
                     )) : null
                 }
             </Wrap>

@@ -2,8 +2,7 @@ const express = require('express')
 const {
 getRecipes,
 getRecipe,
-createRecipe,
-createRecipes,
+addRecipe,
 generateRecipes,
 deleteRecipe
 } = require('../controllers/recipeController')
@@ -22,10 +21,7 @@ router.get('/', getRecipes)
 router.get('/:id', getRecipe)
 
 // POST a new recipe 
-router.post('/add', createRecipe)
-
-// POST new recipes 
-router.post('/addMultiple', createRecipes)
+router.post('/add', addRecipe)
 
 // POST generate new recipes
 router.post('/generate', generateRecipes)

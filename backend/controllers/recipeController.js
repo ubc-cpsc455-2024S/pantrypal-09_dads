@@ -36,64 +36,25 @@ const getRecipe = async (req, res) => {
 
 
 // create new recipe
-const createRecipe = async (req, res) => {
-	const {title, load, reps} = req.body
+const addRecipe = async (req, res) => {
+	const {recipe} = req.body
 	const user_uuid = req.user._id
 
-	let emptyFields = []
-
-	if(!title) {
-		emptyFields.push('title')
-	}
-	if(!load) {
-		emptyFields.push('load')
-	}
-	if(!reps) {
-		emptyFields.push('reps')
-	}
-	if(emptyFields.length > 0) {
-		return res.status(400).json({ error: 'Please fill in all the fields', emptyFields })
+	if (!mongoose.Types.ObjectId.isValid(user_uuid)) {
+		return res.status(404).json({error: 'No such user'})
 	}
 
-	// add doc to db
 	try {
-		const user_id = req.user._id
-		const workout = await Workout.create({title, load, reps, user_id})
-		res.status(200).json(workout)
+
+		await Recipe.create(recipe)
+		const recipes = await Recipe.find({user_uuid}).sort({createdAt: -1})
+
+		res.status(200).json(recipes)
 	} catch (error) {
 		res.status(400).json({error: error.message})
 	}
 }
 
-// create new recipes
-const createRecipes = async (req, res) => {
-    const {title, load, reps} = req.body
-    const user_uuid = req.user._id
-
-    let emptyFields = []
-  
-    if(!title) {
-      emptyFields.push('title')
-    }
-    if(!load) {
-      emptyFields.push('load')
-    }
-    if(!reps) {
-      emptyFields.push('reps')
-    }
-    if(emptyFields.length > 0) {
-      return res.status(400).json({ error: 'Please fill in all the fields', emptyFields })
-    }
-  
-    // add doc to db
-    try {
-      const user_id = req.user._id
-      const workout = await Workout.create({title, load, reps, user_id})
-      res.status(200).json(workout)
-    } catch (error) {
-      res.status(400).json({error: error.message})
-    }
-  }
   
 
 // generate new recipes
@@ -235,8 +196,7 @@ const deleteRecipe = async (req, res) => {
 module.exports = {
   getRecipes,
   getRecipe,
-  createRecipe,
-  createRecipes,
+  addRecipe,
   generateRecipes,
   deleteRecipe
 }

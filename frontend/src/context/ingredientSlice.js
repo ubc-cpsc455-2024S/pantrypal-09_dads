@@ -2,12 +2,12 @@ import { createSlice, createAsyncThunk} from '@reduxjs/toolkit';
 import { API_URL } from '../consts';
 import axios from 'axios';
 
-export const generateIngredients = createAsyncThunk('user/generateIngredients', async (image) => {
+export const generateIngredients = createAsyncThunk('ingredients/generateIngredients', async (image) => {
   const response = await axios.post('http://localhost:3000/ingredients/generate', image)
   return response.data
 })
 
-export const getIngredients = createAsyncThunk('user/getUser', async (user) => {
+export const getIngredients = createAsyncThunk('ingredients/getIngredients', async (user) => {
   const response = await axios.get(API_URL + '/ingredients/',{
     headers: {'Authorization': `Bearer ${user.token}`},
   })
@@ -15,7 +15,7 @@ export const getIngredients = createAsyncThunk('user/getUser', async (user) => {
   return response.data
 })
 
-export const updateIngredients = createAsyncThunk('user/updateIngredients', async (formData) => {
+export const updateIngredients = createAsyncThunk('ingredients/updateIngredients', async (formData) => {
   let data = JSON.stringify({
     "ingredients":formData.ingredients
   });

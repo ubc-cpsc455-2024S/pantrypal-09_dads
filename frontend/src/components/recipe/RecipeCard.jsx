@@ -6,7 +6,7 @@ const RecipeCard = ({recipe}) => {
     return (
         <Card
         direction={{ base: 'column', sm: 'row' }}
-        overflow='hidden'
+        overflow='scroll'
         variant='outline'
         w="300px"
         h="300px"

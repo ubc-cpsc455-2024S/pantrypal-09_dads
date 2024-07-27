@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "test": "jest --runInBand",
-    "start": "node server.js"
+    "start": "node ./bin/www"
   },
   "author": "",
   "license": "ISC",

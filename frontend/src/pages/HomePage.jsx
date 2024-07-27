@@ -3,8 +3,8 @@ import { Box, VStack, Wrap, WrapItem, Heading, HStack, Button, Divider } from "@
 import { useSelector, useDispatch } from "react-redux";
 import { getRecipes, deleteRecipe} from '../context/recipeSlice';
 import { useAuthContext } from '../hooks/useAuthContext';
-import RecipeComponent from '../components/Recipe/RecipeComponent';
-import RecipeGeneration from '../components/Recipe/RecipeGeneration';
+import RecipeComponent from '../components/Recipes/RecipeComponent';
+import RecipeGeneration from '../components/Recipes/RecipeGeneration';
 
 const Home = () => {
   const recipes = useSelector((state) => state.recipe.recipes);

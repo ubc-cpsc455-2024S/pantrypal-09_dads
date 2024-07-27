@@ -23,12 +23,7 @@ const RecipeComponent = ({recipe}) => {
             <ModalContent minW={'50%'}>
                 <VStack w='100%' marginBottom={'2em'} marginTop={'2em'}>
                     <Header
-                        title={recipe.name}
-                        image={recipe.image}
-                        time={recipe.time}
-                        calories={recipe.nutrition.calories}
-                        likes={30}
-                        servings = {recipe.serves}
+                        recipe={recipe}
                     />
                     <Ingredients
                         usedIngredients={recipe.ingredients}

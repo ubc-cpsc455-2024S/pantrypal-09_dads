@@ -26,7 +26,7 @@ const RecipeCard = ({recipe}) => {
                                 <Tag  size={'md'} key={'md'} borderRadius='full' variant='outline' color={"black"}>{Math.round(recipe.nutrition.calories) + " Cals"}</Tag>
                                 </WrapItem>
                                 <WrapItem>
-                                <Tag  size={'md'} key={'md'} borderRadius='full' variant='outline' color={"black"}>{Math.round(recipe.time) + " Mins"}</Tag>
+                                <Tag  size={'md'} key={'md'} borderRadius='full' variant='outline' color={"black"}>{Math.round(recipe.serves) + " Servings"}</Tag>
                                 </WrapItem>
                                 <WrapItem>
                                 {recipe.vegetarian ? <Tag  size={'md'} key={'md'} borderRadius='full' variant='solid' color={"black"} bg="green.200">Vegetarian</Tag> : <Tag  size={'md'} key={'md'} borderRadius='full' variant='solid' color={"black"} bg="yellow.300">Non-Vegetarian</Tag>}

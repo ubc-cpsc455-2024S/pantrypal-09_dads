@@ -14,7 +14,7 @@ import {
   SimpleGrid,
   Image 
 } from '@chakra-ui/react'
-import Hero from "./Home/Hero"
+import Hero from "../components/Hero"
 
 const Signup = () => {
   const [email, setEmail] = useState('')

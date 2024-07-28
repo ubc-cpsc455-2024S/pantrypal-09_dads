@@ -30,13 +30,15 @@ const Signup = () => {
   }
 
   return (
-    <Grid templateColumns='repeat(2, 1fr)' gap={6}>
+    <Grid display={{ base: "block", md: "grid" }} templateColumns='repeat(2, 1fr)' gap={6}>
+      
       <GridItem colSpan={1}>
-      <Flex direction="column">
-        {/* Hero */}
-        <Hero />
-      </Flex>
+        <Flex direction="column">
+          {/* Hero */}
+          <Hero />
+        </Flex>
       </GridItem>
+
       <GridItem colSpan={1}>
         <Flex direction="column">
           {/* Signup */}
@@ -92,6 +94,7 @@ const Signup = () => {
           </Box>
         </Flex>
       </GridItem>
+      
     </Grid>
   )
 }

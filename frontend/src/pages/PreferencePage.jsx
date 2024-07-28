@@ -20,8 +20,8 @@ const PreferencePage = () => {
     }
   
   return (
-    <Box display={"flex"} flexDirection={"column"} mx={"8%"} alignItems="flex-start">
-        <VStack alignItems="flex-start">
+    <Box display={"flex"} flexDirection={"column"} mx={'8%'} alignItems="flex-start">
+        <VStack alignItems="flex-start" maxW={'80%'} mx='auto'>
             <Heading
                as="h1"
                fontSize="2rem"
@@ -43,7 +43,7 @@ const PreferencePage = () => {
                 <Text margin="2rem">
                     Here are your current preferences: <br/><b>{preference}</b>
                 </Text>
-                <Textarea type='preferences' id="preferences" value={preferences} minW={'500px'} onChange={(e) => setPreferences(e.target.value)} />
+                <Textarea type='preferences' id="preferences" value={preferences} minW={{base: '80%', md:'500px'}} onChange={(e) => setPreferences(e.target.value)} />
                 <Button mt={5} type="submit">Set Preferences</Button>
             </form>
         </VStack>

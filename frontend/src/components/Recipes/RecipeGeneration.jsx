@@ -55,7 +55,7 @@ const RecipeGeneration = ({dispatch}) => {
         </Button>
         <Modal isOpen={isOpen} onClose={onClose} >
             <ModalOverlay />
-            <ModalContent minW={'70%'}>
+            <ModalContent minW={{ base: '60%', md: '500px' }} maxW={{ base: '80%', md: '700px' }}>
                 <ModalBody>
                 {/* Generate recipe prompt*/}
                 <Box display={"flex"} flexDirection={"column"} m={"8%"} alignItems="flex-start">
@@ -78,7 +78,7 @@ const RecipeGeneration = ({dispatch}) => {
                             {"If you have any specific requests for what recipes to generate,  include them here!"}
                         </Heading>
                         <form onSubmit={handleSubmit}>
-                            <Textarea type='preferences' id="preferences" value={generator} minW={'500px'} onChange={(e) => setGenerator(e.target.value)} />
+                            <Textarea type='preferences' id="preferences" value={generator} minW={{ base: 'none', md: '500px' }} onChange={(e) => setGenerator(e.target.value)} />
                             <HStack alignItems={'flex-center'}mt={5} >
                                 <Button mr={5} type="submit" disabled={loading}>Generate</Button>
                                 <Select placeholder='Select LLM'>

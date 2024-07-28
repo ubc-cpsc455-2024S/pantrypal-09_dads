@@ -30,13 +30,15 @@ const Login = () => {
 
 
   return (
-    <Grid templateColumns='repeat(2, 1fr)' gap={6}>
+    <Grid display={{ base: "block", md: "grid" }} templateColumns='repeat(2, 1fr)' gap={6}>
+
       <GridItem colSpan={1}>
-      <Flex direction="column">
-        {/* Hero */}
-        <Hero />
-      </Flex>
+        <Flex direction="column">
+          {/* Hero */}
+          <Hero />
+        </Flex>
       </GridItem>
+
       <GridItem colSpan={1}>
         {/* Login */}
         <Box flex="1" display="flex" alignItems="center" justifyContent="center" my={5}>
@@ -83,6 +85,7 @@ const Login = () => {
           </SimpleGrid>
         </Box>
       </GridItem>
+
     </Grid>
 
   )

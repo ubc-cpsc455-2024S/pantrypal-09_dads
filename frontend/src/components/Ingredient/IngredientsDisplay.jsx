@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import {
   VStack, 
-  HStack, 
   Button, 
   Box, 
   useDisclosure,
@@ -15,23 +14,17 @@ import {
   FormLabel,
   Input,
   Select,
-  SimpleGrid,
   Divider,
   Table,
   Thead,
   Tbody,
-  Tfoot,
   Tr,
   Th,
-  Td,
-  TableCaption,
   TableContainer,
   useToast
 } from "@chakra-ui/react";
-import IngredientCard from "./ingredientCard.jsx";
 import IngredientRow from './ingredientRow.jsx';
 import { updateIngredients } from '../../context/ingredientSlice.js';
-import { v4 as uuidv4 } from 'uuid';
 
 const IngredientsDisplay = ({ingredients, dispatch, user}) => {
   const [newIngredient, setNewIngredient] = useState({
@@ -127,7 +120,7 @@ const IngredientsDisplay = ({ingredients, dispatch, user}) => {
     <Box display={"flex"} flexDirection={"column"} mx={"8%"}>
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
-        <ModalContent>
+        <ModalContent maxW={{base:'80%', md:'500px'}}>
           <ModalHeader alignSelf={'center'}>{isEditMode ? 'Edit Ingredient' : 'Add Ingredient'}</ModalHeader>
           <ModalCloseButton />
           <ModalBody>

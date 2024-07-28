@@ -4,7 +4,7 @@ const NotFoundPage = () => {
 
   return (
     <Box display={"flex"} flexDirection={"column"} mx={"8%"}>
-        <VStack alignItems="flex-start">
+        <VStack alignItems="flex-start" mx={'auto'}>
             <Heading
                as="h1"
                fontSize="2rem"

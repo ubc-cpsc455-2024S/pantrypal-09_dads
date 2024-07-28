@@ -1,10 +1,5 @@
 import {
-  VStack, 
   Heading, 
-  HStack, 
-  Button, 
-  Divider, 
-  Link, 
   Box,
 } from "@chakra-ui/react";
 import { useSelector,useDispatch } from "react-redux";

@@ -48,5 +48,3 @@ module.exports = {
     getIngredients,
     updateIngredients
   }
-
-

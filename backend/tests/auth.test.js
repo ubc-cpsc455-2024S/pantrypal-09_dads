@@ -1,9 +1,11 @@
 const request = require('supertest');
 const app = require('../server');
-const { connectToDb, closeDb, getDb } = require('../database');
+const { connectToDb, closeDb, getDb } = require('../utils/database');
 
 beforeAll(async () => {
     await connectToDb();
+    const db = getDb();
+    await db.collection('users').deleteMany({ email: 'testuser@example.com' });
 });
 
 afterAll(async () => {
@@ -12,80 +14,77 @@ afterAll(async () => {
 
 afterEach(async () => {
     const db = getDb();
-    await db.collection('users').deleteMany({ username: 'testuser' });
+    await db.collection('users').deleteMany({ email: 'testuser@example.com' });
 });
 
 describe('Auth Routes', () => {
     test('should sign up a new user', async () => {
         const response = await request(app)
-            .post('/auth/signup')
+            .post('/api/auth/signup')
             .send({
-                username: 'testuser',
                 email: 'testuser@example.com',
-                passwordHash: 'hashedpassword'
+                password: 'password'
             });
-        expect(response.status).toBe(201);
-        expect(response.text).toBe('User created successfully');
+        expect(response.status).toBe(200);
+        expect(response.body).toHaveProperty('email', 'testuser@example.com');
+        expect(response.body).toHaveProperty('token');
     });
 
     test('should not sign up an existing user', async () => {
         await request(app)
-            .post('/auth/signup')
+            .post('/api/auth/signup')
             .send({
-                username: 'testuser',
                 email: 'testuser@example.com',
-                passwordHash: 'hashedpassword'
+                password: 'password'
             });
 
         const response = await request(app)
-            .post('/auth/signup')
+            .post('/api/auth/signup')
             .send({
-                username: 'testuser',
                 email: 'testuser@example.com',
-                passwordHash: 'hashedpassword'
+                password: 'password'
             });
-        expect(response.status).toBe(409);
-        expect(response.text).toBe('Username already exists');
+        expect(response.status).toBe(500);
+        expect(response.body).toHaveProperty('error');
     });
 
     test('should not sign up a user with missing fields', async () => {
         const response = await request(app)
-            .post('/auth/signup')
+            .post('/api/auth/signup')
             .send({
-                username: 'testuser',
-                email: 'testuser@example.com',
+                email: 'testuser@example.com'
             });
-        expect(response.status).toBe(400);
-        expect(response.text).toBe('Missing required fields');
+        expect(response.status).toBe(500);
+        expect(response.body).toHaveProperty('error');
     });
 
     test('should login valid existing user', async () => {
         await request(app)
-            .post('/auth/signup')
+            .post('/api/auth/signup')
             .send({
-                username: 'testuser',
                 email: 'testuser@example.com',
-                passwordHash: 'hashedpassword'
+                password: 'password'
             });
 
         const response = await request(app)
-            .post('/auth/login')
+            .post('/api/auth/login')
             .send({
-                username: 'testuser',
-                passwordHash: 'hashedpassword'
+                email: 'testuser@example.com',
+                password: 'password'
             });
         expect(response.status).toBe(200);
-        expect(response.body.message).toBe('Login successful');
+        expect(response.body).toHaveProperty('email', 'testuser@example.com');
+        expect(response.body).toHaveProperty('token');
     });
 
     test('should not login invalid user', async () => {
         const response = await request(app)
-            .post('/auth/login')
+            .post('/api/auth/login')
             .send({
-                username: 'testuser',
-                passwordHash: 'wrongpassword'
+                email: 'testuser@example.com',
+                password: 'wrongpassword'
             });
-        expect(response.status).toBe(404);
-        expect(response.text).toBe('User not found or incorrect password');
+        expect(response.status).toBe(500);
+        expect(response.body).toHaveProperty('error');
     });
 });

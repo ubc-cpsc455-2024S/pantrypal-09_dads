@@ -1,10 +1,6 @@
 require('dotenv').config()
-const OpenAI = require('openai');
 const User = require('../models/userModel')
 const mongoose = require('mongoose')
-
-//OpenAI connection
-const openai = new OpenAI({apiKey: process.env.OPEN_AI_API_KEY});
 
 const getIngredients = async (req, res) => {
 	const user_uuid = req.user._id

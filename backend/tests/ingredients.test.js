@@ -1,6 +1,6 @@
 const request = require('supertest');
 const app = require('../server');
-const { connectToDb, closeDb, getDb } = require('../database');
+const { connectToDb, closeDb, getDb } = require('../utils/database');
 
 beforeAll(async () => {
     await connectToDb();
@@ -10,63 +10,99 @@ afterAll(async () => {
     await closeDb();
 });
 
-afterEach(async () => {
+let token;
+
+beforeEach(async () => {
     const db = getDb();
-    await db.collection('users').deleteMany({ username: 'testuser' });
+    await db.collection('users').deleteMany({ email: 'testuser@example.com' });
+
+    // Create a test user and get a token
+    await request(app)
+        .post('/api/auth/signup')
+        .send({
+            email: 'testuser@example.com',
+            password: 'password'
+        });
+
+    const response = await request(app)
+        .post('/api/auth/login')
+        .send({
+            email: 'testuser@example.com',
+            password: 'password'
+        });
+
+    token = response.body.token;
 });
 
 describe('Ingredients Routes', () => {
     test('should add ingredients to a user', async () => {
-        await request(app)
-            .post('/auth/signup')
-            .send({
-                username: 'testuser',
-                email: 'testuser@example.com',
-                passwordHash: 'hashedpassword'
-            });
+        const ingredients = [
+            { name: 'tomato', quantity: 2, unit: 'pcs', notes: '' },
+            { name: 'cheese', quantity: 1, unit: 'block', notes: '' }
+        ];
 
         const response = await request(app)
-            .post('/ingredients/update')
+            .post('/api/ingredients/update')
+            .set('Authorization', `Bearer ${token}`)
             .send({
-                username: 'testuser',
-                ingredients: { 'tomato': 2, 'cheese': 1 }
+                ingredients
             });
-        expect(JSON.parse(response.text)).toEqual({ ingredients: { 'tomato': 2, 'cheese': 1 } });
+
+        expect(response.status).toBe(200);
+        expect(response.body.ingredients).toEqual(
+            expect.arrayContaining([
+                expect.objectContaining({ name: 'tomato', quantity: 2, unit: 'pcs', notes: '' }),
+                expect.objectContaining({ name: 'cheese', quantity: 1, unit: 'block', notes: '' })
+            ])
+        );
     });
 
     test('should fetch ingredients for a user', async () => {
-        await request(app)
-            .post('/auth/signup')
-            .send({
-                username: 'testuser',
-                email: 'testuser@example.com',
-                passwordHash: 'hashedpassword'
-            });
+        const ingredients = [
+            { name: 'cheese', quantity: 1, unit: 'block', notes: '' },
+            { name: 'tomato', quantity: 2, unit: 'pcs', notes: '' }
+        ];
 
         await request(app)
-            .post('/ingredients/update')
-            .send({
-                username: 'testuser',
-                ingredients: { 'cheese': 1, 'tomato': 2 }
-            });
+            .post('/api/ingredients/update')
+            .set('Authorization', `Bearer ${token}`)
+            .send({ ingredients });
 
         const response = await request(app)
-            .get('/ingredients')
-            .query({ username: 'testuser' });
-        expect(response.body).toEqual({ 'cheese': 1, 'tomato': 2 });
+            .get('/api/ingredients')
+            .set('Authorization', `Bearer ${token}`);
+
+        expect(response.status).toBe(200);
+        expect(response.body.ingredients).toEqual(
+            expect.arrayContaining([
+                expect.objectContaining({ name: 'cheese', quantity: 1, unit: 'block', notes: '' }),
+                expect.objectContaining({ name: 'tomato', quantity: 2, unit: 'pcs', notes: '' })
+            ])
+        );
     });
 
     test('should not fetch ingredients for a non-existent user', async () => {
         const response = await request(app)
-            .get('/ingredients')
-            .query({ username: 'nonexistentuser' });
-        expect(response.text).toBe('No ingredients found for this user');
+            .get('/api/ingredients')
+            .set('Authorization', `Bearer invalid_token`);
+        expect(response.status).toBe(401); // Unauthorized due to invalid token
     });
 
-    test('should not fetch ingredients without username', async () => {
+    test('should not fetch ingredients without being authenticated', async () => {
         const response = await request(app)
-            .get('/ingredients');
-        expect(response.status).toBe(400);
-        expect(response.text).toBe('username is required');
+            .get('/api/ingredients');
+        expect(response.status).toBe(401); // Unauthorized
+    });
+
+    test('should not add ingredients without being authenticated', async () => {
+        const ingredients = [
+            { name: 'tomato', quantity: 2, unit: 'pcs', notes: '' },
+            { name: 'cheese', quantity: 1, unit: 'block', notes: '' }
+        ];
+
+        const response = await request(app)
+            .post('/api/ingredients/update')
+            .send({ ingredients });
+        expect(response.status).toBe(401); // Unauthorized
     });
 });

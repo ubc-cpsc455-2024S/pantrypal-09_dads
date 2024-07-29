@@ -4,8 +4,8 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "test": "jest --runInBand",
-    "start": "node server.js"
+    "test": "NODE_ENV=test jest --runInBand",
+    "start": "NODE_ENV=prod node server.js"
   },
   "author": "",
   "license": "ISC",

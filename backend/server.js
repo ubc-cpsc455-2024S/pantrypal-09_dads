@@ -2,8 +2,8 @@
 // ============================================================================
 const express = require('express');
 const cors = require('cors');
-const mongoose = require("mongoose");
 const bodyParser = require('body-parser');
+const { connectToDb } = require('./utils/database');
 require('dotenv').config()
 
 //const ingredientsRouter = require('./routes/ingredients');
@@ -38,18 +38,18 @@ app.use('/api/ingredients', ingredientsRouter);
 app.use('/api/recipes', recipesRouter);
 app.use('/api/preferences', preferencesRouter);
 
-// Database Connection
+// Database Connection and Server Start
 // ============================================================================
-mongoose.connect(process.env.MONGO_URI)
-  .then(() => {
-    // listen for requests
-    app.listen(process.env.PORT, () => {
-      console.log('Connected to Database! Listening on Port: ', process.env.PORT)
-    })
-})
-.catch((error) => {
-console.log(error)
-})
+const startServer = () => {
+  if (process.env.NODE_ENV !== 'test') {
+    connectToDb().then(() => {
+      app.listen(process.env.PORT, () => {
+        console.log('Listening on Port: ', process.env.PORT)
+      });
+    });
+  }
+};
 
+startServer();
 
 module.exports = app;

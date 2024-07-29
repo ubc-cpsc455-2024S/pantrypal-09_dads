@@ -27,6 +27,9 @@ jobs:
       run: |
         echo "MONGO_URI=${{ secrets.MONGO_URI }}" >> .env
         echo "OPEN_AI_API_KEY=${{ secrets.OPEN_AI_API_KEY }}" >> .env
+        echo "JWT_SECRET=${{ secrets.JWT_SECRET }}" >> .env
+        echo "CORS_ORIGIN=${{ secrets.CORS_ORIGIN }}" >> .env
+        echo "PORT=${{ secrets.PORT }}" >> .env
       working-directory: ./backend
 
     - name: Run Tests

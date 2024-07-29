@@ -1,5 +1,4 @@
 require('dotenv').config()
-const OpenAI = require('openai');
 const User = require('../models/userModel')
 const mongoose = require('mongoose')
 

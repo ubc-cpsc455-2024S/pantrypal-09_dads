@@ -59,7 +59,7 @@ export const addRecipe = createAsyncThunk('recipes/add', async (formData) => {
 })
 
 export const getRecipe = createAsyncThunk('recipes/getRecipe', async (formData) => {
-  const response = await axios.get(API_URL + '/recipes/66a502484536ae6406bf2915',{
+  const response = await axios.get(API_URL + '/recipes/' + formData.id,{
     headers: {'Authorization': `Bearer ${formData.user.token}`},
   })
   console.log(response)

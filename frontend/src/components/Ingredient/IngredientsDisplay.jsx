@@ -21,10 +21,18 @@ import {
   Tr,
   Th,
   TableContainer,
-  useToast
+  useToast,
+  HStack,
+  Wrap,
+  WrapItem,
+  NumberInputStepper,
+  NumberIncrementStepper,
+  NumberDecrementStepper,
 } from "@chakra-ui/react";
 import IngredientRow from './ingredientRow.jsx';
 import { updateIngredients } from '../../context/ingredientSlice.js';
+import UploadIngredientsComponent from './UploadIngredientsComponent.jsx';
+import IngredientCard from './ingredientCard.jsx';
 
 const IngredientsDisplay = ({ingredients, dispatch, user}) => {
   const [newIngredient, setNewIngredient] = useState({
@@ -93,6 +101,10 @@ const IngredientsDisplay = ({ingredients, dispatch, user}) => {
   const handleNewIngredientUnit = (event) => {
     setNewIngredient({ ...newIngredient, unit: event.target.value });
   };
+
+  const handleNewIngredientNotes = (event) => {
+    setNewIngredient({ ...newIngredient, notes: event.target.value });
+  };
   // =======================================================================================
 
   //Handling for deleting singular ingredients
@@ -114,43 +126,50 @@ const IngredientsDisplay = ({ingredients, dispatch, user}) => {
   const clearIngredients = () => {
     const newIngredients = [];
     dispatch(updateIngredients({user:user, ingredients:newIngredients}));
+    toast({
+      title: 'Cleared All Ingredients',
+      status: 'warning',
+      duration: 1500,
+      isClosable: true,
+    })
   };
 
   return (
-    <Box display={"flex"} flexDirection={"column"} mx={"8%"}>
+    <Box display={"flex"} flexDirection={"column"}>
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent maxW={{base:'80%', md:'500px'}}>
           <ModalHeader alignSelf={'center'}>{isEditMode ? 'Edit Ingredient' : 'Add Ingredient'}</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
-            <FormLabel>Name</FormLabel>
-            <Input 
-              value={newIngredient.name}
-              onChange={handleNewIngredientName} 
-              placeholder='Ingredient name' 
-            />
-
-            <FormLabel>Quantity</FormLabel>
-            <Input 
-              type="number"
-              value={newIngredient.quantity}
-              onChange={handleNewIngredientQuantity}
-              placeholder='0' 
-            />
-
-            <FormLabel>Unit</FormLabel>
-            <Select value={newIngredient.unit} onChange={handleNewIngredientUnit} placeholder='Select unit'>
-              <option value="grams">Grams</option>
-              <option value="cups">Cups</option>
-              <option value="ml">Milliliters (ml)</option>
-              <option value="liters">Liters</option>
-              <option value="tablespoons">Tablespoons</option>
-              <option value="teaspoons">Teaspoons</option>
-              <option value="ounces">Ounces</option>
-              <option value="pounds">Pounds</option>
-              <option value="kilograms">Kilograms</option>
-            </Select>
+              <FormLabel>Name</FormLabel>
+              <Input 
+                value={newIngredient.name}
+                onChange={handleNewIngredientName} 
+                placeholder='Ingredient name'
+                marginBottom={'1em'}
+              />
+              <FormLabel>Quantity</FormLabel>
+              <Input 
+                type="number"
+                value={newIngredient.quantity}
+                onChange={handleNewIngredientQuantity}
+                marginBottom={'1em'}
+              />
+              <FormLabel>Unit</FormLabel>
+              <Input 
+                value={newIngredient.unit}
+                onChange={handleNewIngredientUnit}
+                placeholder='Select unit'          
+                marginBottom={'1em'}  
+              />
+              <FormLabel>Notes</FormLabel>
+              <Input 
+                value={newIngredient.notes}
+                onChange={handleNewIngredientNotes} 
+                placeholder='Ingredient Notes' 
+                marginBottom={'1em'}
+              />
           </ModalBody>
 
           <ModalFooter alignSelf={'center'}>
@@ -164,52 +183,30 @@ const IngredientsDisplay = ({ingredients, dispatch, user}) => {
         </ModalContent>
       </Modal>
 
-      <VStack>
-        {/* <SimpleGrid spacing={4} templateColumns='repeat(4, minmax(200px, 1fr))'>
-          {ingredients && ingredients.length !== 0 ? (
-            ingredients.map((ingredient) => (
-              <HStack key={ingredient._id}>
-                <IngredientCard
-                  key={ingredient._id}
-                  ingredient={ingredient}
-                  id={ingredient._id}
-                  onDelete={deleteIngredient}
-                  onEdit={() => openEditModal(ingredient)}
-                />
-              </HStack>
-            ))
-          ) : null}
-        </SimpleGrid> */}
-        <TableContainer>
-          <Table size='lg' variant='simple'>
-            <Thead>
-              <Tr>
-                <Th>Name</Th>
-                <Th>Quantity</Th>
-                <Th>Unit</Th>
-                <Th>Notes</Th>
-              </Tr>
-            </Thead>
-            <Tbody>
-              {ingredients && ingredients.length !== 0 ? (
-                  ingredients.map((ingredient) => (
-                    <IngredientRow
+      <VStack w="100%">
+        <Wrap spacing='15px' justify='center'>
+            {ingredients && ingredients.length !== 0 ? (
+                ingredients.map((ingredient) => (
+                  <WrapItem key={ingredient._id}>
+                    <IngredientCard
                       key={ingredient._id}
                       ingredient={ingredient}
                       id={ingredient._id}
                       onDelete={deleteIngredient}
                       onEdit={() => openEditModal(ingredient)}
                     />
-                  ))
-                ) : null}
-            </Tbody>
-          </Table>
-        </TableContainer>
+                  </WrapItem>            
+                ))
+              ) : null}
+        </Wrap>
         <Divider />
-        <Button onClick={openAddModal}>
-          Add Ingredient
-        </Button>
-        <Button onClick={ () => dispatch(clearIngredients())}>
+        <HStack>
+          <Button onClick={openAddModal}>
+            Add Ingredient
+          </Button>
+          <UploadIngredientsComponent dispatch={dispatch} />
+        </HStack>
+        <Button marginTop={'1em'} onClick={ () => dispatch(clearIngredients())}>
           Clear All Ingredients
         </Button>
       </VStack>

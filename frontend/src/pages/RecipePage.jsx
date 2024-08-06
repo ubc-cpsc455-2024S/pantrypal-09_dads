@@ -15,7 +15,7 @@ const RecipePage = () => {
     const recipe = useSelector((state) => state.recipe.singleRecipe);
     const {user} = useAuthContext();
     const dispatch = useDispatch()
-    
+
     useEffect(() => {
         dispatch(getRecipe({id:id,user:user}))
     }, [dispatch, user]);

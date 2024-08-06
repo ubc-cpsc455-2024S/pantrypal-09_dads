@@ -79,7 +79,7 @@ const generateRecipes = async (req, res) => {
 		var ingredientString = "Ingredients: "
 
 		userIngredients.map((ingredient) => {
-			ingredientString += ingredient.quantity + " " + ingredient.unit + " of " + ingredient.name + " (Notes: " + ingredient.notes + "), "
+			ingredientString += ingredient.quantity + " " + ingredient.unit==""? ingredient.name + "'s" :  ingredient.unit + " of " + ingredient.name + " (Notes: " + ingredient.notes + "), "
 		});
 
 		// Should have GPT4o call to generate recipe from user ingredients

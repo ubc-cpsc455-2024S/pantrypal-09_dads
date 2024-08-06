@@ -3,8 +3,10 @@ const {
 getRecipes,
 getRecipe,
 addRecipe,
+saveRecipe,
 generateRecipes,
-deleteRecipe
+deleteRecipe,
+checkSavedStatus
 } = require('../controllers/recipeController')
 
 const requireAuth = require('../middleware/requireAuth')
@@ -24,7 +26,10 @@ router.get('/:id', getRecipe)
 router.post('/add', addRecipe)
 
 // POST a like for a recipe 
-router.post('/add/:id', addRecipe)
+router.post('/save', saveRecipe)
+
+// POST a check for status
+router.post('/checkSaved', checkSavedStatus)
 
 // POST generate new recipes
 router.post('/generate', generateRecipes)

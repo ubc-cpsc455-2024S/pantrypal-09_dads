@@ -25,6 +25,7 @@ const SuggestedRecipeComponent = ({recipe, index, onChoose, onDelete}) => {
                 <VStack w='100%' marginBottom={'2em'} marginTop={'2em'}>
                     <Header
                         recipe={recipe}
+                        suggestion={true}
                     />
                     <Ingredients
                         usedIngredients={recipe.ingredients}

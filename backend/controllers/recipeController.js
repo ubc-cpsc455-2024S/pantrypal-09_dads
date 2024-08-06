@@ -56,6 +56,63 @@ const addRecipe = async (req, res) => {
 	}
 }
 
+// save recipe
+const saveRecipe = async (req, res) => {
+	const {recipe_id} = req.body
+	const user_uuid = req.user._id
+
+	if (!mongoose.Types.ObjectId.isValid(user_uuid)) {
+		return res.status(404).json({error: 'No such user'})
+	}
+
+	try {
+		
+		const recipe = await Recipe.findOne({_id: recipe_id})
+
+		if (recipe.saved.indexOf(user_uuid.toString()) > -1) { 
+			return res.status(404).json({error: 'Recipe already Saved'})
+		}
+
+		const newSaved = [...recipe.saved]
+		newSaved.push(user_uuid.toString())
+		const recipe_new = await Recipe.findOneAndUpdate({_id: recipe_id},{saved:newSaved})
+
+		if (!recipe_new) {
+			return res.status(400).json({error: 'No such recipe'})
+		}
+
+		const recipes = await Recipe.find({saved: user_uuid}).sort({createdAt: -1})
+		res.status(200).json(recipes)
+	} catch (error) {
+		console.log(error)
+		res.status(400).json({error: error.message})
+	}
+}
+
+// save recipe
+const checkSavedStatus = async (req, res) => {
+	const {recipe_id} = req.body
+	const user_uuid = req.user._id
+
+	if (!mongoose.Types.ObjectId.isValid(user_uuid)) {
+		return res.status(404).json({error: 'No such user'})
+	}
+
+	try {
+		
+		const recipe = await Recipe.findOne({_id: recipe_id})
+
+		if (recipe.saved.indexOf(user_uuid.toString()) > -1) { 
+			return res.status(200).json({saved: true})
+		}
+
+		res.status(200).json({saved: false})
+	} catch (error) {
+		res.status(400).json({error: error.message})
+	}
+}
+
+
   
 
 // generate new recipes
@@ -198,10 +255,8 @@ const deleteRecipe = async (req, res) => {
 	}
 	newSaved.splice(index, 1)
 
-	const recipe2 = await Recipe.findOneAndUpdate({_id: id},{saved:newSaved})
-
-	if (!recipe2) {
-		console.log("here")
+	const recipe_new = await Recipe.findOneAndUpdate({_id: id},{saved:newSaved})
+	if (!recipe_new) {
 		return res.status(400).json({error: 'No such recipe'})
 	}
 
@@ -216,5 +271,7 @@ module.exports = {
   getRecipe,
   addRecipe,
   generateRecipes,
-  deleteRecipe
+  deleteRecipe,
+  saveRecipe,
+  checkSavedStatus
 }

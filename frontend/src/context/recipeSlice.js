@@ -58,11 +58,50 @@ export const addRecipe = createAsyncThunk('recipes/add', async (formData) => {
   return response.data
 })
 
+export const saveRecipe = createAsyncThunk('recipes/save', async (formData) => {
+  let data = JSON.stringify({
+    "recipe_id":formData.recipe_id
+  });
+  
+  let config = {
+    method: 'post',
+    maxBodyLength: Infinity,
+    url: `${API_URL}/recipes/save`,
+    headers: { 
+      'Content-Type': 'application/json', 
+      'Authorization': `Bearer ${formData.user.token}`
+    },
+    data : data
+  };
+
+  const response = await axios.request(config)
+  return response.data
+})
+
+export const checkSaveStatus = createAsyncThunk('recipes/checkSaved', async (formData) => {
+  let data = JSON.stringify({
+    "recipe_id":formData.recipe_id
+  });
+  
+  let config = {
+    method: 'post',
+    maxBodyLength: Infinity,
+    url: `${API_URL}/recipes/checkSaved`,
+    headers: { 
+      'Content-Type': 'application/json', 
+      'Authorization': `Bearer ${formData.user.token}`
+    },
+    data : data
+  };
+
+  const response = await axios.request(config)
+  return response.data
+})
+
 export const getRecipe = createAsyncThunk('recipes/getRecipe', async (formData) => {
   const response = await axios.get(API_URL + '/recipes/' + formData.id,{
     headers: {'Authorization': `Bearer ${formData.user.token}`},
   })
-  console.log(response)
   return response.data
 })
 
@@ -72,6 +111,7 @@ const recipeSlice = createSlice({
       recipes: [],
       suggestedRecipes:[],
       singleRecipe: null,
+      savedStatus: false,
       loading: false
     },
     reducers: {
@@ -98,6 +138,13 @@ const recipeSlice = createSlice({
         .addCase(addRecipe.fulfilled, (state, action) => {
           state.suggestedRecipes = state.suggestedRecipes.filter(recipe => recipe.name !== action.name)
           state.recipes = action.payload;
+        })
+        .addCase(saveRecipe.fulfilled, (state, action) => {
+          state.recipes = action.payload;
+          state.savedStatus = true;
+        })
+        .addCase(checkSaveStatus.fulfilled, (state, action) => {
+          state.savedStatus = action.payload.saved;
         })
         .addCase(deleteRecipe.fulfilled, (state, action) => {
           state.recipes = action.payload;

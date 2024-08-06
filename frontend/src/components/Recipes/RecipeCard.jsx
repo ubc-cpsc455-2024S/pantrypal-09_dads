@@ -17,7 +17,7 @@ const RecipeCard = ({recipe}) => {
                         <Heading as='h1' size='lg' mb="15px">{recipe.name}</Heading>
                         <StackDivider />
                         <Text fontSize='lg' marginBottom={'2em'}>{recipe.description}</Text>
-                        <Center height='10px'>
+                        <Center height='10px' marginBottom={'2em'}>
                             <Wrap>
                                 <WrapItem>
                                 <Tag  size={'md'} key={'md'} borderRadius='full' variant='outline' color={"black"}>{recipe.time + " mins"}</Tag>

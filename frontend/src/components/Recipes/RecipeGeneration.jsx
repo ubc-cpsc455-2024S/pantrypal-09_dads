@@ -55,7 +55,7 @@ const RecipeGeneration = ({dispatch}) => {
         </Button>
         <Modal isOpen={isOpen} onClose={onClose} >
             <ModalOverlay />
-            <ModalContent minW={{ base: '60%', md: '500px' }} maxW={{ base: '80%', md: '700px' }}>
+            <ModalContent minW={{ base: '60%', md: '500px' }} maxW={{ base: '80%'}}>
                 <ModalBody>
                 {/* Generate recipe prompt*/}
                 <Box display={"flex"} flexDirection={"column"} m={"8%"} alignItems="flex-start">

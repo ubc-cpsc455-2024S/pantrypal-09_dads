@@ -30,7 +30,7 @@ export const getRecipes = createAsyncThunk('recipes/getRecipes', async (user) =>
 })
 
 export const deleteRecipe = createAsyncThunk('recipes/delete', async (formData) => {
-  const response = await axios.delete(API_URL + '/recipes/'+formData.id,{
+  const response = await axios.delete(API_URL + '/recipes/'+ formData.id,{
     headers: {'Authorization': `Bearer ${formData.user.token}`},
   })
   
@@ -58,11 +58,20 @@ export const addRecipe = createAsyncThunk('recipes/add', async (formData) => {
   return response.data
 })
 
+export const getRecipe = createAsyncThunk('recipes/getRecipe', async (formData) => {
+  const response = await axios.get(API_URL + '/recipes/' + formData.id,{
+    headers: {'Authorization': `Bearer ${formData.user.token}`},
+  })
+  console.log(response)
+  return response.data
+})
+
 const recipeSlice = createSlice({
     name: 'recipes',
     initialState: {
       recipes: [],
       suggestedRecipes:[],
+      singleRecipe: null,
       loading: false
     },
     reducers: {
@@ -82,6 +91,9 @@ const recipeSlice = createSlice({
         })
         .addCase(getRecipes.fulfilled, (state, action) => {
           state.recipes = action.payload;
+        })
+        .addCase(getRecipe.fulfilled, (state, action) => {
+          state.singleRecipe = action.payload;
         })
         .addCase(addRecipe.fulfilled, (state, action) => {
           state.suggestedRecipes = state.suggestedRecipes.filter(recipe => recipe.name !== action.name)

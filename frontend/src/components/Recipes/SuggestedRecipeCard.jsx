@@ -9,8 +9,8 @@ const SuggestedRecipeCard = ({recipe, index, onChoose, onDelete, onOpen}) => {
         direction={{ base: 'column', sm: 'row' }}
         overflow='scroll'
         variant='outline'
-        w="300px"
-        h="350px"
+        maxW="300px"
+        h={{ base: '450px', md: '350px' }}
         >                              
             <CardBody h="100%">
                 <Stack spacing='4'>

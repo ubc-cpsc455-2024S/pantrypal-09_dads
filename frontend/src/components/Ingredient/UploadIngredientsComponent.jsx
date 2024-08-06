@@ -3,8 +3,10 @@ import { Button, Stack} from '@chakra-ui/react';
 import { FaCameraRetro, FaWindowClose } from 'react-icons/fa';
 import Webcam from 'react-webcam';
 import { generateIngredients } from '../../context/ingredientSlice';
+import { useAuthContext } from '../../hooks/useAuthContext';
+import { useToast } from '@chakra-ui/react';
 
-const ImageUpload = (props) => {
+const UploadIngredientsComponent = (props) => {
     const [preview, setPreview] = useState(null);
     const [image, setImage] = useState(null);
     const [isFullScreen, setIsFullScreen] = useState(false);
@@ -12,14 +14,15 @@ const ImageUpload = (props) => {
     const [useMode, setUseMode] = useState("None");
     const fileInputRef = useRef(null);
     const webcamRef = useRef(null);
+    const { user } = useAuthContext()
+    const toast = useToast()
 
     const handleFileChange = (event) => {
         const file = event.target.files[0];
 
-        const formData = new FormData(); 
-        formData.append('my-image-file', file, file.name);
-        formData.append('username', 'adi');
-        setImage(formData);
+        const imageData = new FormData(); 
+        imageData.append('image_file', file, file.name);
+        setImage(imageData);
 
         if (file) {
             const reader = new FileReader();
@@ -59,12 +62,22 @@ const ImageUpload = (props) => {
     const handleClose = () => {
         setPreview(null);
         setUseWebcam(false)
+        setImage(null)
         setUseMode("None")
         setIsFullScreen(false)
     };
 
     const handleContinue = async () => {
-        props.dispatch(generateIngredients(image))
+        props.dispatch(generateIngredients({image:image,user:user}))
+        
+        toast({
+            title: 'Ingredient Scan Request Sent Successfully!',
+            status: 'success',
+            duration: 1500,
+            isClosable: true,
+        })
+
+        handleClose()
     };
 
     const capture = useCallback(() => {
@@ -76,9 +89,9 @@ const ImageUpload = (props) => {
 
     return (
         <div>
-            <Stack direction='row' spacing={4}>
+            <Stack direction='row'>
                 <Button variant='solid' onClick={handleUpload}>
-                    Upload Photo 
+                    Scan Ingredients 
                 </Button>
                 <Button variant='solid' onClick={handlePhoto}><FaCameraRetro /></Button>
             </Stack>
@@ -161,4 +174,4 @@ const styles = {
     },
 };
 
-export default ImageUpload;
+export default UploadIngredientsComponent;

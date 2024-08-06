@@ -10,6 +10,7 @@ const userSchema = new Schema({
   email: {type: String, required: true, unique: true},
   password: { type: String, required: true},
   dietary_preferences: {type: String, required: false},
+  name: {type:String, required: false},
   ingredients: { type: [IngredientSchema], required: true },
 })
 
@@ -25,7 +26,7 @@ userSchema.statics.signup = async function(email, password) {
         throw Error('Email not valid')
     }
     
-    //TODO: Re-enable password validation for PROD
+    // Enable password validation for real production scenarios
     // if (!validator.isStrongPassword(password)) {
     //     throw Error('Password not strong enough')
     // }
@@ -39,7 +40,7 @@ userSchema.statics.signup = async function(email, password) {
     const salt = await bcrypt.genSalt(10)
     const hash = await bcrypt.hash(password, salt)
   
-    const user = await this.create({ email, password: hash, dietary_preferences:"", ingredients: []})
+    const user = await this.create({ email, password: hash, dietary_preferences:"", name:"New User", ingredients: []})
   
     return user
 

@@ -13,7 +13,7 @@ const theme = extendTheme({
   fonts: {
     heading: `'Arvo', serif`,
     body: `'Arvo', serif`,
-  },
+  }
 })
 
 

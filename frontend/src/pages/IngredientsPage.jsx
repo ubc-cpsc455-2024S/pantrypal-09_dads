@@ -7,10 +7,13 @@ import { useEffect } from "react";
 import { useAuthContext } from "../hooks/useAuthContext";
 import { getIngredients } from "../context/ingredientSlice";
 import IngredientsDisplay from "../components/Ingredient/IngredientsDisplay";
+import Loading from "../components/Loading";
 
 const IngredientsPage = () => {
   const { user }= useAuthContext()
   const ingredients = useSelector((state) => state.ingredient.ingredients);
+  const loading = useSelector((state) => state.ingredient.loading);
+
   const dispatch = useDispatch()
 
   useEffect(() => {
@@ -19,7 +22,7 @@ const IngredientsPage = () => {
 
 
   return (
-    <Box display={"flex"} flexDirection={"column"} mx={"8%"}>
+    <Box display={"flex"} flexDirection={"column"}>
 
       <Heading
         as="h1"
@@ -39,6 +42,7 @@ const IngredientsPage = () => {
                 >
                 Make any necessary changes before generating recipes.
       </Heading>
+      {loading?<Loading/>:null}
       <IngredientsDisplay ingredients={ingredients} dispatch={dispatch} user={user} />
     </Box>
   );

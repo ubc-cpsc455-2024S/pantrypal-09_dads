@@ -2,8 +2,14 @@ import { createSlice, createAsyncThunk} from '@reduxjs/toolkit';
 import { API_URL } from '../consts';
 import axios from 'axios';
 
-export const generateIngredients = createAsyncThunk('ingredients/generateIngredients', async (image) => {
-  const response = await axios.post('http://localhost:3000/ingredients/generate', image)
+export const generateIngredients = createAsyncThunk('ingredients/generateIngredients', async (user) => {
+  const response = await axios.post(`${API_URL}/ingredients/generate`, user.image, {
+    headers: {
+      'content-type': 'multipart/form-data',
+      'Authorization': `Bearer ${user.user.token}`
+    }
+  })
+
   return response.data
 })
 
@@ -41,7 +47,7 @@ const ingredientSlice = createSlice({
     initialState: {
       preferences: "",
       ingredients: [],
-      status: 'default'
+      loading: false,
     },
     extraReducers(builder) {
       builder
@@ -49,14 +55,15 @@ const ingredientSlice = createSlice({
           state.ingredients = action.payload.ingredients;
         })
         .addCase(generateIngredients.pending, (state, action) => {
-          state.status = 'loading'
+          state.loading = true
         })
         .addCase(generateIngredients.fulfilled, (state, action) => {
+          console.log(action.payload.ingredients)
           state.ingredients = action.payload.ingredients;
-          state.status = 'ingredients'
+          state.loading = false
         })
         .addCase(generateIngredients.rejected, (state, action) => {
-          state.status = 'default'
+          state.loading = false
         })
         .addCase(updateIngredients.fulfilled, (state, action) => {
           state.ingredients = action.payload.ingredients;

@@ -23,7 +23,9 @@ const RecipeSchema = new Schema({
   time: { type: Number, required: false },
   serves: { type: Number, required: false },
   image: { type: String, required: false },
-  user_uuid: { type: String, required: false }
+  user_uuid: { type: String, required: false },
+  created_by_name: { type: String, required: false },
+  saved: { type: [String], required: false },
 });
 
 module.exports = mongoose.model('Recipe', RecipeSchema)

@@ -1,4 +1,4 @@
-import { VStack, Card, Heading, Box, Button, Textarea, Text, Input , Divider, HStack} from "@chakra-ui/react";
+import { VStack, Card, Heading, Box, Button, Textarea, Text, Input , Divider, Flex, HStack} from "@chakra-ui/react";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector} from "react-redux";
 import { useAuthContext } from "../hooks/useAuthContext";
@@ -46,12 +46,12 @@ const PreferencePage = () => {
             </Heading>
             <Card padding={"2em"}> 
                 <form onSubmit={handleSubmitName}>
-                    <Text margin="2rem">
+                    <Text>
                         Current Name: {name}
                     </Text>
-                    <HStack>
+                    <HStack alignContent={'center'}>
                         <Input  type='name' id="name" value={newName} minW={{base: '80%', md:'500px'}} onChange={(e) => setNewName(e.target.value)} />
-                        <Button mt={5} type="submit">Set Name</Button>
+                        <Button type="submit">Set Name</Button>
                     </HStack>
                 </form>
             </Card>
@@ -69,11 +69,12 @@ const PreferencePage = () => {
                 fontSize="1rem"
                 fontWeight="500"
                 color="#333"
+                mb="10px"
                     >
                     Please add any Restrictions that you would like for us to take into account!
                 </Heading>
                 <form onSubmit={handleSubmit}>
-                    <Text margin="2rem">
+                    <Text mb="10px">
                         Here are your current preferences: <br/><b>{preference}</b>
                     </Text>
                     <Textarea type='preferences' id="preferences" value={preferences} minW={{base: '80%', md:'500px'}} onChange={(e) => setPreferences(e.target.value)} />

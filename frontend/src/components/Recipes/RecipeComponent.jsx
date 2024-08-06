@@ -35,10 +35,10 @@ const RecipeComponent = ({recipe, handleDelete}) => {
                         instructions={recipe.steps}
                         key={2}
                     />
-                    <Flex w="100%" ml={"2em"} mt={"1em"}>
-                        <Link  onClick={handleDeleteRecipe}>I'm done making this recipe!</Link>
-                    </Flex>
-                </VStack>     
+                </VStack>
+                <Flex w="100%" ml={"2em"} mt={"1em"} mb={"2em"}>
+                    <Link  onClick={handleDeleteRecipe}>I'm done making this recipe!</Link>
+                </Flex>     
             </ModalContent>
         </Modal>   
     </Box>

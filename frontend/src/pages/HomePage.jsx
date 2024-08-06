@@ -28,7 +28,7 @@ const Home = () => {
             color="#333"
             marginBottom="1rem"
         >
-          Saved Recipes
+          Here are your Saved Recipes
         </Heading>
         <Divider marginBottom={'20px'} />
         <VStack alignItems="flex-start">

@@ -12,6 +12,8 @@ import Footer from './components/Footer'
 import IngredientsPage from './pages/IngredientsPage'
 import PreferencePage from './pages/PreferencePage'
 import AboutPage from './pages/AboutPage'
+import RecipePage from './pages/RecipePage'
+
 
 function App() {
   const { user } = useAuthContext()
@@ -50,6 +52,8 @@ function App() {
               path="*" 
               element={<NotFoundPage/>} 
             />
+            {/* Dynamic Component */}
+            <Route path="recipes/:id" element={<RecipePage />} />
           </Routes>
         </div>
         <Footer/>

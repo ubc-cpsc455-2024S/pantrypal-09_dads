@@ -1,4 +1,4 @@
-import { Stack, Box, Text, Link } from "@chakra-ui/react"
+import { Stack, Box, Text, Link, Avatar } from "@chakra-ui/react"
 import { useLogout } from "../../hooks/useLogout"
 import { useAuthContext } from "../../hooks/useAuthContext"
 import {
@@ -53,7 +53,7 @@ const MenuLinks = ({isOpen}) => {
                             aria-label='Options'
                             variant='outline'
                         >
-                            Settings
+                            Account
                         </MenuButton>
                         <MenuList>
                             <MenuItem>
@@ -66,6 +66,7 @@ const MenuLinks = ({isOpen}) => {
                             </MenuItem>
                         </MenuList>
                     </Menu>
+                    <Avatar name={user.name} src='https://cdn-icons-png.flaticon.com/512/1198/1198284.png' />
                 </> 
                 ): (
                 <>

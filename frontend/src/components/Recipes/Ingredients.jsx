@@ -10,7 +10,7 @@ const Ingredients = ({usedIngredients, equipment}) => {
             </Heading>
             {usedIngredients.map((ingredient, index) => {
                 return (
-                    <Checkbox key={index} color="#0c5446" isChecked={true}>
+                    <Checkbox key={index} color="#0c5446">
                         {ingredient.quantity + " " + ingredient.unit + " of " + ingredient.name}
                     </Checkbox>
                 )

@@ -2,6 +2,8 @@ const express = require('express')
 const {
     getPreferences,
     setPreferences,
+    getName,
+    setName
 } = require('../controllers/preferenceController')
 const requireAuth = require('../middleware/requireAuth')
 
@@ -15,5 +17,12 @@ router.get('/', getPreferences)
 
 // Set User Preferences
 router.post('/set', setPreferences)
+
+// GET user name
+router.get('/name', getName)
+
+// Set User name
+router.post('/name/set', setName)
+
 
 module.exports = router

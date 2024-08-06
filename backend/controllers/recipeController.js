@@ -19,7 +19,8 @@ const getRecipes = async (req, res) => {
 
 // get a single recipe
 const getRecipe = async (req, res) => {
-	const recipe_id = req.user._id
+	const user_id = req.user._id
+	const recipe_id = req.params.id 
 
 	if (!mongoose.Types.ObjectId.isValid(recipe_id)) {
 		return res.status(404).json({error: 'No such recipe'})

@@ -23,6 +23,9 @@ router.get('/:id', getRecipe)
 // POST a new recipe 
 router.post('/add', addRecipe)
 
+// POST a like for a recipe 
+router.post('/add/:id', addRecipe)
+
 // POST generate new recipes
 router.post('/generate', generateRecipes)
 

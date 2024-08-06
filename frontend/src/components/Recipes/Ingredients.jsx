@@ -3,7 +3,7 @@ import { Box, Checkbox, Divider, Heading,HStack } from "@chakra-ui/react";
 const Ingredients = ({usedIngredients, equipment}) => {
 
   return (
-    <HStack paddingTop="20px" paddingBottom="15px" flexDirection={'row'}>
+    <HStack margin={"15px"} flexDirection={'row'}>
         <Box display="flex" flexDirection="column" alignItems={'flex-start'} alignContent={'flex-start'}>
             <Heading size='sm' alignContent={'flex-start'} marginTop={'5px'} marginBottom={'5px'}>
                 Ingredients

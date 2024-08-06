@@ -12,7 +12,7 @@ const openai = new OpenAI({apiKey: process.env.OPEN_AI_API_KEY});
 const getRecipes = async (req, res) => {
 	const user_uuid = req.user._id
 
-	const recipes = await Recipe.find({user_uuid}).sort({createdAt: -1})
+	const recipes = await Recipe.find({saved: user_uuid}).sort({createdAt: -1})
 
 	res.status(200).json(recipes)
 }
@@ -48,7 +48,7 @@ const addRecipe = async (req, res) => {
 	try {
 
 		await Recipe.create(recipe)
-		const recipes = await Recipe.find({user_uuid}).sort({createdAt: -1})
+		const recipes = await Recipe.find({saved: user_uuid}).sort({createdAt: -1})
 
 		res.status(200).json(recipes)
 	} catch (error) {
@@ -162,6 +162,8 @@ const generateRecipes = async (req, res) => {
 			// 	size: "1024x1024",
 			// });
 			curr['user_uuid'] = user_uuid
+			curr['created_by_name'] = user.name
+			curr['saved'] = [user_uuid]
 
 			//WE only suggest recipes, we don't save them. Once user selects a recipe, we add them through the group add POST endpoint
 			//await Recipe.create(curr)
@@ -186,13 +188,24 @@ const deleteRecipe = async (req, res) => {
 		return res.status(404).json({error: 'No such user'})
 	}
 
-	const recipe = await Recipe.findOneAndDelete({_id: id})
+	const recipe = await Recipe.findOne({_id: id})
 
-	if (!recipe) {
+	const newSaved = [...recipe.saved]
+	const index = newSaved.indexOf(user_uuid.toString())
+
+	if (index < 0) { 
+		return res.status(404).json({error: 'No such saved recipe for user'})
+	}
+	newSaved.splice(index, 1)
+
+	const recipe2 = await Recipe.findOneAndUpdate({_id: id},{saved:newSaved})
+
+	if (!recipe2) {
+		console.log("here")
 		return res.status(400).json({error: 'No such recipe'})
 	}
 
-	const recipes = await Recipe.find({user_uuid}).sort({createdAt: -1})
+	const recipes = await Recipe.find({saved: user_uuid}).sort({createdAt: -1})
 
 	res.status(200).json(recipes)
 }

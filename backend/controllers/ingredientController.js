@@ -141,8 +141,6 @@ const generateIngredients = async (req, res) => {
         return res.status(404).json({error: 'User not Found'})
       }
 
-      console.log(ingredients.concat(user.ingredients))
-
       await User.findOneAndUpdate(
           {_id: user_uuid},
           { $set: {ingredients: ingredients.concat(user.ingredients)}}

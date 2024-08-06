@@ -18,9 +18,8 @@ const Header = ({recipe}) => {
   return (
     <>
       <Center>
-            <VStack>
-                
-                <Heading alignContent={'flex-start'} marginTop={'5px'} marginBottom={'5px'} size="xl" fontWeight="400" letterSpacing={'tighter'}>
+            <VStack margin={"5px"} >
+                <Heading alignContent={'flex-start'} margin={"5px"} size="xl" fontWeight="400" letterSpacing={'tighter'} overflow={'none'}>
                     {recipe.name}
                 </Heading>
                 <Wrap align='center'>

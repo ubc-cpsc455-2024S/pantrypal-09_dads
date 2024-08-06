@@ -27,8 +27,8 @@ Transform your cooking experience with PantryPal, the ultimate app for home cook
   - [x] Advanced Recipe Generation: Employ machine learning models or external APIs to generate recipes based on user-inputted ingredients.
   - [x] Recipe Interaction: Allow users to rate and favorite recipes, which will aid in refining and improving recipe suggestions.
 - ### Stretch Requirements
-  - [ ] Smart Ingredient and Recipe Memory: Save frequently used ingredients and recipes to streamline the generation process and prevent repetitive suggestions.
-  - [ ] Nutritional Information: Integrate detailed nutritional information for each recipe, enhancing the app's health-oriented utility.
+  - [x] Smart Ingredient and Recipe Memory: Save frequently used ingredients and recipes to streamline the generation process and prevent repetitive suggestions.
+  - [x] Nutritional Information: Integrate detailed nutritional information for each recipe, enhancing the app's health-oriented utility.
   - [ ] Voice Controls: Incorporate voice control functionalities, enabling users to interact with the app hands-free, which is particularly useful during cooking.
   - [x] User Accounts: Develop user accounts to save recipes, user preferences, and a history of generated recipes.
 

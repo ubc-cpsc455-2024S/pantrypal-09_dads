@@ -13,8 +13,8 @@ Transform your cooking experience with PantryPal, the ultimate app for home cook
 - David Mwita
 - Adi Poluri
 
-## Project Task Requirements
-
+  
+## Goals
 - ### Minimal Requirements
   - [x] Ingredient Input: Users must be able to manually input or upload pictures of their ingredients.
   - [x] Recipe and Ingredient Storage: The system should store user-generated recipes along with their ingredients.
@@ -31,6 +31,24 @@ Transform your cooking experience with PantryPal, the ultimate app for home cook
   - [ ] Voice Controls: Incorporate voice control functionalities, enabling users to interact with the app hands-free, which is particularly useful during cooking.
   - [x] User Accounts: Develop user accounts to save recipes, user preferences, and a history of generated recipes.
 
-## Sketch Prototypes
 
-<img src ="images/mockup.png" width="800px">
+## Description on usage of tech from Units 1-5 
+
+
+## Above and Beyond Functionality
+
+
+## Next Steps
+
+
+## List of Contributions
+
+- **Sai Athoti** - 
+- **Deep Parekh** - 
+- **David Mwita** - 
+- **Adi Poluri** -
+
+
+
+
+

@@ -1,159 +1,171 @@
-const Recipe = require('../models/recipeModel')
-const User = require('../models/userModel')
+const Recipe = require("../models/recipeModel");
+const User = require("../models/userModel");
 
-const mongoose = require('mongoose')
+const mongoose = require("mongoose");
 
-const OpenAI = require('openai');
-require('dotenv').config()
+const OpenAI = require("openai");
+require("dotenv").config();
 
-const openai = new OpenAI({apiKey: process.env.OPEN_AI_API_KEY});
+const openai = new OpenAI({ apiKey: process.env.OPEN_AI_API_KEY });
 
-// get all recipes
+// getRecipes Handlers
+// ============================================================================
 const getRecipes = async (req, res) => {
-	const user_uuid = req.user._id
+  const user_uuid = req.user._id;
 
-	const recipes = await Recipe.find({saved: user_uuid}).sort({createdAt: -1})
+  const recipes = await Recipe.find({ saved: user_uuid }).sort({
+    createdAt: -1,
+  });
 
-	res.status(200).json(recipes)
-}
+  res.status(200).json(recipes);
+};
 
-// get a single recipe
 const getRecipe = async (req, res) => {
-	const user_id = req.user._id
-	const recipe_id = req.params.id 
+  const recipe_id = req.params.id;
 
-	if (!mongoose.Types.ObjectId.isValid(recipe_id)) {
-		return res.status(404).json({error: 'No such recipe'})
-	}
+  if (!mongoose.Types.ObjectId.isValid(recipe_id)) {
+    return res.status(404).json({ error: "No such recipe" });
+  }
 
-	const recipe = await Recipe.findById(recipe_id)
+  const recipe = await Recipe.findById(recipe_id);
 
-	if (!recipe) {
-		return res.status(404).json({error: 'No such recipe'})
-	}
-	
-	res.status(200).json(recipe)
-}
+  if (!recipe) {
+    return res.status(404).json({ error: "No such recipe" });
+  }
 
+  res.status(200).json(recipe);
+};
 
-// create new recipe
+// addRecipe Handlers
+// ============================================================================
 const addRecipe = async (req, res) => {
-	const {recipe} = req.body
-	const user_uuid = req.user._id
+  const { recipe } = req.body;
+  const user_uuid = req.user._id;
 
-	if (!mongoose.Types.ObjectId.isValid(user_uuid)) {
-		return res.status(404).json({error: 'No such user'})
-	}
+  if (!mongoose.Types.ObjectId.isValid(user_uuid)) {
+    return res.status(404).json({ error: "No such user" });
+  }
 
-	try {
+  try {
+    await Recipe.create(recipe);
+    const recipes = await Recipe.find({ saved: user_uuid }).sort({
+      createdAt: -1,
+    });
 
-		await Recipe.create(recipe)
-		const recipes = await Recipe.find({saved: user_uuid}).sort({createdAt: -1})
+    res.status(200).json(recipes);
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+};
 
-		res.status(200).json(recipes)
-	} catch (error) {
-		res.status(400).json({error: error.message})
-	}
-}
 
-// save recipe
+// saveRecipe Handlers
+// ============================================================================
 const saveRecipe = async (req, res) => {
-	const {recipe_id} = req.body
-	const user_uuid = req.user._id
+  const { recipe_id } = req.body;
+  const user_uuid = req.user._id;
 
-	if (!mongoose.Types.ObjectId.isValid(user_uuid)) {
-		return res.status(404).json({error: 'No such user'})
-	}
+  if (!mongoose.Types.ObjectId.isValid(user_uuid)) {
+    return res.status(404).json({ error: "No such user" });
+  }
 
-	try {
-		
-		const recipe = await Recipe.findOne({_id: recipe_id})
+  try {
+    const recipe = await Recipe.findOne({ _id: recipe_id });
 
-		if (recipe.saved.indexOf(user_uuid.toString()) > -1) { 
-			return res.status(404).json({error: 'Recipe already Saved'})
-		}
+    if (recipe.saved.indexOf(user_uuid.toString()) > -1) {
+      return res.status(404).json({ error: "Recipe already Saved" });
+    }
 
-		const newSaved = [...recipe.saved]
-		newSaved.push(user_uuid.toString())
-		const recipe_new = await Recipe.findOneAndUpdate({_id: recipe_id},{saved:newSaved})
+    const newSaved = [...recipe.saved];
+    newSaved.push(user_uuid.toString());
+    const recipe_new = await Recipe.findOneAndUpdate(
+      { _id: recipe_id },
+      { saved: newSaved },
+    );
 
-		if (!recipe_new) {
-			return res.status(400).json({error: 'No such recipe'})
-		}
+    if (!recipe_new) {
+      return res.status(400).json({ error: "No such recipe" });
+    }
 
-		const recipes = await Recipe.find({saved: user_uuid}).sort({createdAt: -1})
-		res.status(200).json(recipes)
-	} catch (error) {
-		console.log(error)
-		res.status(400).json({error: error.message})
-	}
-}
+    const recipes = await Recipe.find({ saved: user_uuid }).sort({
+      createdAt: -1,
+    });
+    res.status(200).json(recipes);
+  } catch (error) {
+    console.log(error);
+    res.status(400).json({ error: error.message });
+  }
+};
 
-// save recipe
+// checkSavedStatus Handlers
+// ============================================================================
 const checkSavedStatus = async (req, res) => {
-	const {recipe_id} = req.body
-	const user_uuid = req.user._id
+  const { recipe_id } = req.body;
+  const user_uuid = req.user._id;
 
-	if (!mongoose.Types.ObjectId.isValid(user_uuid)) {
-		return res.status(404).json({error: 'No such user'})
-	}
+  if (!mongoose.Types.ObjectId.isValid(user_uuid)) {
+    return res.status(404).json({ error: "No such user" });
+  }
 
-	try {
-		
-		const recipe = await Recipe.findOne({_id: recipe_id})
+  try {
+    const recipe = await Recipe.findOne({ _id: recipe_id });
 
-		if (recipe.saved.indexOf(user_uuid.toString()) > -1) { 
-			return res.status(200).json({saved: true})
-		}
+    if (recipe.saved.indexOf(user_uuid.toString()) > -1) {
+      return res.status(200).json({ saved: true });
+    }
 
-		res.status(200).json({saved: false})
-	} catch (error) {
-		res.status(400).json({error: error.message})
-	}
-}
+    res.status(200).json({ saved: false });
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+};
 
-
-  
-
-// generate new recipes
+// generateRecipes Handlers
+// ============================================================================
 const generateRecipes = async (req, res) => {
-	const user_uuid = req.user._id
-	const {prompt} = req.body
+  const user_uuid = req.user._id;
+  const { prompt } = req.body;
 
-	try {
-		// Fetch user's ingredients from the database
-		const user = await User.findOne({ _id: user_uuid });
+  try {
+    // Fetch user's ingredients from the database
+    const user = await User.findOne({ _id: user_uuid });
 
-		let userIngredients = user['ingredients'];
-		let userPreferences = user['dietary_preferences'];
+    let userIngredients = user["ingredients"];
+    let userPreferences = user["dietary_preferences"];
 
-				
-		if (!userIngredients) {
-			return res.status(404).send('No ingredients found for this user');
-		}
+    if (!userIngredients) {
+      return res.status(404).send("No ingredients found for this user");
+    }
 
-        //Create plain english concatenation of ingredients
-		var ingredientString = "Ingredients: "
+    //Create plain english concatenation of ingredients
+    var ingredientString = "Ingredients: ";
 
-		userIngredients.map((ingredient) => {
-			ingredientString += ingredient.quantity + " " + ingredient.unit==""? ingredient.name + "'s" :  ingredient.unit + " of " + ingredient.name + " (Notes: " + ingredient.notes + "), "
-		});
+    userIngredients.map((ingredient) => {
+      ingredientString +=
+        ingredient.quantity + " " + ingredient.unit == ""
+          ? ingredient.name + "'s"
+          : ingredient.unit +
+            " of " +
+            ingredient.name +
+            " (Notes: " +
+            ingredient.notes +
+            "), ";
+    });
 
-		// Should have GPT4o call to generate recipe from user ingredients
-		// Might need a helper to convert from [<ingredients, quantity>] to string
-        console.log("Generating Recipes for User " + user_uuid)
+    console.log("Generating Recipes for User " + user_uuid);
 
-		const response = await openai.chat.completions.create({
-			model: "gpt-4o",
-			response_format: {
-				"type": "json_object"
-			},
-			messages: [
-				{
-					role: "user",
-					content: [
-						{ type: "text", text: 
-							`Here is a list of ingredients that I have available at home. ${ingredientString}. Can you create 2-5 recipes using these ingredients${userPreferences==""?"":" while keeping in mind the following dietary preferences " + userPreferences}.${prompt==""?"":"I am looking for recipes that fulfill this request: " + prompt+". "}Each recipe should be detailed with name, description, steps, tools, and more. Each step must be accurate and detailed such that anyone can make follow this recipe and make this dish. You MUST follow this JSON scheme EXACTLY:   
+    const response = await openai.chat.completions.create({
+      model: "gpt-4o",
+      response_format: {
+        type: "json_object",
+      },
+      messages: [
+        {
+          role: "user",
+          content: [
+            {
+              type: "text",
+              text: `Here is a list of ingredients that I have available at home. ${ingredientString}. Can you create 2-5 recipes using these ingredients${userPreferences == "" ? "" : " while keeping in mind the following dietary preferences " + userPreferences}.${prompt == "" ? "" : "I am looking for recipes that fulfill this request: " + prompt + ". "}Each recipe should be detailed with name, description, steps, tools, and more. Each step must be accurate and detailed such that anyone can make follow this recipe and make this dish. You MUST follow this JSON scheme EXACTLY:   
 								{
 									recipes: [
 										{
@@ -192,79 +204,67 @@ const generateRecipes = async (req, res) => {
 										}
 									]
 								}
-							`
-						},
-						// {
-						// 	type: "text",
-						// 	text: ingredientString,
-						// },
-					],
-				},
-			],
-		});
+							`,
+            }
+          ],
+        },
+      ],
+    });
 
-		const recipes = JSON.parse(response.choices[0].message.content);
-		console.log("Finished Generating Recipes for User " + user_uuid)
+    const recipes = JSON.parse(response.choices[0].message.content);
+    console.log("Finished Generating Recipes for User " + user_uuid);
 
-        //TODO: If we find a cheaper alternative to image gen, uncomment this and add it in
-		let retVal = []
-		for(let i = 0; i < recipes.recipes.length; i++) {
-			curr = recipes.recipes[i]
+    let retVal = [];
+    for (let i = 0; i < recipes.recipes.length; i++) {
+      curr = recipes.recipes[i];
+      curr["user_uuid"] = user_uuid;
+      curr["created_by_name"] = user.name;
+      curr["saved"] = [user_uuid];
+      retVal.push(curr);
+    }
 
-			// console.log("Generating tag and image for Recipe "+  i);
-			// const response = await openai.images.generate({
-			// 	model: "dall-e-3",
-			// 	prompt: curr.name,
-			// 	n: 1,
-			// 	size: "1024x1024",
-			// });
-			curr['user_uuid'] = user_uuid
-			curr['created_by_name'] = user.name
-			curr['saved'] = [user_uuid]
-
-			//WE only suggest recipes, we don't save them. Once user selects a recipe, we add them through the group add POST endpoint
-			//await Recipe.create(curr)
-			retVal.push(curr);
-		}
+    res.status(200).send({ recipes: retVal });
+  } catch (error) {
+    console.error("Error generating recipes:", error);
+    res.status(500).send("Error generating recipes");
+  }
+};
 
 
-		res.status(200).send({recipes: retVal});
-	} catch (error) {
-		console.error('Error generating recipes:', error);
-		res.status(500).send('Error generating recipes');
-	}
+// deleteRecipe Handlers
+// ============================================================================
+const deleteRecipe = async (req, res) => {
+  const user_uuid = req.user._id;
+  const { id } = req.params;
+
+  if (!mongoose.Types.ObjectId.isValid(user_uuid)) {
+    return res.status(404).json({ error: "No such user" });
   }
 
+  const recipe = await Recipe.findOne({ _id: id });
 
-// delete a recipe
-const deleteRecipe = async (req, res) => {
-	const user_uuid = req.user._id
-	const {id} = req.params
+  const newSaved = [...recipe.saved];
+  const index = newSaved.indexOf(user_uuid.toString());
 
-	if (!mongoose.Types.ObjectId.isValid(user_uuid)) {
-		return res.status(404).json({error: 'No such user'})
-	}
+  if (index < 0) {
+    return res.status(404).json({ error: "No such saved recipe for user" });
+  }
+  newSaved.splice(index, 1);
 
-	const recipe = await Recipe.findOne({_id: id})
+  const recipe_new = await Recipe.findOneAndUpdate(
+    { _id: id },
+    { saved: newSaved },
+  );
+  if (!recipe_new) {
+    return res.status(400).json({ error: "No such recipe" });
+  }
 
-	const newSaved = [...recipe.saved]
-	const index = newSaved.indexOf(user_uuid.toString())
+  const recipes = await Recipe.find({ saved: user_uuid }).sort({
+    createdAt: -1,
+  });
 
-	if (index < 0) { 
-		return res.status(404).json({error: 'No such saved recipe for user'})
-	}
-	newSaved.splice(index, 1)
-
-	const recipe_new = await Recipe.findOneAndUpdate({_id: id},{saved:newSaved})
-	if (!recipe_new) {
-		return res.status(400).json({error: 'No such recipe'})
-	}
-
-	const recipes = await Recipe.find({saved: user_uuid}).sort({createdAt: -1})
-
-	res.status(200).json(recipes)
-}
-
+  res.status(200).json(recipes);
+};
 
 module.exports = {
   getRecipes,
@@ -273,5 +273,5 @@ module.exports = {
   generateRecipes,
   deleteRecipe,
   saveRecipe,
-  checkSavedStatus
-}
+  checkSavedStatus,
+};

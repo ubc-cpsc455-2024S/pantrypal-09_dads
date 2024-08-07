@@ -1,4 +1,4 @@
-import { Box, Heading, Text, Image } from '@chakra-ui/react';
+import { Box, Heading, Text, Image } from "@chakra-ui/react";
 
 const Hero = () => {
   return (
@@ -19,18 +19,11 @@ const Hero = () => {
       >
         Simplify Your Cooking, Minimize Food Waste
       </Heading>
-      <Text
-        fontSize="1.5rem"
-        color="#666"
-        marginBottom="2rem"
-      >
-        Discover recipes based on what's in your fridge. No more wasted food, just delicious meals.
+      <Text fontSize="1.5rem" color="#666" marginBottom="2rem">
+        Discover recipes based on what's in your fridge. No more wasted food,
+        just delicious meals.
       </Text>
-      <Image
-        maxWidth="600px"
-        src="/open_fridge.jpeg"
-        alt="PantryPals"
-      />
+      <Image maxWidth="600px" src="/open_fridge.jpeg" alt="PantryPals" />
     </Box>
   );
 };

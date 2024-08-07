@@ -1,18 +1,14 @@
-import { useAuthContext } from './useAuthContext'
-import { env } from '../consts'
+import { useAuthContext } from "./useAuthContext";
+import { env } from "../consts";
 
 export const useLogout = () => {
-  const { dispatch } = useAuthContext()
-  //const { dispatch: dispatchWorkouts } = useWorkoutsContext()
+  const { dispatch } = useAuthContext();
 
   const logout = () => {
     // remove user from storage
-    localStorage.removeItem('user_'+env)
+    localStorage.removeItem("user_" + env);
+    dispatch({ type: "LOGOUT" });
+  };
 
-    // dispatch logout action
-    dispatch({ type: 'LOGOUT' })
-    //dispatchWorkouts({ type: 'SET_WORKOUTS', payload: null })
-  }
-
-  return { logout }
-}
+  return { logout };
+};

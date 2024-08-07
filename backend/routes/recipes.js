@@ -1,40 +1,35 @@
-const express = require('express')
+const express = require("express");
 const {
-getRecipes,
-getRecipe,
-addRecipe,
-saveRecipe,
-generateRecipes,
-deleteRecipe,
-checkSavedStatus
-} = require('../controllers/recipeController')
+  getRecipes,
+  addRecipe,
+  saveRecipe,
+  generateRecipes,
+  deleteRecipe,
+  checkSavedStatus,
+} = require("../controllers/recipeController");
+const requireAuth = require("../middleware/requireAuth");
 
-const requireAuth = require('../middleware/requireAuth')
+const router = express.Router();
 
-const router = express.Router()
+// Enable Authorization
+router.use(requireAuth);
 
-// require auth for all recipe routes
-router.use(requireAuth)
+// GET recipes
+router.get("/", getRecipes);
 
-// GET all recipes
-router.get('/', getRecipes)
+// POST recipe
+router.post("/add", addRecipe);
 
-//GET a single recipe
-router.get('/:id', getRecipe)
-
-// POST a new recipe 
-router.post('/add', addRecipe)
-
-// POST a like for a recipe 
-router.post('/save', saveRecipe)
+// POST like for recipe
+router.post("/save", saveRecipe);
 
 // POST a check for status
-router.post('/checkSaved', checkSavedStatus)
+router.post("/checkSaved", checkSavedStatus);
 
 // POST generate new recipes
-router.post('/generate', generateRecipes)
+router.post("/generate", generateRecipes);
 
-// DELETE a recipe
-router.delete('/:id', deleteRecipe)
+// DELETE recipe with id
+router.delete("/:id", deleteRecipe);
 
-module.exports = router
+module.exports = router;

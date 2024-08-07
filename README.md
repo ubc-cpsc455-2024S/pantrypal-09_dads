@@ -33,7 +33,22 @@ Transform your cooking experience with PantryPal, the ultimate app for home cook
 
 
 ## Description on usage of tech from Units 1-5 
+- Unit 1: JS/HTML/CSS
+  - Our website starts at our index.html...
+  - There was a discussion in slack about what to include here...
+    
+- Unit 2: React/Redux
+  - We use react for our front end. We use react router for page routing. We use redux for state management for all the pages. We use thunks to asynchronously do actions and update the state which is reflected in our frontend.
+ 
+- Unit 3: NodeJS
+  - Our app runs on a NodeJS/ExpressJS server. We implemented authentication middleware to protect our routes. Our server is split into route/controller files to keep our implementation clean (and separate from the server code)
 
+- Unit 4: MongoDB
+  - We have a database on MongoDB Atlas that holds our users and recipes collection. Our backend has the basic CRUD routes to manipulate data stored there. etc.
+  - We used mongoose and schemas to make handling database data easier.
+
+- Unit 5: Release Engineering
+  - Deployed on Render.com, We have CI/CD pipelines to run tests on every commit and PR to main 
 
 ## Above and Beyond Functionality
 - Smart Recipe Generation

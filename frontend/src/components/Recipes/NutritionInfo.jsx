@@ -13,37 +13,37 @@ import {
         <Box>
           <Stat>
             <StatLabel>Calories</StatLabel>
-            <StatNumber>{Math.round(nutrition.calories)} Cals</StatNumber>
+            <StatNumber fontSize="md">{Math.round(nutrition.calories)} Cals</StatNumber>
           </Stat>
         </Box>
         <Box>
           <Stat>
             <StatLabel>Fat</StatLabel>
-            <StatNumber>{Math.round(nutrition.fat)} g</StatNumber>
+            <StatNumber fontSize="md">{Math.round(nutrition.fat)} g</StatNumber>
           </Stat>
         </Box>
         <Box>
           <Stat>
             <StatLabel>Carbs</StatLabel>
-            <StatNumber>{Math.round(nutrition.carbs)} g</StatNumber>
+            <StatNumber fontSize="md">{Math.round(nutrition.carbs)} g</StatNumber>
           </Stat>
         </Box>
         <Box>
           <Stat>
             <StatLabel>Protein</StatLabel>
-            <StatNumber>{Math.round(nutrition.protein)} g</StatNumber>
+            <StatNumber fontSize="md">{Math.round(nutrition.protein)} g</StatNumber>
           </Stat>
         </Box>
         <Box>
           <Stat>
             <StatLabel>Sugar</StatLabel>
-            <StatNumber>{Math.round(nutrition.sugar)} g</StatNumber>
+            <StatNumber fontSize="md">{Math.round(nutrition.sugar)} g</StatNumber>
           </Stat>
         </Box>
         <Box>
           <Stat>
             <StatLabel>Sodium</StatLabel>
-            <StatNumber>{Math.round(nutrition.sodium)} mg</StatNumber>
+            <StatNumber fontSize="md">{Math.round(nutrition.sodium)} mg</StatNumber>
           </Stat>
         </Box>
       </SimpleGrid>

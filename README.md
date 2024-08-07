@@ -31,7 +31,7 @@ Transform your cooking experience with PantryPal, the ultimate app for home cook
   - [ ] Voice Controls: Incorporate voice control functionalities, enabling users to interact with the app hands-free, which is particularly useful during cooking.
   - [x] User Accounts: Develop user accounts to save recipes, user preferences, and a history of generated recipes.
 
-## Test User Accounts with pre-loaded Data
+## Test Account with pre-loaded Data
 - Email: test@test.com
 - Password: test
 

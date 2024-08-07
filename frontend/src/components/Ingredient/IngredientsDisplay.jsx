@@ -13,7 +13,7 @@ import {
   ModalCloseButton,
   FormLabel,
   Input,
-  Select,
+  Flex,
   Divider,
   Table,
   Thead,
@@ -25,14 +25,16 @@ import {
   HStack,
   Wrap,
   WrapItem,
-  NumberInputStepper,
-  NumberIncrementStepper,
-  NumberDecrementStepper,
+  IconButton,
+  Spacer,
+  Card,
 } from "@chakra-ui/react";
 import IngredientRow from "./ingredientRow.jsx";
 import { updateIngredients } from "../../context/ingredientSlice.js";
 import UploadIngredientsComponent from "./UploadIngredientsComponent.jsx";
 import IngredientCard from "./ingredientCard.jsx";
+import { FaBorderAll } from "react-icons/fa6";
+import { FaAlignJustify } from "react-icons/fa6";
 
 const IngredientsDisplay = ({ ingredients, dispatch, user }) => {
   const [newIngredient, setNewIngredient] = useState({
@@ -45,6 +47,7 @@ const IngredientsDisplay = ({ ingredients, dispatch, user }) => {
   const [isEditMode, setIsEditMode] = useState(false);
   const [editingId, setEditingId] = useState(null);
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const [isList, setIsList] = useState(false);
   const toast = useToast();
 
   // Edit and Adding Ingredient Handling
@@ -203,21 +206,57 @@ const IngredientsDisplay = ({ ingredients, dispatch, user }) => {
       </Modal>
 
       <VStack w="100%">
-        <Wrap spacing="15px" justify="center">
-          {ingredients && ingredients.length !== 0
-            ? ingredients.map((ingredient) => (
-                <WrapItem key={ingredient._id}>
-                  <IngredientCard
-                    key={ingredient._id}
-                    ingredient={ingredient}
-                    id={ingredient._id}
-                    onDelete={deleteIngredient}
-                    onEdit={() => openEditModal(ingredient)}
-                  />
-                </WrapItem>
-              ))
-            : null}
-        </Wrap>
+        <Flex w="100%">
+          <Spacer />
+          <IconButton aria-label='Search database' borderRightRadius={'0px'} icon={<FaBorderAll  />} onClick={()=>{setIsList(false)}} />
+          <IconButton aria-label='Search database' borderLeftRadius={'0px'} icon={<FaAlignJustify   />} onClick={()=>{setIsList(true)}}/>
+        </Flex>
+
+        {isList? (
+          <Card boxShadow={'md'} padding={'20px'}>
+            <TableContainer>
+              <Table size='md' variant='simple'>
+                <Thead>
+                  <Tr>
+                    <Th>Name</Th>
+                    <Th>Quantity</Th>
+                    <Th>Unit</Th>
+                    <Th>Notes</Th>
+                  </Tr>
+                </Thead>
+                <Tbody>
+                  {ingredients && ingredients.length !== 0 ? (
+                      ingredients.map((ingredient) => (
+                        <IngredientRow
+                          key={ingredient._id}
+                          ingredient={ingredient}
+                          id={ingredient._id}
+                          onDelete={deleteIngredient}
+                          onEdit={() => openEditModal(ingredient)}
+                        />
+                      ))
+                    ) : null}
+                </Tbody>
+              </Table>
+            </TableContainer>
+          </Card>
+        ):(        
+          <Wrap spacing="15px" justify="center">
+            {ingredients && ingredients.length !== 0
+              ? ingredients.map((ingredient) => (
+                  <WrapItem key={ingredient._id}>
+                    <IngredientCard
+                      key={ingredient._id}
+                      ingredient={ingredient}
+                      id={ingredient._id}
+                      onDelete={deleteIngredient}
+                      onEdit={() => openEditModal(ingredient)}
+                    />
+                  </WrapItem>
+                ))
+              : null}
+          </Wrap>
+        )}
         <Divider />
         <HStack>
           <Button onClick={openAddModal}>Add Ingredient</Button>

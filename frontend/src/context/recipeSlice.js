@@ -112,9 +112,8 @@ export const checkSaveStatus = createAsyncThunk(
 export const getRecipe = createAsyncThunk(
   "recipes/getRecipe",
   async (formData) => {
-    const response = await axios.get(API_URL + "/recipes/" + formData.id, {
-      headers: { Authorization: `Bearer ${formData.user.token}` },
-    });
+    const response = await axios.get(API_URL + "/public/" + formData.id);
+    console.log(response);
     return response.data;
   },
 );

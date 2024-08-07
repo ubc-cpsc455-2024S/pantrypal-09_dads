@@ -11,6 +11,7 @@ const authRouter = require("./routes/auth");
 const recipesRouter = require("./routes/recipes");
 const ingredientsRouter = require("./routes/ingredients");
 const preferencesRouter = require("./routes/preferences");
+const publicRouter = require("./routes/public");
 
 // Initialise Express
 // ============================================================================
@@ -36,6 +37,7 @@ app.use("/api/auth", authRouter);
 app.use("/api/ingredients", ingredientsRouter);
 app.use("/api/recipes", recipesRouter);
 app.use("/api/preferences", preferencesRouter);
+app.use("/api/public", publicRouter);
 
 // Database Connection and Server Start
 // ============================================================================

@@ -19,9 +19,6 @@ router.use(requireAuth);
 // GET all recipes
 router.get("/", getRecipes);
 
-//GET a single recipe
-router.get("/:id", getRecipe);
-
 // POST a new recipe
 router.post("/add", addRecipe);
 

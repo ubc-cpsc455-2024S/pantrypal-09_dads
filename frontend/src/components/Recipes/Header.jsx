@@ -65,25 +65,30 @@ const Header = ({ recipe, suggestion = false }) => {
             >
               {recipe.name}
             </Heading>
+            {/* Social Links */}
             {suggestion ? null : (
               <>
-                <WrapItem>
-                  {savedStatus ? (
-                    <Flex align="center">
-                      <FcLike />
-                      <Text marginLeft={"2px"}>{recipe.saved.length}</Text>
-                    </Flex>
-                  ) : (
-                    <Tooltip label="Save Recipe!" aria-label="A tooltip">
-                      <IconButton
-                        background={"none"}
-                        borderRadius={"full"}
-                        icon={<FcLikePlaceholder />}
-                        onClick={clickSave}
-                      />
-                    </Tooltip>
-                  )}
-                </WrapItem>
+                {/* Show save button only if logged in */}
+                {user ? (
+                  <WrapItem>
+                    {savedStatus ? (
+                      <Flex align="center">
+                        <FcLike />
+                        <Text marginLeft={"2px"}>{recipe.saved.length}</Text>
+                      </Flex>
+                    ) : (
+                      <Tooltip label="Save Recipe!" aria-label="A tooltip">
+                        <IconButton
+                          background={"none"}
+                          borderRadius={"full"}
+                          icon={<FcLikePlaceholder />}
+                          onClick={clickSave}
+                        />
+                      </Tooltip>
+                    )}
+                  </WrapItem>
+                ) : null}
+                {/* Share Button */}
                 <WrapItem>
                   <Tooltip label="Share Recipe!" aria-label="A tooltip">
                     <IconButton

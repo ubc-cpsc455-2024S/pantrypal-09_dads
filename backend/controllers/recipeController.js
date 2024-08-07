@@ -21,7 +21,6 @@ const getRecipes = async (req, res) => {
 
 // get a single recipe
 const getRecipe = async (req, res) => {
-  const user_id = req.user._id;
   const recipe_id = req.params.id;
 
   if (!mongoose.Types.ObjectId.isValid(recipe_id)) {

@@ -13,6 +13,7 @@ import IngredientsPage from "./pages/IngredientsPage";
 import PreferencePage from "./pages/PreferencePage";
 import AboutPage from "./pages/AboutPage";
 import RecipePage from "./pages/RecipePage";
+import UnauthorizedPage from "./pages/UnauthorizedPage";
 
 function App() {
   const { user } = useAuthContext();
@@ -29,12 +30,12 @@ function App() {
             />
             <Route
               path="/pantry"
-              element={user ? <IngredientsPage /> : <></>}
+              element={user ? <IngredientsPage /> : <UnauthorizedPage />}
             />
-            <Route path="/about" element={user ? <AboutPage /> : <></>} />
+            <Route path="/about" element={<AboutPage />} />
             <Route
               path="/preference"
-              element={user ? <PreferencePage /> : <></>}
+              element={user ? <PreferencePage /> : <UnauthorizedPage />}
             />
             <Route
               path="/login"

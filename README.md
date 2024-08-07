@@ -35,9 +35,12 @@ Transform your cooking experience with PantryPal, the ultimate app for home cook
 
 ## Description on usage of tech from Units 1-5 
 
+
 ## Above and Beyond Functionality
 
+
 ## Next Steps
+
 
 ## List of Contributions
 

@@ -57,8 +57,32 @@ Transform your cooking experience with PantryPal, the ultimate app for home cook
   - Github Actions for our CI/CD workflow integrates well into the tools we were already using and decreases the odds of version-breaking changes getting through, allowing for quicker deployment. 
 
 ## Above and Beyond Functionality
-- Smart Recipe Generation
-- Smart Ingredient Identification
+
+### Smart Ingredient Generation from Images
+PantryPal allows users to generate ingredient lists from images they upload. Utilizing the OpenAI API for image analysis, the app identifies and lists ingredients from photos of users' pantries or fridges automatically.
+
+**In-Depth Explanation:**
+- **Technology Stack:** OpenAI API for image analysis and ingredient recognition.
+- **Functionality:** Users upload or capture images; the system processes these images to detect and list ingredients, minimizing manual entry.
+
+### Personalized Recipe Generation Using AI
+PantryPal offers personalized recipe suggestions using OpenAI API and Claude LLM, tailored to user preferences and available ingredients.
+
+**In-Depth Explanation:**
+- **Technology Stack:** OpenAI API and Claude LLM for natural language processing and personalized recipe recommendations.
+- **Functionality:** Users' dietary preferences and available ingredients are used to generate customized recipes in real-time.
+- **Challenges Overcome:** Overcame API Rate Limits by saving generated recipes and using them instead of sending requests to API.
+
+### Additional Advanced Features
+
+1. **User Accounts and Preferences:**
+   - Developed user accounts to save recipes, preferences, and historical data for a personalized experience.
+
+2. **Recipe Sharing:**
+   - Enabled users to share recipes via links, enhancing community engagement and allowing users to easily exchange their favorite recipes.
+
+4. **Nutritional Information:**
+   - Integrated detailed nutritional information for each recipe, providing users with insights into the nutritional content of their meals.
 
 ## Next Steps
 - Discover page for finding recipes that other people have shared

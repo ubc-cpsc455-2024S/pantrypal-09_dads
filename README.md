@@ -54,7 +54,7 @@ Transform your cooking experience with PantryPal, the ultimate app for home cook
   - **Mongoose for Simplified Database Instructions**: We used Mongoose to define schemas and interact with our database, enforcing data validation and creating a clear structure for our collections. This made our code more readable and maintainable. 
 
 - **Unit 5: Release Engineering**
-  - **Deployment on Render.com**: Our application is deployed on Render.com, leveraging its robust infrastructure for reliable and scalable hosting. 
+  - **Deployment on Render.com**: Our application is deployed on Render.com, leveraging its robust infrastructure for reliable and scalable hosting. Render.com simplifies the deployment process by automatically handling scaling, security, and server management, allowing us to focus on development
   - **CI/CD Pipelines**: We implemented continuous integration and continuous deployment (CI/CD) pipelines that automatically run tests on every commit and pull request to the main branch. This ensures that our code remains stable and functional throughout the development process.
   - **Comprehensive Testing with GitHub Actions Integration**: For our CI/CD workflow, we used GitHub Actions, which integrates seamlessly with our existing tools. We extensively tested the backend using Supertest and Jest, ensuring that our API endpoints function correctly and that our server logic is reliable. GitHub Actions helps reduce the likelihood of version-breaking changes by thoroughly testing each update before deployment. This integration facilitates quicker and more confident releases, ensuring that our application remains reliable and up-to-date.
 
@@ -77,11 +77,11 @@ PantryPal offers personalized recipe suggestions using OpenAI API and Claude LLM
 
 ### Additional Advanced Features
 
-- **User Accounts and Preferences:** Developed user accounts to save recipes, preferences, and historical data for a personalized experience.
+1. **User Accounts and Preferences:** Developed user accounts to save recipes, preferences, and historical data for a personalized experience.
 
-- **Recipe Sharing:** Enabled users to share recipes via links, enhancing community engagement and allowing users to easily exchange their favorite recipes.
+2. **Recipe Sharing:** Enabled users to share recipes via links, enhancing community engagement and allowing users to easily exchange their favorite recipes.
 
-- **Nutritional Information:** Integrated detailed nutritional information for each recipe, providing users with insights into the nutritional content of their meals.
+3. **Nutritional Information:** Integrated detailed nutritional information for each recipe, providing users with insights into the nutritional content of their meals.
 
 ## Next Steps
 - **Discover Page**: We could implement a Discover page for finding recipes shared by other users, enhancing community engagement.

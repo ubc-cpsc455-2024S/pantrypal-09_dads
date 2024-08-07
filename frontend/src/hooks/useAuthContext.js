@@ -1,3 +1,4 @@
+// Note: Followed Express Auth Tutorial https://www.youtube.com/@NetNinja
 import { AuthContext } from "../context/AuthContext";
 import { useContext } from "react";
 

@@ -2,7 +2,7 @@ const jwt = require("jsonwebtoken");
 const User = require("../models/userModel");
 
 // requireAuth Middleware
-// Note: Followed Express Auth Tutorial to implement middleware
+// Note: Followed Express Auth Tutorial to implement middleware https://www.youtube.com/@NetNinja
 // ============================================================================
 const requireAuth = async (req, res, next) => {
   // Verify that user is Authenticated

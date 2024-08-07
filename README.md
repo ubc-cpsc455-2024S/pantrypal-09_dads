@@ -54,7 +54,7 @@ Transform your cooking experience with PantryPal, the ultimate app for home cook
 
 - Unit 5: Release Engineering
   - Deployed on Render.com, We have CI/CD pipelines to run tests on every commit and PR to main.
-  - Using Github Actions for our CI/CD workflow integrates well into the tools we are already using and decreases the odds of version-breaking changes getting through, allowing for quicker deployment. 
+  - Github Actions for our CI/CD workflow integrates well into the tools we were already using and decreases the odds of version-breaking changes getting through, allowing for quicker deployment. 
 
 ## Above and Beyond Functionality
 - Smart Recipe Generation

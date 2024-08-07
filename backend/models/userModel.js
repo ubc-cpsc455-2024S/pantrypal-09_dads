@@ -15,6 +15,7 @@ const userSchema = new Schema({
 });
 
 // Signup Validator
+// Note: Followed Express Auth Tutorial https://www.youtube.com/@NetNinja
 // ============================================================================
 userSchema.statics.signup = async function (email, password) {
 
@@ -52,9 +53,10 @@ userSchema.statics.signup = async function (email, password) {
 };
 
 // Login Validator 
+// Note: Followed Express Auth Tutorial https://www.youtube.com/@NetNinja
 // ============================================================================
 userSchema.statics.login = async function (email, password) {
-  
+
   if (!email || !password) {
     throw Error("All fields must be filled");
   }

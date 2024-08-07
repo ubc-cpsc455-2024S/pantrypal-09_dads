@@ -6,6 +6,7 @@ const createToken = (_id) => {
 };
 
 // User Login Controller
+// Note: Followed Express Auth Tutorial https://www.youtube.com/@NetNinja
 // ============================================================================
 const loginUser = async (req, res) => {
   const { email, password } = req.body;
@@ -23,6 +24,7 @@ const loginUser = async (req, res) => {
 };
 
 // User Signup Controller
+// Note: Followed Express Auth Tutorial https://www.youtube.com/@NetNinja
 // ============================================================================
 const signupUser = async (req, res) => {
   const { email, password } = req.body;

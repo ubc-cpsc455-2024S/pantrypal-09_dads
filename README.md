@@ -60,14 +60,14 @@ Transform your cooking experience with PantryPal, the ultimate app for home cook
 
 ## Above and Beyond Functionality
 
-### - Smart Ingredient Generation from Images
+### Smart Ingredient Generation from Images
 PantryPal allows users to generate ingredient lists from images they upload. Utilizing the OpenAI API for image analysis, the app identifies and lists ingredients from photos of users' pantries or fridges automatically.
 
 **In-Depth Explanation:**
 - **Technology Stack:** OpenAI API for image analysis and ingredient recognition.
 - **Functionality:** Users upload or capture images; the system processes these images to detect and list ingredients, minimizing manual entry.
 
-### - Personalized Recipe Generation Using AI
+### Personalized Recipe Generation Using AI
 PantryPal offers personalized recipe suggestions using OpenAI API and Claude LLM, tailored to user preferences and available ingredients.
 
 **In-Depth Explanation:**

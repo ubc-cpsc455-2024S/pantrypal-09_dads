@@ -6,7 +6,6 @@ const bodyParser = require("body-parser");
 const { connectToDb } = require("./utils/database");
 require("dotenv").config();
 
-//const ingredientsRouter = require('./routes/ingredients');
 const authRouter = require("./routes/auth");
 const recipesRouter = require("./routes/recipes");
 const ingredientsRouter = require("./routes/ingredients");
@@ -20,7 +19,7 @@ const app = express();
 // Middleware
 // ============================================================================
 const corsOptions = {
-  origin: process.env.CORS_ORIGIN, // frontend URI (ReactJS)
+  origin: process.env.CORS_ORIGIN,
 };
 app.use(cors(corsOptions));
 app.use(bodyParser.urlencoded({ extended: false }));

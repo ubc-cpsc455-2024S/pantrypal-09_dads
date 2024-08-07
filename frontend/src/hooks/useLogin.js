@@ -7,23 +7,31 @@ export const useLogin = () => {
   const [isLoading, setIsLoading] = useState(null);
   const { dispatch } = useAuthContext();
 
+
   const login = async (email, password) => {
     setIsLoading(true);
     setError(null);
+
 
     const response = await fetch(API_URL + "/auth/login", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email, password }),
     });
+
     const json = await response.json();
+    
     if (!response.ok) {
       setIsLoading(false);
       setError(json.error);
     }
+
     if (response.ok) {
-      console.log(json);
-      // save the user to local storage
+      if(env == "test") {
+        console.log(json);
+      }
+      
+      // Save data in local storage
       localStorage.setItem("user_" + env, JSON.stringify(json));
 
       // update the auth context

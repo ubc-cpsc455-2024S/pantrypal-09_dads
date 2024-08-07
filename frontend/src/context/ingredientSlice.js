@@ -2,57 +2,48 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { API_URL } from "../consts";
 import axios from "axios";
 
-export const generateIngredients = createAsyncThunk(
-  "ingredients/generateIngredients",
-  async (user) => {
-    const response = await axios.post(
-      `${API_URL}/ingredients/generate`,
-      user.image,
-      {
-        headers: {
-          "content-type": "multipart/form-data",
-          Authorization: `Bearer ${user.user.token}`,
-        },
-      },
-    );
-
-    return response.data;
-  },
-);
-
-export const getIngredients = createAsyncThunk(
-  "ingredients/getIngredients",
-  async (user) => {
-    const response = await axios.get(API_URL + "/ingredients/", {
-      headers: { Authorization: `Bearer ${user.token}` },
-    });
-
-    return response.data;
-  },
-);
-
-export const updateIngredients = createAsyncThunk(
-  "ingredients/updateIngredients",
-  async (formData) => {
-    let data = JSON.stringify({
-      ingredients: formData.ingredients,
-    });
-
-    let config = {
-      method: "post",
-      maxBodyLength: Infinity,
-      url: `${API_URL}/ingredients/update`,
+export const generateIngredients = createAsyncThunk("ingredients/generateIngredients",async (user) => {
+  const response = await axios.post(
+    `${API_URL}/ingredients/generate`,
+    user.image,
+    {
       headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${formData.user.token}`,
+        "content-type": "multipart/form-data",
+        Authorization: `Bearer ${user.user.token}`,
       },
-      data: data,
-    };
+    },
+  );
 
-    const response = await axios.request(config);
-    return response.data;
-  },
-);
+  return response.data;
+});
+
+export const getIngredients = createAsyncThunk("ingredients/getIngredients",async (user) => {
+  const response = await axios.get(API_URL + "/ingredients/", {
+    headers: { Authorization: `Bearer ${user.token}` },
+  });
+
+  return response.data;
+});
+
+export const updateIngredients = createAsyncThunk("ingredients/updateIngredients", async (formData) => {
+  let data = JSON.stringify({
+    ingredients: formData.ingredients,
+  });
+
+  let config = {
+    method: "post",
+    maxBodyLength: Infinity,
+    url: `${API_URL}/ingredients/update`,
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${formData.user.token}`,
+    },
+    data: data,
+  };
+
+  const response = await axios.request(config);
+  return response.data;
+});
 
 const ingredientSlice = createSlice({
   name: "ingredients",

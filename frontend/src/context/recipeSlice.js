@@ -2,49 +2,40 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { API_URL } from "../consts";
 import axios from "axios";
 
-export const generateRecipes = createAsyncThunk(
-  "recipes/generateRecipes",
-  async (formData) => {
-    let data = JSON.stringify({
-      prompt: formData.prompt,
-    });
+export const generateRecipes = createAsyncThunk("recipes/generateRecipes", async (formData) => {
+  let data = JSON.stringify({
+    prompt: formData.prompt,
+  });
 
-    let config = {
-      method: "post",
-      maxBodyLength: Infinity,
-      url: `${API_URL}/recipes/generate`,
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${formData.user.token}`,
-      },
-      data: data,
-    };
+  let config = {
+    method: "post",
+    maxBodyLength: Infinity,
+    url: `${API_URL}/recipes/generate`,
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${formData.user.token}`,
+    },
+    data: data,
+  };
 
-    const response = await axios.request(config);
-    return response.data;
-  },
-);
+  const response = await axios.request(config);
+  return response.data;
+});
 
-export const getRecipes = createAsyncThunk(
-  "recipes/getRecipes",
-  async (user) => {
-    const response = await axios.get(API_URL + "/recipes/", {
-      headers: { Authorization: `Bearer ${user.token}` },
-    });
-    return response.data;
-  },
-);
+export const getRecipes = createAsyncThunk("recipes/getRecipes", async (user) => {
+  const response = await axios.get(API_URL + "/recipes/", {
+    headers: { Authorization: `Bearer ${user.token}` },
+  });
+  return response.data;
+});
 
-export const deleteRecipe = createAsyncThunk(
-  "recipes/delete",
-  async (formData) => {
-    const response = await axios.delete(API_URL + "/recipes/" + formData.id, {
-      headers: { Authorization: `Bearer ${formData.user.token}` },
-    });
+export const deleteRecipe = createAsyncThunk("recipes/delete", async (formData) => {
+  const response = await axios.delete(API_URL + "/recipes/" + formData.id, {
+    headers: { Authorization: `Bearer ${formData.user.token}` },
+  });
 
-    return response.data;
-  },
-);
+  return response.data;
+});
 
 export const addRecipe = createAsyncThunk("recipes/add", async (formData) => {
   let data = JSON.stringify({
@@ -86,37 +77,30 @@ export const saveRecipe = createAsyncThunk("recipes/save", async (formData) => {
   return response.data;
 });
 
-export const checkSaveStatus = createAsyncThunk(
-  "recipes/checkSaved",
-  async (formData) => {
-    let data = JSON.stringify({
-      recipe_id: formData.recipe_id,
-    });
+export const checkSaveStatus = createAsyncThunk("recipes/checkSaved", async (formData) => {
+  let data = JSON.stringify({
+    recipe_id: formData.recipe_id,
+  });
 
-    let config = {
-      method: "post",
-      maxBodyLength: Infinity,
-      url: `${API_URL}/recipes/checkSaved`,
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${formData.user.token}`,
-      },
-      data: data,
-    };
+  let config = {
+    method: "post",
+    maxBodyLength: Infinity,
+    url: `${API_URL}/recipes/checkSaved`,
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${formData.user.token}`,
+    },
+    data: data,
+  };
 
-    const response = await axios.request(config);
-    return response.data;
-  },
-);
+  const response = await axios.request(config);
+  return response.data;
+});
 
-export const getRecipe = createAsyncThunk(
-  "recipes/getRecipe",
-  async (formData) => {
-    const response = await axios.get(API_URL + "/public/" + formData.id);
-    console.log(response);
-    return response.data;
-  },
-);
+export const getRecipe = createAsyncThunk("recipes/getRecipe", async (formData) => {
+  const response = await axios.get(API_URL + "/public/" + formData.id);
+  return response.data;
+});
 
 const recipeSlice = createSlice({
   name: "recipes",
@@ -132,7 +116,6 @@ const recipeSlice = createSlice({
       state.loading = action.payload;
     },
     deleteSuggestedRecipe(state, action) {
-      console.log(action.payload);
       state.suggestedRecipes = action.payload;
     },
   },

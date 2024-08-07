@@ -5,11 +5,11 @@ const {
   updateIngredients,
   generateIngredients,
 } = require("../controllers/ingredientController");
-
 const requireAuth = require("../middleware/requireAuth");
+
 const router = express.Router();
 
-// require auth for all ingredients routes
+// Enable Authorization
 router.use(requireAuth);
 
 // GET all ingredients
@@ -19,7 +19,7 @@ router.get("/", getIngredients);
 router.post("/update", updateIngredients);
 
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-// Generate Ingredients
+// Image Multer and Ingredient Generation Route
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 const imageUploadPath = "./temp";

@@ -5,14 +5,15 @@ const createToken = (_id) => {
   return jwt.sign({ _id }, process.env.JWT_SECRET, { expiresIn: "3d" });
 };
 
-// process login for user
+// User Login Controller
+// ============================================================================
 const loginUser = async (req, res) => {
   const { email, password } = req.body;
 
   try {
     const user = await User.login(email, password);
 
-    // create a token
+    // Create a jwt
     const token = createToken(user._id);
 
     res.status(200).json({ email, token, name: user.name });
@@ -21,17 +22,15 @@ const loginUser = async (req, res) => {
   }
 };
 
-// process signup for user
+// User Signup Controller
+// ============================================================================
 const signupUser = async (req, res) => {
   const { email, password } = req.body;
 
-  // disable signup for workshop demo
-  // return res.status(500).json({error: "Signup Disabled for Workshop Demo to prevent spam lol"})
-
   try {
     const user = await User.signup(email, password);
-
-    // create a token
+    
+    // Create a jwt
     const token = createToken(user._id);
 
     res.status(200).json({ email, token, name: user.name });

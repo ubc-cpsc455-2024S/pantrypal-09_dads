@@ -17,10 +17,11 @@ const userSchema = new Schema({
 // Signup Validator
 // ============================================================================
 userSchema.statics.signup = async function (email, password) {
-  // validation
+
   if (!email || !password) {
     throw Error("All fields must be filled");
   }
+
   if (!validator.isEmail(email)) {
     throw Error("Email not valid");
   }
@@ -53,6 +54,7 @@ userSchema.statics.signup = async function (email, password) {
 // Login Validator 
 // ============================================================================
 userSchema.statics.login = async function (email, password) {
+  
   if (!email || !password) {
     throw Error("All fields must be filled");
   }

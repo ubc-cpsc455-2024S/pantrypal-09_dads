@@ -6,6 +6,8 @@ const OpenAI = require("openai");
 
 const openai = new OpenAI({ apiKey: process.env.OPEN_AI_API_KEY });
 
+// getIngredients Handler
+// ============================================================================
 const getIngredients = async (req, res) => {
   const user_uuid = req.user._id;
 
@@ -22,6 +24,9 @@ const getIngredients = async (req, res) => {
   res.status(200).json({ ingredients: user.ingredients });
 };
 
+
+// updateIngredients Handler
+// ============================================================================
 const updateIngredients = async (req, res) => {
   const user_uuid = req.user._id;
   const { ingredients } = req.body;
@@ -46,7 +51,9 @@ const updateIngredients = async (req, res) => {
   res.status(200).json({ ingredients: user2.ingredients });
 };
 
-//Converts image to base64 string
+
+// generateIngredients Handler and Helpers
+// ============================================================================
 function convertImageToBase64(filePath) {
   return new Promise((resolve, reject) => {
     fs.readFile(filePath, (err, data) => {

@@ -7,21 +7,20 @@ const {
   deleteRecipe,
   checkSavedStatus,
 } = require("../controllers/recipeController");
-
 const requireAuth = require("../middleware/requireAuth");
 
 const router = express.Router();
 
-// require auth for all recipe routes
+// Enable Authorization
 router.use(requireAuth);
 
-// GET all recipes
+// GET recipes
 router.get("/", getRecipes);
 
-// POST a new recipe
+// POST recipe
 router.post("/add", addRecipe);
 
-// POST a like for a recipe
+// POST like for recipe
 router.post("/save", saveRecipe);
 
 // POST a check for status
@@ -30,7 +29,7 @@ router.post("/checkSaved", checkSavedStatus);
 // POST generate new recipes
 router.post("/generate", generateRecipes);
 
-// DELETE a recipe
+// DELETE recipe with id
 router.delete("/:id", deleteRecipe);
 
 module.exports = router;

@@ -9,19 +9,19 @@ const requireAuth = require("../middleware/requireAuth");
 
 const router = express.Router();
 
-// require auth for all preference routes
+// Enable Authorization
 router.use(requireAuth);
 
 // GET user preferences
 router.get("/", getPreferences);
 
-// Set User Preferences
+// POST User Preferences
 router.post("/set", setPreferences);
 
 // GET user name
 router.get("/name", getName);
 
-// Set User name
+// POST User name
 router.post("/name/set", setName);
 
 module.exports = router;

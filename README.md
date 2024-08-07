@@ -36,10 +36,16 @@ Transform your cooking experience with PantryPal, the ultimate app for home cook
 
 
 ## Above and Beyond Functionality
-
+- Smart Recipe Generation
+- Smart Ingredient Identification
 
 ## Next Steps
-
+- Discover page for finding recipes that other people have shared
+- Expanding on User Profiles
+- Adding "Verified" tag to let users know when a recipe has been verified by a real user
+- Implementing a smart similarity search
+- Add an interactive mode that lets users get Text-to-Speech directions
+- ...more
 
 ## List of Contributions
 

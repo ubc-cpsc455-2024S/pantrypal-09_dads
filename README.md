@@ -84,12 +84,12 @@ PantryPal offers personalized recipe suggestions using OpenAI API and Claude LLM
 3. **Nutritional Information:** Integrated detailed nutritional information for each recipe, providing users with insights into the nutritional content of their meals.
 
 ## Next Steps
+- **Voice Controls and Interactive Mode**: We could address the incomplete stretch requirement of incorporating voice control functionalities, enabling users to interact with the app hands-free during cooking, and add an interactive mode that provides Text-to-Speech directions to enhance accessibility and usability.
 - **Discover Page**: We could implement a Discover page for finding recipes shared by other users, enhancing community engagement.
 - **User Profiles**: We could expand user profiles to include more personalized features and user interactions.
 - **Verified Tag**: Adding a "Verified" tag could indicate recipes that have been tested and approved by real users, increasing trust in the recipe quality.
 - **Smart Similarity Search**: We could implement a smart similarity search to help users find recipes based on similar ingredients or preferences.
-- **Voice Controls and Interactive Mode**: We could address the incomplete stretch requirement of incorporating voice control functionalities, enabling users to interact with the app hands-free during cooking, and add an interactive mode that provides Text-to-Speech directions to enhance accessibility and usability.
-- ...more
+- **...more**
 
 ## List of Contributions
 

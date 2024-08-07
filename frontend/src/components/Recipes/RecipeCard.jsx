@@ -57,6 +57,17 @@ const RecipeCard = ({ recipe }) => {
                     variant="outline"
                     color={"black"}
                   >
+                    {Math.round(recipe.nutrition.calories) + " Cals"}
+                  </Tag>
+                </WrapItem>
+                <WrapItem>
+                  <Tag
+                    size={"md"}
+                    key={"md"}
+                    borderRadius="full"
+                    variant="outline"
+                    color={"black"}
+                  >
                     {Math.round(recipe.serves) + " Servings"}
                   </Tag>
                 </WrapItem>

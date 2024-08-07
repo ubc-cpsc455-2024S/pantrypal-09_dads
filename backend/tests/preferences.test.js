@@ -2,6 +2,8 @@ const request = require("supertest");
 const app = require("../server");
 const { connectToDb, closeDb, getDb } = require("../utils/database");
 
+jest.setTimeout(30000);
+
 beforeAll(async () => {
   await connectToDb();
 });

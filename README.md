@@ -43,10 +43,14 @@ Transform your cooking experience with PantryPal, the ultimate app for home cook
 
 ## List of Contributions
 
-- **Sai Athoti** - 
-- **Deep Parekh** - 
-- **David Mwita** - 
-- **Adi Poluri** -
+- **Sai Athoti**
+  - 
+- **Deep Parekh**
+  - 
+- **David Mwita**
+  -  
+- **Adi Poluri**
+  - I worked on both the backend and frontend. In the backend I implemented the Auth System, Recipe routes, Ingredient routes as well as user handling in MongoDB. In the frontend, I implemented the auth pages, recipe page, ingredients page, and preferences page as well as connecting all pages to redux. Added redux thunks and handlers to make calls to backend. I did some of the styling for most of the pages of our app aswell. Other than large notable features, I did a lot of the bug fixing and deployement issue debugging to get everything running smoothly. I also refactored and cleaned up the entire codebase and organized everything.
 
 
 

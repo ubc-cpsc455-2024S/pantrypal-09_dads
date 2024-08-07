@@ -2,6 +2,8 @@ require("dotenv").config();
 const User = require("../models/userModel");
 const mongoose = require("mongoose");
 
+// Getters and Setters for User Preferences
+// ============================================================================
 const getPreferences = async (req, res) => {
   const user_uuid = req.user._id;
 
@@ -42,6 +44,8 @@ const setPreferences = async (req, res) => {
   res.status(200).json({ preferences: user2.dietary_preferences });
 };
 
+// Getters and Setters for Public User Name
+// ============================================================================
 const getName = async (req, res) => {
   const user_uuid = req.user._id;
 

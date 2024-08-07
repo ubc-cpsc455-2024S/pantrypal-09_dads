@@ -14,7 +14,8 @@ const userSchema = new Schema({
   ingredients: { type: [IngredientSchema], required: true },
 });
 
-//Sign Up validator
+// Signup Validator
+// ============================================================================
 userSchema.statics.signup = async function (email, password) {
   // validation
   if (!email || !password) {
@@ -49,7 +50,8 @@ userSchema.statics.signup = async function (email, password) {
   return user;
 };
 
-//Log In validator
+// Login Validator 
+// ============================================================================
 userSchema.statics.login = async function (email, password) {
   if (!email || !password) {
     throw Error("All fields must be filled");

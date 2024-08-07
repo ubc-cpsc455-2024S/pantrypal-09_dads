@@ -8,7 +8,8 @@ require("dotenv").config();
 
 const openai = new OpenAI({ apiKey: process.env.OPEN_AI_API_KEY });
 
-// get all recipes
+// getRecipes Handlers
+// ============================================================================
 const getRecipes = async (req, res) => {
   const user_uuid = req.user._id;
 
@@ -19,7 +20,6 @@ const getRecipes = async (req, res) => {
   res.status(200).json(recipes);
 };
 
-// get a single recipe
 const getRecipe = async (req, res) => {
   const recipe_id = req.params.id;
 
@@ -36,7 +36,8 @@ const getRecipe = async (req, res) => {
   res.status(200).json(recipe);
 };
 
-// create new recipe
+// addRecipe Handlers
+// ============================================================================
 const addRecipe = async (req, res) => {
   const { recipe } = req.body;
   const user_uuid = req.user._id;
@@ -57,7 +58,9 @@ const addRecipe = async (req, res) => {
   }
 };
 
-// save recipe
+
+// saveRecipe Handlers
+// ============================================================================
 const saveRecipe = async (req, res) => {
   const { recipe_id } = req.body;
   const user_uuid = req.user._id;
@@ -94,7 +97,8 @@ const saveRecipe = async (req, res) => {
   }
 };
 
-// save recipe
+// checkSavedStatus Handlers
+// ============================================================================
 const checkSavedStatus = async (req, res) => {
   const { recipe_id } = req.body;
   const user_uuid = req.user._id;
@@ -116,7 +120,8 @@ const checkSavedStatus = async (req, res) => {
   }
 };
 
-// generate new recipes
+// generateRecipes Handlers
+// ============================================================================
 const generateRecipes = async (req, res) => {
   const user_uuid = req.user._id;
   const { prompt } = req.body;
@@ -147,8 +152,6 @@ const generateRecipes = async (req, res) => {
             "), ";
     });
 
-    // Should have GPT4o call to generate recipe from user ingredients
-    // Might need a helper to convert from [<ingredients, quantity>] to string
     console.log("Generating Recipes for User " + user_uuid);
 
     const response = await openai.chat.completions.create({
@@ -202,11 +205,7 @@ const generateRecipes = async (req, res) => {
 									]
 								}
 							`,
-            },
-            // {
-            // 	type: "text",
-            // 	text: ingredientString,
-            // },
+            }
           ],
         },
       ],
@@ -215,24 +214,12 @@ const generateRecipes = async (req, res) => {
     const recipes = JSON.parse(response.choices[0].message.content);
     console.log("Finished Generating Recipes for User " + user_uuid);
 
-    //TODO: If we find a cheaper alternative to image gen, uncomment this and add it in
     let retVal = [];
     for (let i = 0; i < recipes.recipes.length; i++) {
       curr = recipes.recipes[i];
-
-      // console.log("Generating tag and image for Recipe "+  i);
-      // const response = await openai.images.generate({
-      // 	model: "dall-e-3",
-      // 	prompt: curr.name,
-      // 	n: 1,
-      // 	size: "1024x1024",
-      // });
       curr["user_uuid"] = user_uuid;
       curr["created_by_name"] = user.name;
       curr["saved"] = [user_uuid];
-
-      //WE only suggest recipes, we don't save them. Once user selects a recipe, we add them through the group add POST endpoint
-      //await Recipe.create(curr)
       retVal.push(curr);
     }
 
@@ -243,7 +230,9 @@ const generateRecipes = async (req, res) => {
   }
 };
 
-// delete a recipe
+
+// deleteRecipe Handlers
+// ============================================================================
 const deleteRecipe = async (req, res) => {
   const user_uuid = req.user._id;
   const { id } = req.params;

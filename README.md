@@ -37,24 +37,23 @@ Transform your cooking experience with PantryPal, the ultimate app for home cook
 
 ## Description on usage of tech from Units 1-5 
 - Unit 1: JS/HTML/CSS
-  - Our website starts at our index.html...
-  - There was a discussion in slack about what to include here...
+  - HTML and JSX: While traditional HTML was minimally used, the `index.html` file serves as the entry point for our React application. JSX, which closely resembles HTML, was extensively utilized to define the structure and layout of our React components.
+  - CSS for Styling: CSS was crucial for styling our React components, both directly and through the use of CSS-in-JS libraries such as ChakraUI. We applied custom styles to our components to enhance the user interface and ensure a consistent design across the application.
+  - JavaScript Across the Stack: JavaScript was the backbone of our entire project, driving both the client-side and server-side logic. On the client side, we used JavaScript extensively with React to create interactive user interfaces and manage state with Redux. On the server side, JavaScript powered our backend using Node.js and Express, handling API requests, routing, and server-side logic.
     
 - Unit 2: React/Redux
-  - We use react for our front end. We use react router for page routing. We use redux for state management for all the pages. We use thunks to asynchronously do actions and update the state which is reflected in our frontend.
-  - Using React component librariy like ChakraUI sped up development by allowing us to work with out-of-the-box responsive components. This documentation and standardization of components also increased the ease of torubleshooting and adding new details. 
+  - We leveraged React for our front end, employing React Router for efficient page routing and Redux for comprehensive state management across all pages. Thunks enabled asynchronous actions and state updates, which were seamlessly reflected in the frontend. Additionally, using the ChakraUI component library accelerated development with its out-of-the-box responsive components and comprehensive documentation, improving our development velocity and ease of troubleshooting.
  
 - Unit 3: NodeJS
-  - Our app runs on a NodeJS/ExpressJS server. We implemented authentication middleware to protect our routes. Our server is split into route/controller files to keep our implementation clean (and separate from the server code)
+  - Our app is powered by a Node.js/Express.js server. We implemented authentication middleware to secure our routes. To maintain a clean and organized codebase, we separated our server logic into distinct route and controller files.
 
 - Unit 4: MongoDB
-  - We have a database on MongoDB Atlas that holds our users and recipes collection. Our backend has the basic CRUD routes to manipulate data stored there. etc.
-  - We used mongoose and schemas to make handling database data easier.
-  - Compared to SQL alternatives, MongoDB made it easier to modify and add schema details, allowing us to better handle changing user requirments as the application evolved. 
+  - Our database is hosted on MongoDB Atlas, containing our users and recipes collections. Our backend supports basic CRUD operations to manage this data efficiently. We leveraged Mongoose and defined schemas to simplify database interactions. Ultimately, compared to SQL alternatives, MongoDB made it easier to modify and add schema details, allowing us to better handle changing user requirments as the application evolved. 
 
 - Unit 5: Release Engineering
-  - Deployed on Render.com, We have CI/CD pipelines to run tests on every commit and PR to main.
-  - Github Actions for our CI/CD workflow integrates well into the tools we were already using and decreases the odds of version-breaking changes getting through, allowing for quicker deployment. 
+  - Deployment on Render.com: Our application is deployed on Render.com, leveraging its robust infrastructure for reliable and scalable hosting. 
+  - CI/CD Pipelines: We implemented continuous integration and continuous deployment (CI/CD) pipelines that automatically run tests on every commit and pull request to the main branch. This ensures that our code remains stable and functional throughout the development process.
+  - GitHub Actions Integration: For our CI/CD workflow, we used GitHub Actions, which integrates seamlessly with our existing tools. This integration helps reduce the likelihood of version-breaking changes by thoroughly testing each update before deployment, facilitating quicker and more confident releases.
 
 ## Above and Beyond Functionality
 

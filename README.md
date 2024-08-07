@@ -43,8 +43,7 @@ Transform your cooking experience with PantryPal, the ultimate app for home cook
     
 - **Unit 2: React/Redux**
   - **React for Frontend Development**: We leveraged React for our frontend, using its component-based architecture to build a modular and maintainable user interface. React Router enabled efficient page routing, allowing smooth navigation without full page reloads, enhancing the user experience. Compared to traditional JavaScript frameworks like jQuery, React’s virtual DOM and declarative nature provided a more efficient and predictable way to build UIs, making our code easier to debug and maintain. Additionally, using the ChakraUI component library accelerated development with its out-of-the-box responsive components and comprehensive documentation, improving our development velocity and ease of troubleshooting.
-  - **Redux for State Management** 
-  - Redux was used for comprehensive state management across all pages, ensuring consistency and predictability in our application's behavior. We utilized thunks for handling asynchronous actions, allowing seamless API calls and state updates. While React’s Context API can manage state, Redux offers a more scalable solution for larger applications with complex state interactions. Its middleware capabilities (like thunks) enable more sophisticated state management, which would be more cumbersome to implement with the Context API alone.
+  - **Redux for State Management**: Redux was used for comprehensive state management across all pages, ensuring consistency and predictability in our application's behavior. We utilized thunks for handling asynchronous actions, allowing seamless API calls and state updates. While React’s Context API can manage state, Redux offers a more scalable solution for larger applications with complex state interactions. Its middleware capabilities (like thunks) enable more sophisticated state management, which would be more cumbersome to implement with the Context API alone.
  
 - **Unit 3: NodeJS and Express**
   - **Node.js for Server-Side Development**: Our application is powered by a Node.js server, leveraging its event-driven, non-blocking I/O model for efficient and scalable server-side operations. Node.js allowed us to use JavaScript across the entire stack, streamlining the development process. Compared to traditional server-side languages like PHP or Ruby, Node.js offers a more unified development experience.
@@ -52,7 +51,7 @@ Transform your cooking experience with PantryPal, the ultimate app for home cook
 
 - **Unit 4: MongoDB**
   - **MongoDB Atlas for Database Hosting**: Our database is hosted on MongoDB Atlas, providing a fully managed, cloud-based solution that ensures high availability, scalability, and security. MongoDB Atlas allows us to focus on development without worrying about database management tasks such as backups, scaling, and monitoring. Ultimately, compared to SQL alternatives, MongoDB made it easier to modify and add schema details, allowing us to better handle changing user requirments as the application evolved. 
-- **Mongoose for Simplified Database Instructions**: We used Mongoose to define schemas and interact with our database, enforcing data validation and creating a clear structure for our collections. This made our code more readable and maintainable. 
+  - **Mongoose for Simplified Database Instructions**: We used Mongoose to define schemas and interact with our database, enforcing data validation and creating a clear structure for our collections. This made our code more readable and maintainable. 
 
 - **Unit 5: Release Engineering**
   - **Deployment on Render.com**: Our application is deployed on Render.com, leveraging its robust infrastructure for reliable and scalable hosting. 
@@ -61,14 +60,14 @@ Transform your cooking experience with PantryPal, the ultimate app for home cook
 
 ## Above and Beyond Functionality
 
-### Smart Ingredient Generation from Images
+### 1) Smart Ingredient Generation from Images
 PantryPal allows users to generate ingredient lists from images they upload. Utilizing the OpenAI API for image analysis, the app identifies and lists ingredients from photos of users' pantries or fridges automatically.
 
 **In-Depth Explanation:**
 - **Technology Stack:** OpenAI API for image analysis and ingredient recognition.
 - **Functionality:** Users upload or capture images; the system processes these images to detect and list ingredients, minimizing manual entry.
 
-### Personalized Recipe Generation Using AI
+### 2) Personalized Recipe Generation Using AI
 PantryPal offers personalized recipe suggestions using OpenAI API and Claude LLM, tailored to user preferences and available ingredients.
 
 **In-Depth Explanation:**
@@ -78,14 +77,11 @@ PantryPal offers personalized recipe suggestions using OpenAI API and Claude LLM
 
 ### Additional Advanced Features
 
-1. **User Accounts and Preferences:**
-   - Developed user accounts to save recipes, preferences, and historical data for a personalized experience.
+- **User Accounts and Preferences:** Developed user accounts to save recipes, preferences, and historical data for a personalized experience.
 
-2. **Recipe Sharing:**
-   - Enabled users to share recipes via links, enhancing community engagement and allowing users to easily exchange their favorite recipes.
+- **Recipe Sharing:** Enabled users to share recipes via links, enhancing community engagement and allowing users to easily exchange their favorite recipes.
 
-4. **Nutritional Information:**
-   - Integrated detailed nutritional information for each recipe, providing users with insights into the nutritional content of their meals.
+- **Nutritional Information:** Integrated detailed nutritional information for each recipe, providing users with insights into the nutritional content of their meals.
 
 ## Next Steps
 - **Discover Page**: We could implement a Discover page for finding recipes shared by other users, enhancing community engagement.

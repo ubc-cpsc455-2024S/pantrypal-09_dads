@@ -1,7 +1,7 @@
-const mongoose = require('mongoose')
-const Schema = mongoose.Schema
+const mongoose = require("mongoose");
+const Schema = mongoose.Schema;
 
-const IngredientSchema = require('./ingredientModel');
+const IngredientSchema = require("./ingredientModel");
 
 const NutritionSchema = new Schema({
   calories: { type: Number, required: true },
@@ -9,7 +9,7 @@ const NutritionSchema = new Schema({
   carbs: { type: Number, required: true },
   protein: { type: Number, required: true },
   sugar: { type: Number, required: true },
-  sodium: { type: Number, required: true }
+  sodium: { type: Number, required: true },
 });
 
 const RecipeSchema = new Schema({
@@ -28,4 +28,4 @@ const RecipeSchema = new Schema({
   saved: { type: [String], required: false },
 });
 
-module.exports = mongoose.model('Recipe', RecipeSchema)
+module.exports = mongoose.model("Recipe", RecipeSchema);

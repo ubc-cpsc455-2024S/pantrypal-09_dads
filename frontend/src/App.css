@@ -19,4 +19,6 @@
   min-height: 66vh;
 }
 
-::-webkit-scrollbar {display:none;}
+::-webkit-scrollbar {
+  display: none;
+}

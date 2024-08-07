@@ -2,7 +2,7 @@ name: Test and Deploy
 
 on:
   push:
-    branches: 
+    branches:
       - main
   pull_request:
 
@@ -11,43 +11,43 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Check out code
-      uses: actions/checkout@v4
-      
-    - name: Set up Node.js
-      uses: actions/setup-node@v4
-      with:
-        node-version: 20
+      - name: Check out code
+        uses: actions/checkout@v4
 
-    - name: Install Dependencies
-      run: npm install
-      working-directory: ./backend
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
 
-    - name: Set up .env file
-      run: |
-        echo "MONGO_URI=${{ secrets.MONGO_URI }}" >> .env
-        echo "OPEN_AI_API_KEY=${{ secrets.OPEN_AI_API_KEY }}" >> .env
-        echo "JWT_SECRET=${{ secrets.JWT_SECRET }}" >> .env
-        echo "CORS_ORIGIN=${{ secrets.CORS_ORIGIN }}" >> .env
-        echo "PORT=${{ secrets.PORT }}" >> .env
-      working-directory: ./backend
+      - name: Install Dependencies
+        run: npm install
+        working-directory: ./backend
 
-    - name: Run Tests
-      run: npm test
-      working-directory: ./backend
-      
+      - name: Set up .env file
+        run: |
+          echo "MONGO_URI=${{ secrets.MONGO_URI }}" >> .env
+          echo "OPEN_AI_API_KEY=${{ secrets.OPEN_AI_API_KEY }}" >> .env
+          echo "JWT_SECRET=${{ secrets.JWT_SECRET }}" >> .env
+          echo "CORS_ORIGIN=${{ secrets.CORS_ORIGIN }}" >> .env
+          echo "PORT=${{ secrets.PORT }}" >> .env
+        working-directory: ./backend
+
+      - name: Run Tests
+        run: npm test
+        working-directory: ./backend
+
   deploy-frontend:
     needs: test
     runs-on: ubuntu-latest
 
     steps:
-    - name: Deploy frontend to Render
-      run: curl -X POST ${{ secrets.FRONTEND_DEPLOY_HOOK }}
+      - name: Deploy frontend to Render
+        run: curl -X POST ${{ secrets.FRONTEND_DEPLOY_HOOK }}
 
   deploy-backend:
     needs: test
     runs-on: ubuntu-latest
 
     steps:
-    - name: Deploy backend to Render
-      run: curl -X POST ${{ secrets.BACKEND_DEPLOY_HOOK }}
+      - name: Deploy backend to Render
+        run: curl -X POST ${{ secrets.BACKEND_DEPLOY_HOOK }}

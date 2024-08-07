@@ -6,7 +6,6 @@
 
 Transform your cooking experience with PantryPal, the ultimate app for home cooks, foodies, and anyone looking to whip up delicious dishes with ease. Snap a photo of your fridge contents, and let our AI-powered app identify your ingredients and suggest mouth-watering recipes tailored just for you. Say goodbye to the daily "What's for dinner?" dilemma and hello to personalized, hassle-free cooking!
 
-
 ## Team Members
 
 - Sai Athoti
@@ -14,8 +13,8 @@ Transform your cooking experience with PantryPal, the ultimate app for home cook
 - David Mwita
 - Adi Poluri
 
-  
 ## Project Task Requirements
+
 - ### Minimal Requirements
   - [x] Ingredient Input: Users must be able to manually input or upload pictures of their ingredients.
   - [x] Recipe and Ingredient Storage: The system should store user-generated recipes along with their ingredients.
@@ -32,13 +31,6 @@ Transform your cooking experience with PantryPal, the ultimate app for home cook
   - [ ] Voice Controls: Incorporate voice control functionalities, enabling users to interact with the app hands-free, which is particularly useful during cooking.
   - [x] User Accounts: Develop user accounts to save recipes, user preferences, and a history of generated recipes.
 
-
 ## Sketch Prototypes
 
 <img src ="images/mockup.png" width="800px">
-
-
-
-
-
-

@@ -68,10 +68,10 @@ PantryPal allows users to generate ingredient lists from images they upload. Uti
 - **Functionality:** Users upload or capture images; the system processes these images to detect and list ingredients, minimizing manual entry.
 
 ### Personalized Recipe Generation Using AI
-PantryPal offers personalized recipe suggestions using OpenAI API and Claude LLM, tailored to user preferences and available ingredients.
+PantryPal offers personalized recipe suggestions using OpenAI API, tailored to user preferences and available ingredients.
 
 **In-Depth Explanation:**
-- **Technology Stack:** OpenAI API and Claude LLM for natural language processing and personalized recipe recommendations.
+- **Technology Stack:** OpenAI's GPT 4o LLM for natural language processing and personalized recipe recommendations.
 - **Functionality:** Users' dietary preferences and available ingredients are used to generate customized recipes in real-time.
 - **Challenges Overcome:** Overcame API Rate Limits by saving generated recipes and using them instead of sending requests to API.
 

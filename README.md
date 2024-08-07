@@ -36,25 +36,27 @@ Transform your cooking experience with PantryPal, the ultimate app for home cook
 - Password: test
 
 ## Description on usage of tech from Units 1-5 
-- Unit 1: JS/HTML/CSS
-  - Our website starts at our index.html...
-  - There was a discussion in slack about what to include here...
+- **Unit 1: JS/HTML/CSS**
+  - **HTML and JSX**: HTML was used primarily in the index.html file, serving as the entry point for our React application. However, JSX, which is a syntax extension of JavaScript and closely resembles HTML, was extensively utilized to define the structure and layout of our React components. Using JSX allowed us to write components in a way that combines HTML-like syntax with JavaScript logic, making the code more readable and maintainable. This approach enhanced the development experience by leveraging the power of JavaScript while maintaining the clarity of HTML.
+  - **CSS for Styling**: CSS was crucial for styling our React components, both directly and through the use of CSS-in-JS libraries such as ChakraUI. We applied custom styles to our components to enhance the user interface and ensure a consistent design across the application. This approach not only improved the visual appeal but also made the styling process more efficient
+  - **JavaScript Across the Stack**: JavaScript was the backbone of our entire project, driving both the client-side and server-side logic. On the client side, we used JavaScript extensively with React to create interactive user interfaces and manage state with Redux. On the server side, JavaScript powered our backend using Node.js and Express, handling API requests, routing, and server-side logic. JavaScript's versatility and extensive ecosystem made it an ideal choice for developing a full-stack web application, enabling us to use a single language across the entire stack and streamline the development process.
     
-- Unit 2: React/Redux
-  - We use react for our front end. We use react router for page routing. We use redux for state management for all the pages. We use thunks to asynchronously do actions and update the state which is reflected in our frontend.
-  - Using React component librariy like ChakraUI sped up development by allowing us to work with out-of-the-box responsive components. This documentation and standardization of components also increased the ease of torubleshooting and adding new details. 
+- **Unit 2: React/Redux**
+  - **React for Frontend Development**: We leveraged React for our frontend, using its component-based architecture to build a modular and maintainable user interface. React Router enabled efficient page routing, allowing smooth navigation without full page reloads, enhancing the user experience. Compared to traditional JavaScript frameworks like jQuery, React’s virtual DOM and declarative nature provided a more efficient and predictable way to build UIs, making our code easier to debug and maintain. Additionally, using the ChakraUI component library accelerated development with its out-of-the-box responsive components and comprehensive documentation, improving our development velocity and ease of troubleshooting.
+  - **Redux for State Management**: Redux was used for comprehensive state management across all pages, ensuring consistency and predictability in our application's behavior. We utilized thunks for handling asynchronous actions, allowing seamless API calls and state updates. While React’s Context API can manage state, Redux offers a more scalable solution for larger applications with complex state interactions. Its middleware capabilities (like thunks) enable more sophisticated state management, which would be more cumbersome to implement with the Context API alone.
  
-- Unit 3: NodeJS
-  - Our app runs on a NodeJS/ExpressJS server. We implemented authentication middleware to protect our routes. Our server is split into route/controller files to keep our implementation clean (and separate from the server code)
+- **Unit 3: NodeJS and Express**
+  - **Node.js for Server-Side Development**: Our application is powered by a Node.js server, leveraging its event-driven, non-blocking I/O model for efficient and scalable server-side operations. Node.js allowed us to use JavaScript across the entire stack, streamlining the development process. Compared to traditional server-side languages like PHP or Ruby, Node.js offers a more unified development experience.
+  - **Express for Routing and Middleware**: We utilized Express.js to handle routing and middleware in our application. Express.js provided a minimalistic yet powerful framework for creating server-side logic. We implemented authentication middleware to secure our routes, ensuring that only authorized users could access certain endpoints. This approach enhances security and aligns with best practices for web application development. Compared to more heavyweight frameworks like Django or Ruby on Rails, Express.js offers greater flexibility and simplicity, allowing us to build custom middleware and routing logic tailored to our needs. To maintain a clean and organized codebase, we separated our server logic into distinct route and controller files.
 
-- Unit 4: MongoDB
-  - We have a database on MongoDB Atlas that holds our users and recipes collection. Our backend has the basic CRUD routes to manipulate data stored there. etc.
-  - We used mongoose and schemas to make handling database data easier.
-  - Compared to SQL alternatives, MongoDB made it easier to modify and add schema details, allowing us to better handle changing user requirments as the application evolved. 
+- **Unit 4: MongoDB**
+  - **MongoDB Atlas for Database Hosting**: Our database is hosted on MongoDB Atlas, providing a fully managed, cloud-based solution that ensures high availability, scalability, and security. MongoDB Atlas allows us to focus on development without worrying about database management tasks such as backups, scaling, and monitoring. Ultimately, compared to SQL alternatives, MongoDB made it easier to modify and add schema details, allowing us to better handle changing user requirments as the application evolved. 
+  - **Mongoose for Simplified Database Instructions**: We used Mongoose to define schemas and interact with our database, enforcing data validation and creating a clear structure for our collections. This made our code more readable and maintainable. 
 
-- Unit 5: Release Engineering
-  - Deployed on Render.com, We have CI/CD pipelines to run tests on every commit and PR to main.
-  - Github Actions for our CI/CD workflow integrates well into the tools we were already using and decreases the odds of version-breaking changes getting through, allowing for quicker deployment. 
+- **Unit 5: Release Engineering**
+  - **Deployment on Render.com**: Our application is deployed on Render.com, leveraging its robust infrastructure for reliable and scalable hosting. Render.com simplifies the deployment process by automatically handling scaling, security, and server management, allowing us to focus on development
+  - **CI/CD Pipelines**: We implemented continuous integration and continuous deployment (CI/CD) pipelines that automatically run tests on every commit and pull request to the main branch. This ensures that our code remains stable and functional throughout the development process.
+  - **Comprehensive Testing with GitHub Actions Integration**: For our CI/CD workflow, we used GitHub Actions, which integrates seamlessly with our existing tools. We extensively tested the backend using Supertest and Jest, ensuring that our API endpoints function correctly and that our server logic is reliable. GitHub Actions helps reduce the likelihood of version-breaking changes by thoroughly testing each update before deployment. This integration facilitates quicker and more confident releases, ensuring that our application remains reliable and up-to-date.
 
 ## Above and Beyond Functionality
 
@@ -75,31 +77,28 @@ PantryPal offers personalized recipe suggestions using OpenAI API and Claude LLM
 
 ### Additional Advanced Features
 
-1. **User Accounts and Preferences:**
-   - Developed user accounts to save recipes, preferences, and historical data for a personalized experience.
+1. **User Accounts and Preferences:** Developed user accounts to save recipes, preferences, and historical data for a personalized experience.
 
-2. **Recipe Sharing:**
-   - Enabled users to share recipes via links, enhancing community engagement and allowing users to easily exchange their favorite recipes.
+2. **Recipe Sharing:** Enabled users to share recipes via links, enhancing community engagement and allowing users to easily exchange their favorite recipes.
 
-4. **Nutritional Information:**
-   - Integrated detailed nutritional information for each recipe, providing users with insights into the nutritional content of their meals.
+3. **Nutritional Information:** Integrated detailed nutritional information for each recipe, providing users with insights into the nutritional content of their meals.
 
 ## Next Steps
-- Discover page for finding recipes that other people have shared
-- Expanding on User Profiles
-- Adding "Verified" tag to let users know when a recipe has been verified by a real user
-- Implementing a smart similarity search
-- Add an interactive mode that lets users get Text-to-Speech directions
-- ...more
+- **Voice Controls and Interactive Mode**: We could address the incomplete stretch requirement of incorporating voice control functionalities, enabling users to interact with the app hands-free during cooking, and add an interactive mode that provides Text-to-Speech directions to enhance accessibility and usability.
+- **Discover Page**: We could implement a Discover page for finding recipes shared by other users, enhancing community engagement.
+- **User Profiles**: We could expand user profiles to include more personalized features and user interactions.
+- **Verified Tag**: Adding a "Verified" tag could indicate recipes that have been tested and approved by real users, increasing trust in the recipe quality.
+- **Smart Similarity Search**: We could implement a smart similarity search to help users find recipes based on similar ingredients or preferences.
+- **...more**
 
 ## List of Contributions
 
 - **Sai Athoti**
   - I worked largely on the backend with a bit of frontend, with a bit of debugging and testing. I set up the components for image processing (camera and file upload). For backend, I set up the MongoDB with some basic schemas for users and recipes, alongside intial server and route implementation.
 - **Deep Parekh**
-  - 
+  - I worked on the backend, frontend, and deployment of the application. For the backend, I designed the test suite, refactored code, and added new functions for server routes and MongoDB connection. On the frontend, I set up Redux functionality, improved the UI for recipes and ingredients, and created the initial data schemas. Additionally, I led deployment by creating the GitHub Actions file for CI/CD and setting the app up on Render, ensuring it was properly hosted.
 - **David Mwita**
-  -  
+  - My primary focus was the frontend. I was responsible for styling the pages to ensure a visually appealing and user-friendly interface. Additionally, I worked on making the frontend responsive, ensuring the app performs well on various devices and screen sizes. In addition to my frontend work, I also created the database schema for the backend, designing the structures to store user data, ingredients, and recipes efficiently.
 - **Adi Poluri**
   - I worked on both the backend and frontend. In the backend I implemented the Auth System, Recipe routes, Ingredient routes as well as user handling in MongoDB. In the frontend, I implemented the auth pages, recipe page, ingredients page, and preferences page as well as connecting all pages to redux. Added redux thunks and handlers to make calls to backend. I did some of the styling for most of the pages of our app aswell. Other than large notable features, I did a lot of the bug fixing and deployement issue debugging to get everything running smoothly. I also refactored and cleaned up the entire codebase and organized everything.
 
